@@ -12,7 +12,7 @@ card layouts from JSON and rendering them into PIL Images.
 import json
 import logging
 from typing import List, Dict, Any, Tuple, Optional
-
+from pathlib import Path
 import PIL.Image as image
 import PIL.ImageDraw as draw
 import PIL.ImageFont as font
@@ -41,6 +41,12 @@ def generate_card() -> bool:
         s_json_path = tss_npc_input_path[1]
         logging.info(f"Processing NPC files {s_image_path} {s_json_path} ")
 
+        
+        # construct the output path
+        logging.info(f"Processing NPC files {Path("output",f"{s_json_path.name}") } ")
+        
+
+
         cl_generator = Cl_npc_character_sheet_generator(
             i_w_card_width_mm=63.5,
             i_h_card_height_mm=88.9,
@@ -48,6 +54,7 @@ def generate_card() -> bool:
             i_background_color=(255, 255, 255),
             i_border_color=(0, 0, 0)
         )
+        logging.info("Constructed NPC generator class...")
 
         # Generate the card back
         cl_generated_image = cl_generator.generate_card(
@@ -55,7 +62,6 @@ def generate_card() -> bool:
             #i_ls_mask_front_path=["mask", "front_mask_transparent.png"],
             i_ls_mask_front_path=["mask", "front_mask_d.png"],
             i_ls_npc_illustration_path= s_image_path,
-            #i_ls_npc_json_path = ["src", "json", "demo_npc_b.json"],
             i_ls_npc_json_path = s_json_path,
             i_ls_output_file_path=["output","test_q_card_back.png"]
         )
