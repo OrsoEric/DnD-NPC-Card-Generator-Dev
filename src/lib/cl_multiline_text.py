@@ -1,3 +1,5 @@
+#2026-02-04 adaptive height of the text box
+
 # ------------------------------------------------------------------
 #  Imports
 # ------------------------------------------------------------------
@@ -202,13 +204,13 @@ class Cl_multiline_text:
 if __name__ == "__main__":
     cl_image = Image.new("RGB", (400, 300), (255, 255, 255))
 
-    Cl_multiline_text.render_fixed_size_text_box(
+    h_box = Cl_multiline_text.render_fixed_size_text_box(
         i_cl_imgage = cl_image,
         i_s_text = "This is a reusable multiline text box renderer This is a reusable multiline text box renderer . . ..",
         i_w_margin = 20,
         i_h_margin = 20,
         i_w_border = 250,
-        i_h_border = 120,
+        i_h_border = 0,
         i_s_font_name = "arial.ttf",
         i_n_font_size = 18,
         i_tn_color = (127, 127, 127),
@@ -216,5 +218,7 @@ if __name__ == "__main__":
         i_x_draw_border = True,
         i_tn_border_color = (255,0,0)
     )
+
+    print(f"W: {h_box}")
 
     cl_image.save("outest_i_multiline_text.png")

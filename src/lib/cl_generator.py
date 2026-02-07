@@ -227,23 +227,51 @@ class Cl_npc_character_sheet_generator:
             #0 height mean that the text box renderer with automatically calculate and return height
             if (h_size_ppt <= 0):
                 h_text_box_px = 0
+
+                h_rendered = Cl_multiline_text.render_fixed_size_text_box(
+                    i_cl_imgage = i_cl_image.g_cl_image,
+                    i_s_text = s_text,
+                    i_w_margin = w_top_left_px,
+                    i_h_margin = h_cursor,
+                    i_w_border = w_text_box_px,
+                    i_h_border = 0,
+                    i_s_font_name = "arial.ttf",
+                    i_n_font_size = h_font_px,
+                    i_tn_color = (127, 127, 127),
+                    i_n_padding = 5,
+                    i_x_draw_border = True,
+                    i_tn_border_color = (255,0,0)
+                )
+
+                h_cursor = h_cursor + h_rendered
+
+
+            #height is given
             else:
                 h_text_box_px = int( h_size_px * h_size_ppt / 1000)    
 
-            Cl_multiline_text.render_fixed_size_text_box(
-                i_cl_imgage = i_cl_image.g_cl_image,
-                i_s_text = s_text,
-                i_w_margin = w_top_left_px,
-                i_h_margin = h_top_left_px,
-                i_w_border = w_text_box_px,
-                i_h_border = h_text_box_px,
-                i_s_font_name = "arial.ttf",
-                i_n_font_size = h_font_px,
-                i_tn_color = (127, 127, 127),
-                i_n_padding = 5,
-                i_x_draw_border = True,
-                i_tn_border_color = (255,0,0)
-            )
+                h_rendered = Cl_multiline_text.render_fixed_size_text_box(
+                    i_cl_imgage = i_cl_image.g_cl_image,
+                    i_s_text = s_text,
+                    i_w_margin = w_top_left_px,
+                    i_h_margin = h_top_left_px,
+                    i_w_border = w_text_box_px,
+                    i_h_border = h_text_box_px,
+                    i_s_font_name = "arial.ttf",
+                    i_n_font_size = h_font_px,
+                    i_tn_color = (127, 127, 127),
+                    i_n_padding = 5,
+                    i_x_draw_border = True,
+                    i_tn_border_color = (255,0,0)
+                )
+
+                #move the cursor
+                h_cursor = h_top_left_px + h_text_box_px
+
+            #render the text box
+
+
+
 
         return False #OK
 
@@ -315,7 +343,7 @@ class Cl_npc_character_sheet_generator:
             # ---------- Header text box (s_name) ----------
             d_header_box = dict(ld_text_boxes[-1])          # shallow copy of the last entry
             d_header_box["s_name"] = f"ACTION{0}"
-            d_header_box["s_text"] = d_action_npc.get("s_name", "")
+            d_header_box["s_text"] = d_action_npc.get("s_name", "ERR:Failed to load")
             d_header_box["s_name"] = f"ACTION{0}"
             ld_text_boxes.append(d_header_box)
             logging.debug(f"Added header text box: {d_header_box}")
@@ -323,7 +351,7 @@ class Cl_npc_character_sheet_generator:
             # ---------- Body text box (s_text) ----------
             d_body_box = dict(ld_text_boxes[-1])             # copy of the newly appended entry
             d_body_box["s_name"] = f"ACTION{0}"
-            d_body_box["s_text"] = d_action_npc.get("s_text", "")
+            d_body_box["s_text"] = d_action_npc.get("s_text", "ERR:Failed to load")
             #auto height
             d_body_box["h_size_ppt"] = 0
             ld_text_boxes.append(d_body_box)
@@ -332,7 +360,7 @@ class Cl_npc_character_sheet_generator:
             # ---------- Description text box (s_action) ----------
             d_description_box = dict(ld_text_boxes[-1])     # copy of the latest entry
             d_description_box["s_name"] = f"ACTION{0}"
-            d_description_box["s_text"] = d_action_npc.get("s_action", "")
+            d_description_box["s_text"] = d_action_npc.get("s_action", "ERR:Failed to load")
             ld_text_boxes.append(d_description_box)
             logging.debug(f"Added description text box: {d_description_box}")
 
@@ -341,13 +369,6 @@ class Cl_npc_character_sheet_generator:
         return False  # SUCCESS
 
 
-
-
-        
-
-
-
-        return False #OK
 
     def generate_card_back(
         self,
