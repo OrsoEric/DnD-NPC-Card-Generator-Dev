@@ -245,5 +245,16 @@
             "h_pos_ppt": 25,
             "h_font_ppt": 20
         }
-    ]
+    ],
+
+    "ACTIONS": {
+        "s_name": "ACTIONS",
+        "s_text": "this covers active and passives, height is adaptive based on previous ability lines",
+        "w_top_left_ppt": 400,
+        "h_top_left_ppt": 500,
+        "w_size_ppt": 500,
+        "h_size_per_line_ppt": 40,
+        "h_font_title_ppt": 25,
+        "h_font_ppt": 20
+    }
 }
