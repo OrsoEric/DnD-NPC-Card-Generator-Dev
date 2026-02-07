@@ -122,6 +122,10 @@ I should have full image, with opacity
 
 The back could be manual image, or better just no background? It's there for info using clear sleeves
 
+# DISTRIBUTION
+
+I am thinking of doing a patreon, and release NPCs individuallty with also their statue and base
+
 
 
 

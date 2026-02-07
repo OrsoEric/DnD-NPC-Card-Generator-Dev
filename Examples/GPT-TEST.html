@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Submission and Shame +1</title>
+
+<style>
+/* -------------------------
+   GLOBAL RESET & FONTS
+--------------------------*/
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 30px;
+  background: #e6e0c8;
+  font-family: "Garamond", "Georgia", serif;
+  color: #2b1b10;
+}
+
+/* -------------------------
+   PAGE CONTAINER
+--------------------------*/
+.page {
+  max-width: 1200px;
+  margin: auto;
+  background: #f6eed2;
+  border: 6px solid #b18a3a;
+  padding: 24px;
+  position: relative;
+}
+
+/* decorative top/bottom bars */
+.page::before,
+.page::after {
+  content: "";
+  display: block;
+  height: 10px;
+  background: linear-gradient(
+    to right,
+    #caa34a,
+    #f1d37a,
+    #caa34a
+  );
+}
+
+.page::after {
+  margin-top: 16px;
+}
+
+/* -------------------------
+   HEADER
+--------------------------*/
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 3px solid #8b2e1f;
+  padding-bottom: 10px;
+}
+
+.title {
+  font-size: 42px;
+  font-variant: small-caps;
+  letter-spacing: 1px;
+  color: #7b1e12;
+}
+
+.subtitle {
+  font-style: italic;
+  font-size: 16px;
+  margin-top: 4px;
+}
+
+/* -------------------------
+   BODY LAYOUT
+--------------------------*/
+.content {
+  display: grid;
+  grid-template-columns: 48% 52%;
+  gap: 24px;
+  margin-top: 18px;
+}
+
+/* -------------------------
+   LEFT COLUMN
+--------------------------*/
+.left-column img {
+  width: 100%;
+  border: 2px solid #7b1e12;
+}
+
+.art-credit {
+  font-size: 12px;
+  margin-top: 6px;
+  font-style: italic;
+}
+
+.stat-block {
+  margin-top: 14px;
+  border-top: 3px solid #7b1e12;
+  padding-top: 10px;
+  font-size: 15px;
+}
+
+.stat-block b {
+  display: inline-block;
+  width: 130px;
+}
+
+.shame-box {
+  margin-top: 14px;
+  padding: 10px;
+  border: 2px solid #7b1e12;
+  background: #efe2b6;
+  font-size: 15px;
+}
+
+/* -------------------------
+   RIGHT COLUMN
+--------------------------*/
+.section {
+  margin-bottom: 18px;
+}
+
+.section-title {
+  font-weight: bold;
+  font-size: 18px;
+  color: #7b1e12;
+  border-bottom: 2px solid #7b1e12;
+  margin-bottom: 6px;
+}
+
+.rules p {
+  margin: 6px 0;
+  font-size: 15px;
+}
+
+.rules b {
+  color: #7b1e12;
+}
+
+.description p {
+  font-size: 15px;
+  line-height: 1.4;
+  margin: 8px 0;
+}
+
+/* -------------------------
+   SMALL CAPS FEEL
+--------------------------*/
+.smallcaps {
+  font-variant: small-caps;
+  font-weight: bold;
+}
+
+/* -------------------------
+   RESPONSIVE
+--------------------------*/
+@media (max-width: 900px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <div class="header">
+    <div>
+      <div class="title">Submission and Shame +1</div>
+      <div class="subtitle">Flail · Rare · 1000 GP</div>
+      <div class="subtitle">Martial Melee Weapon – One-Handed Flail (STR) +1</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- LEFT COLUMN -->
+    <div class="left-column">
+      <img src="images/submission_and_shame.png" alt="Submission and Shame Flail">
+      <div class="art-credit">Art: RMSDXL Aries</div>
+
+      <div class="stat-block">
+        <p><b>Damage</b> 1d8+1 slash</p>
+        <p><b>Length</b> 90cm</p>
+        <p><b>Chain Length</b> 60cm</p>
+        <p><b>Weight</b> 2kg</p>
+      </div>
+
+      <div class="shame-box">
+        <span class="smallcaps">SHAME:</span>
+        Barbarians can decide to activate <i>Rage</i> when they use the
+        <b>SUBMIT</b> ability. If they do, all damage they take this turn
+        is mitigated by one additional d4.
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="right-column">
+
+      <div class="section rules">
+        <div class="section-title">SUBMIT</div>
+        <p>
+          As a bonus action, hit yourself taking <b>1d4 slash damage</b>
+          that cannot be mitigated. Roll a d4 to decide how you feel after
+          your display of submission:
+        </p>
+        <p><b>ASHAMED (1):</b> No effect</p>
+        <p><b>FORGIVEN (2):</b> Gain 2d4 temporary hit points</p>
+        <p><b>PATIENT (3):</b> All damage taken this turn is mitigated by
+           one additional d4</p>
+        <p><b>FURIOUS! (4):</b> When you deal damage with this weapon
+           this turn, roll one additional damage die</p>
+      </div>
+
+      <div class="section description">
+        <div class="section-title">Description and History</div>
+
+        <p>
+          The Flail of Submission and Shame is a nine-cat tail made from
+          entwined thick rope. At each end of this macabre appendage,
+          wicked butcher hooks lie in wait, poised to tear into flesh
+          upon impact.
+        </p>
+
+        <p>
+          The rope’s length allows the wielder to reach their own back,
+          inflicting both physical pain and emotional humiliation.
+        </p>
+
+        <p>
+          The flail was given to the Slagborn, a group of laborers working
+          in the underground tunnels beneath Waterdeep, by a cruel master
+          who found amusement in their suffering.
+        </p>
+
+        <p>
+          Over time, the flail absorbed the resilience and determination
+          of the Slagborn, becoming a symbol of their enduring spirit
+          and will to survive.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+// No JS required for static replication,
+// included only to meet "HTML/CSS/JS" request
+console.log("Submission and Shame loaded.");
+</script>
+
+</body>
+</html>

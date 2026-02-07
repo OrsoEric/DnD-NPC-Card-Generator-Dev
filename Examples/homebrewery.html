@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Fonts -->
+    <link href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet">
+
+    <!-- Homebrewery CSS -->
+    <link rel="stylesheet" href="homebrewery/blank_style.css">
+    <link rel="stylesheet" href="homebrewery/bundle.css">
+    <link rel="stylesheet" href="homebrewery/5ephb_style.css">
+    <link rel="stylesheet" href="homebrewery/overrides.css">
+
+    <!-- Prevent Flash of Unstyled Content -->
+    <style>
+        html { visibility: hidden; }
+    </style>
+</head>
+
+<body>
+
+<div class="container-fluid">
+    <div class="brewRenderer">
+        <div class="page" id="p1">
+            <div class="block monster frame">
+
+                <!-- PUT YOUR CONTENT HERE -->
+                <h1>Goblin</h1>
+                <p><em>Small humanoid (goblinoid), neutral evil</em></p>
+                <hr>
+                <p><strong>Armor Class</strong> 15 (leather armor, shield)</p>
+                <p><strong>Hit Points</strong> 7 (2d6)</p>
+                <p><strong>Speed</strong> 30 ft.</p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.addEventListener("load", () => {
+        document.documentElement.style.visibility = "visible";
+    });
+</script>
+
+</body>
+</html>
