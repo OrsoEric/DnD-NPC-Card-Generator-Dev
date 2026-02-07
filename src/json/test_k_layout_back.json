@@ -8,7 +8,7 @@
             "h_top_left_ppt": 20,
             "w_size_ppt": 800,
             "h_size_left_ppt": 200,
-            "h_font_ppt": 25
+            "h_font_ppt": 20
         },
         {
             "s_name": "DAMAGE_TYPES",

@@ -129,6 +129,7 @@ class Cl_npc_character_sheet_generator:
         w_size_px = i_cl_image.g_w_card_px
         h_size_px = i_cl_image.g_h_card_px
 
+        logging.info(f"Image size {w_size_px} px {h_size_px} px")
         # Draw a simple rectangle border
         cl_draw.rectangle(
             [
@@ -205,29 +206,34 @@ class Cl_npc_character_sheet_generator:
         for st_text_box in ast_text_boxes:
             logging.debug(f"Processing Text Box: {st_text_box}")
 
+            #TODO: I should make this into a structure
             #load text box parameters
             s_label: str = st_text_box.get("s_name", "") 
             s_text: str = st_text_box.get("s_text", "")
             w_top_left_ppt: int = st_text_box.get("h_top_left_ppt", 0)
             h_top_left_ppt: int = st_text_box.get("h_top_left_ppt", 0)
             w_size_ppt: int = st_text_box.get("w_size_ppt", 0)
-            h_size_left_ppt: int = st_text_box.get("h_size_left_ppt", 0)
-            h_font_ppt: int = st_text_box.get("h_font_ppt", 0)
+            h_size_ppt: int = st_text_box.get("h_size_left_ppt", 0)
+            h_font_ppt: int = int(st_text_box.get("h_font_ppt", 0))
             
             # Convert PPT values to pixels
-            w_top_left_px = w_size_px * w_top_left_ppt / 1000
-            h_top_left_px = h_size_px * w_top_left_px / 1000
-            h_font_px = h_size_px * h_font_ppt / 1000
+            w_top_left_px = int(w_size_px * w_top_left_ppt / 1000)
+            h_top_left_px = int(h_size_px * w_top_left_px / 1000)
+            w_text_box_px = int(w_size_px * w_size_ppt / 1000)
+            h_text_box_px = int( h_size_px * h_size_ppt / 1000)
+            h_font_px = int(h_size_px * h_font_ppt / 1000)
+
+            logging.debug(f"Font size {h_font_ppt} ppt {h_font_px} px {h_size_px * h_font_ppt}")
 
             Cl_multiline_text.render_fixed_size_text_box(
                 i_cl_imgage = i_cl_image.g_cl_image,
                 i_s_text = s_text,
                 i_w_margin = w_top_left_px,
                 i_h_margin = h_top_left_px,
-                i_w_border = 250,
-                i_h_border = 120,
+                i_w_border = w_text_box_px,
+                i_h_border = h_text_box_px,
                 i_s_font_name = "arial.ttf",
-                i_n_font_size = 18,
+                i_n_font_size = h_font_px,
                 i_tn_color = (127, 127, 127),
                 i_n_padding = 5,
                 i_x_draw_border = True,

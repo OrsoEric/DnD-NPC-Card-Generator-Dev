@@ -105,7 +105,7 @@ class Cl_multiline_text:
             i_n_padding: int = 5,
             i_x_draw_border: bool = False,
             i_tn_border_color: tuple[int, int, int] = (0, 0, 0)
-            ) -> None:
+            ) -> bool:
         """
         Render wrapped text into a fixed-size rectangle on an existing image.
         """
@@ -113,6 +113,10 @@ class Cl_multiline_text:
         cl_draw: ImageDraw.Draw = ImageDraw.Draw(i_cl_imgage)
 
         st_font = ImageFont.truetype(i_s_font_name, i_n_font_size)
+
+        if i_n_font_size <= 0:
+            print(f"ERR: invalid font size: {i_n_font_size}")
+            return True 
 
         if i_x_draw_border:
             cl_draw.rectangle(
@@ -146,6 +150,7 @@ class Cl_multiline_text:
             i_font=st_font,
             i_text_color=i_tn_color
         )
+        return False #OK
 
 if __name__ == "__main__":
     cl_image = Image.new("RGB", (400, 300), (255, 255, 255))
