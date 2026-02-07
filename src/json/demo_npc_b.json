@@ -6,22 +6,22 @@
 
     "description": "Long form desciption",
 
-    "PROFICIENCY": 0,
-    "STRENGTH": 0,
-    "STR SAVE": 0,
+    "PROFICIENCY": 2,
+    "STRENGTH": -2,
+    "STR SAVE": -1,
     "ATHLETICS": 0,
 
     "DEXTERITY": 0,
     "DEX SAVE": 0,
     "ACROBATICS": 0,
-    "SLEIGHT OF HAND": 0,
+    "SLEIGHT OF HAND": 1,
     "STEALTH": 0,
 
-    "CONSTITUTION": 0,
+    "CONSTITUTION": 4,
     "CON SAVE": 0,
 
     "INTELLIGENCE": 0,
-    "INT SAVE": 0,
+    "INT SAVE": -2,
     "ARCANA": 0,
     "INVESTIGATION": 0,
     "HISTORY": 0,
