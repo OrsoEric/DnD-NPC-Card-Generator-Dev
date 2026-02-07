@@ -159,8 +159,11 @@ def draw_layout_to_image(
     # Default font – Pillow will fallback to a built‑in one if the path is wrong
     cl_default_font: font.FreeTypeFont = font.load_default()
 
-    #ast_abilities = i_layout["layout"]
-    ast_abilities = i_layout
+    try:
+        ast_abilities = i_layout["attributes_and_abilities"]
+    except:
+        print("ERR: field doesn't exist, json is wrong")
+        return cl_draw
 
     cursor_w = 0
     cursor_h = 0
@@ -210,7 +213,7 @@ def draw_layout_to_image(
 # --------------------------------------------------------------------------- #
 
 if __name__ == "__main__":
-    s_path_json_layout : str = str(Path("src") / Path("json") / Path("layout_back.json"))
+    s_path_json_layout : str = str(Path("src") / Path("json") / Path("test_e_layout_back.json"))
     # Create a 5 px/mm A‑4 sheet
     st_layout_back = load_layout_from_json( s_path_json_layout )
 

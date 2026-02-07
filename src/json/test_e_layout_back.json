@@ -1,0 +1,201 @@
+{
+    "descritpion":
+    {
+        "s_tooltip": "Flavour text drescription of the actor",
+        "s_text": "",
+        "w_top_left_ppt": 20,
+        "h_top_left_ppt": 20,
+        "w_size_ppt": 800,
+        "h_size_left_ppt": 200,
+        "h_font_ppt": 25
+    },
+    "attributes_and_abilities":
+    [
+        {
+            "s_name": "PROFICIENCY",
+            "w_pos_ppt": 100,
+            "h_pos_ppt": 175,
+            "h_font_ppt": 25
+        },
+        {
+            "s_name": "STRENGTH",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 30,
+            "h_font_ppt": 25
+        },
+        {
+            "s_name": "STR SAVE",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 25,
+            "h_font_ppt": 20
+        },
+        {
+            "s_name": "ATHLETICS",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 25,
+            "h_font_ppt": 20
+        },
+        {
+            "s_name": "DEXTERITY",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 30,
+            "h_font_ppt": 25
+        },
+        {
+            "s_name": "DEX SAVE",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 25,
+            "h_font_ppt": 20
+        },
+        {
+            "s_name": "ACROBATICS",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 25,
+            "h_font_ppt": 20
+        },
+        {
+            "s_name": "SLEIGHT OF HAND",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 25,
+            "h_font_ppt": 20
+        },
+        {
+            "s_name": "STEALTH",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 25,
+            "h_font_ppt": 20
+        },
+        {
+            "s_name": "CONSTITUTION",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 30,
+            "h_font_ppt": 25
+        },
+        {
+            "s_name": "CON SAVE",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 25,
+            "h_font_ppt": 20
+        },
+        {
+            "s_name": "INTELLIGENCE",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 30,
+            "h_font_ppt": 25
+        },
+        {
+            "s_name": "INT SAVE",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 25,
+            "h_font_ppt": 20
+        },
+        {
+            "s_name": "ARCANA",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 25,
+            "h_font_ppt": 20
+        },
+        {
+            "s_name": "INVESTIGATION",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 25,
+            "h_font_ppt": 20
+        },
+        {
+            "s_name": "HISTORY",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 25,
+            "h_font_ppt": 20
+        },
+        {
+            "s_name": "NATURE",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 25,
+            "h_font_ppt": 20
+        },
+        {
+            "s_name": "RELIGION",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 25,
+            "h_font_ppt": 20
+        },
+        {
+            "s_name": "WISDOM",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 30,
+            "h_font_ppt": 25
+        },
+        {
+            "s_name": "WIS SAVE",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 25,
+            "h_font_ppt": 20
+        },
+        {
+            "s_name": "ANIMAL HANDLING",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 25,
+            "h_font_ppt": 20
+        },
+        {
+            "s_name": "INSIGHT",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 25,
+            "h_font_ppt": 20
+        },
+        {
+            "s_name": "PERCEPTION",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 25,
+            "h_font_ppt": 20
+        },
+        {
+            "s_name": "MEDICINE",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 25,
+            "h_font_ppt": 20
+        },
+        {
+            "s_name": "SURVIVAL",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 25,
+            "h_font_ppt": 20
+        },
+        {
+            "s_name": "CHARISMA",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 30,
+            "h_font_ppt": 25
+        },
+        {
+            "s_name": "CHA SAVE",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 25,
+            "h_font_ppt": 20
+        },
+        {
+            "s_name": "DECEPTION",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 25,
+            "h_font_ppt": 20
+        },
+        {
+            "s_name": "INTIMIDATION",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 25,
+            "h_font_ppt": 20
+        },
+        {
+            "s_name": "PERFORMANCE",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 25,
+            "h_font_ppt": 20
+        },
+        {
+            "s_name": "PERSUASION",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 25,
+            "h_font_ppt": 20
+        }
+    ]
+}
