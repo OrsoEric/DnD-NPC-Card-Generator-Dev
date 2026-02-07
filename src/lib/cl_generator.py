@@ -17,7 +17,7 @@ import PIL.ImageDraw as draw
 import PIL.ImageFont as font
 
 from lib.cl_utility_path import convert_to_path
-from lib.st_attribute_ability import St_attribute_ability
+#from lib.st_attribute_ability import St_attribute_ability
 from lib.st_image import St_image
 #this utility allows to draw a multiline text box onto an image
 from lib.cl_multiline_text import Cl_multiline_text
@@ -168,6 +168,7 @@ class Cl_npc_character_sheet_generator:
             w_pos_ppt: int = st_item.get("w_pos_ppt", 0)
             h_pos_ppt: int = st_item.get("h_pos_ppt", 0)
             h_font_ppt: int = st_item.get("h_font_ppt", 0)
+            n_value : int = st_item.get("n_value",-99)
             
             # Convert PPT values to pixels
             w_pos_px = w_size_px * w_pos_ppt / 1000
@@ -194,7 +195,10 @@ class Cl_npc_character_sheet_generator:
             # Add the header for the attribute or ability 
             cl_draw.text((w_cursor, h_cursor), s_text, fill=(0, 0, 0), font=cl_item_font)
             # Fetch the numerical value of attribute or ability
-            cl_draw.text((w_cursor, h_cursor), "+10", fill=(0, 0, 0), font=cl_item_font, anchor="ra")
+            if (n_value>=0):
+                cl_draw.text((w_cursor, h_cursor), f"+{n_value}", fill=(0, 0, 0), font=cl_item_font, anchor="ra")
+            else: 
+                cl_draw.text((w_cursor, h_cursor), f"{n_value}", fill=(0, 0, 0), font=cl_item_font, anchor="ra")
 
         for st_text_box in ast_text_boxes:
 
