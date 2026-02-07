@@ -208,11 +208,20 @@ if __name__ == "__main__":
 
     print(st_layout_back)
 
+    w_card_mm = 63.5
+    h_card_mm = 88.9
+    dot_per_inch = 300
+    mm_per_inch = 25.4
+
+    w_card_px : int = int(w_card_mm / mm_per_inch * dot_per_inch)
+    h_card_px : int = int(h_card_mm / mm_per_inch * dot_per_inch)
+    print(f"Image size: W: {w_card_px} H: {h_card_px}")
+
     # Create an image from that data
     cl_card_image: image.Image = draw_layout_to_image(
         st_layout_back,
-        i_card_width=400,
-        i_card_height=600,
+        i_card_width = w_card_px,
+        i_card_height = h_card_px,
         i_background_color=(255, 255, 255),
         i_border_color=(0, 0, 0),
     )

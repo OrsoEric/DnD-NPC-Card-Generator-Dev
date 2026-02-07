@@ -1,13 +1,13 @@
 [
     {
-        "s_name": "strength",
-        "w_pos": 10,
+        "s_name": "STRENGTH",
+        "w_pos": 20,
         "h_pos": 10,
-        "h_font": 14
+        "h_font": 18
     },
     {
         "s_name": "athletics",
-        "w_pos": 20,
+        "w_pos": 0,
         "h_pos": 20,
         "h_font": 12
     },
