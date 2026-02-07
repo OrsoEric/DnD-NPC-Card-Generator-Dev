@@ -20,9 +20,13 @@ import logging
 import json
 from pathlib import Path
 from typing import List
-    
+
+#OS independent path
+from lib.cl_utility_path import convert_to_path
+
 #This structure holds an attribute or an ability
 from lib.st_attribute_ability import St_attribute_ability
+
 
 def load_layout(
     i_ls_file_path: List[str],
@@ -58,6 +62,7 @@ def load_layout(
     # 1. Read and parse the JSON file
     # --------------------------------------------------------------------- #
     l_layout_path: Path = Path(*i_ls_file_path).with_suffix(".json")
+    print(f"Log Path: {l_layout_path}")
     if not l_layout_path.is_file():
         raise FileNotFoundError(f"Layout file does not exist: {i_ls_file_path}")
 
@@ -133,8 +138,12 @@ def load_layout(
     return l_result
 
 if __name__ == "__main__":
+
+    s_log_path = convert_to_path(["log","test_g.log"])
+    print(f"Log Path: {s_log_path}")
+
     logging.basicConfig(
-        filename="test_g.log",
+        filename=s_log_path,
         level=logging.INFO,
         format='[%(asctime)s] %(levelname)s %(module)s:%(lineno)d > %(message)s ',
         filemode='w'
