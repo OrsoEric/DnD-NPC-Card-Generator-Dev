@@ -4,11 +4,11 @@
         {
             "s_name": "DESCRIPTION",
             "s_text": "this is a long multiline description of the actor that can cover many topics like flavour, physical description, behaviour, habitat, history and myths.",
-            "w_top_left_ppt": 50,
-            "h_top_left_ppt": 20,
-            "w_size_ppt": 900,
+            "w_top_left_ppt": 10,
+            "h_top_left_ppt": 5,
+            "w_size_ppt": 990,
             "h_size_ppt": 150,
-            "h_font_ppt": 20
+            "h_font_ppt": 18
         },
         {
             "s_name": "RESOURCES",
@@ -275,47 +275,47 @@
         {
             "s_name": "NAME",
             "s_text": "this text box holds the NPC name",
-            "w_top_left_ppt": 50,
-            "h_top_left_ppt": 50,
+            "w_top_left_ppt": 75,
+            "h_top_left_ppt": 25,
             "w_size_ppt": 900,
             "h_size_ppt": 100,
-            "h_font_ppt": 50
+            "h_font_ppt": 40
         },
         {
             "s_name": "RACE",
             "s_text": "this text box holds the NPC species, class, rank",
-            "w_top_left_ppt": 50,
-            "h_top_left_ppt": 120,
+            "w_top_left_ppt": 120,
+            "h_top_left_ppt": 96,
             "w_size_ppt": 900,
             "h_size_ppt": 50,
-            "h_font_ppt": 20
+            "h_font_ppt": 18
         },
         {
             "s_name": "CR",
             "s_text": "this holds the Challenge Rating of the NPC",
-            "w_top_left_ppt": 900,
-            "h_top_left_ppt": 20,
-            "w_size_ppt": 900,
+            "w_top_left_ppt": 840,
+            "h_top_left_ppt": 22,
+            "w_size_ppt": 125,
             "h_size_ppt": 70,
             "h_font_ppt": 40
         },
         {
             "s_name": "AC",
             "s_text": "this holds the Armor class of the character",
-            "w_top_left_ppt": 50,
-            "h_top_left_ppt": 900,
-            "w_size_ppt": 100,
+            "w_top_left_ppt": 52,
+            "h_top_left_ppt": 880,
+            "w_size_ppt": 125,
             "h_size_ppt": 100,
-            "h_font_ppt": 40
+            "h_font_ppt": 60
         },
         {
             "s_name": "HP",
             "s_text": "this holds the Health of the character",
-            "w_top_left_ppt": 900,
-            "h_top_left_ppt": 900,
+            "w_top_left_ppt": 830,
+            "h_top_left_ppt": 880,
             "w_size_ppt": 100,
             "h_size_ppt": 100,
-            "h_font_ppt": 40
+            "h_font_ppt": 60
         }
     ]
 }

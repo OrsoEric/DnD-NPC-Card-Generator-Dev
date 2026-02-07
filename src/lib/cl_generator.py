@@ -164,7 +164,7 @@ class Cl_npc_character_sheet_generator:
             if (h_size_ppt <= 0):
                 h_text_box_px = 0
 
-                h_rendered = Cl_multiline_text.render_fixed_size_text_box(
+                h_rendered = Cl_multiline_text.render_fixed_size_text_box_center(
                     i_cl_imgage = i_cl_image.g_cl_image,
                     i_s_text = s_text,
                     i_w_margin = w_top_left_px,
@@ -186,7 +186,7 @@ class Cl_npc_character_sheet_generator:
             else:
                 h_text_box_px = int( h_size_px * h_size_ppt / 1000)    
 
-                h_rendered = Cl_multiline_text.render_fixed_size_text_box(
+                h_rendered = Cl_multiline_text.render_fixed_size_text_box_center(
                     i_cl_imgage = i_cl_image.g_cl_image,
                     i_s_text = s_text,
                     i_w_margin = w_top_left_px,

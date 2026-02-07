@@ -18,14 +18,14 @@ if __name__ == "__main__":
 
     s_font_path = convert_to_path(["font","fantasy.ttf"])
 
-    h_box = Cl_multiline_text.render_fixed_size_text_box(
+    h_box = Cl_multiline_text.render_fixed_size_text_box_center(
         i_cl_imgage = cl_image,
         i_s_text = "This is a reusable multiline text box renderer This is a reusable multiline text box renderer . . ..",
         i_w_margin = 20,
         i_h_margin = 20,
         i_w_border = 250,
         i_h_border = 0,
-        i_s_font_name = s_font_path,
+        i_s_font_name = "arial",
         i_n_font_size = 25,
         i_tn_color = (127, 127, 127),
         i_n_padding = 5,

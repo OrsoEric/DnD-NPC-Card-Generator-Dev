@@ -205,12 +205,119 @@ class Cl_multiline_text:
         #return height of text box
         return i_h_border
 
+    @staticmethod
+    def draw_wrapped_text_center(
+        i_draw: ImageDraw.Draw,
+        i_x: int,
+        i_y: int,
+        i_box_width: int,
+        i_lines: List[str],
+        i_font: ImageFont.FreeTypeFont,
+        i_text_color: tuple[int, int, int],
+        i_line_spacing: int = 0
+    ) -> None:
+
+        # Height of a single line
+        line_height: int = i_draw.textbbox((0, 0), "A", font=i_font)[3]
+
+        y_offset: int = 0
+
+        for line in i_lines:
+            # Compute pixel width of this line
+            w_line = i_draw.textlength(line, font=i_font)
+
+            # Center horizontally inside the box
+            x_centered = i_x + (i_box_width - w_line) // 2
+
+            i_draw.text(
+                (x_centered, i_y + y_offset),
+                line,
+                fill=i_text_color,
+                font=i_font,
+                stroke_width=2,
+                stroke_fill=(255,255,255)
+            )
+
+            y_offset += line_height + i_line_spacing
+
+
+    @staticmethod
+    def render_fixed_size_text_box_center(
+            i_cl_imgage: Image.Image,
+            i_s_text: str,
+            i_w_margin: int,
+            i_h_margin: int,
+            i_w_border: int,
+            i_h_border: int,
+            i_s_font_name: str,
+            i_n_font_size: int,
+            i_tn_color: tuple[int, int, int] = (0, 0, 0),
+            i_n_padding: int = 5,
+            i_x_draw_border: bool = False,
+            i_tn_border_color: tuple[int, int, int] = (0, 0, 0)
+        ) -> int:
+
+        cl_draw: ImageDraw.Draw = ImageDraw.Draw(i_cl_imgage)
+        st_font = ImageFont.truetype(i_s_font_name, i_n_font_size)
+
+        # Adaptive height if requested
+        x_adaptive_height = (i_h_border <= 0)
+
+        # Inner width for wrapping
+        w_inner: int = i_w_border - (2 * i_n_padding)
+
+        # Wrap text
+        ls_wrapped_lines: List[str] = (
+            Cl_multiline_text.wrap_text_into_lines(
+                i_text=i_s_text,
+                i_max_width=w_inner,
+                i_draw=cl_draw,
+                i_font=st_font
+            )
+        )
+
+        # Compute adaptive height
+        if x_adaptive_height:
+            n_lines = len(ls_wrapped_lines)
+            line_height = cl_draw.textbbox((0, 0), "A", font=st_font)[3]
+            i_h_border = n_lines * line_height + i_n_padding * 2
+
+        if i_n_font_size <= 0:
+            print(f"ERR: invalid font size: {i_n_font_size}")
+            return True
+
+        # Draw border
+        if i_x_draw_border:
+            cl_draw.rectangle(
+                [
+                    i_w_margin,
+                    i_h_margin,
+                    i_w_margin + i_w_border,
+                    i_h_margin + i_h_border
+                ],
+                outline=i_tn_border_color
+            )
+
+        # Render centered text
+        Cl_multiline_text.draw_wrapped_text_center(
+            i_draw=cl_draw,
+            i_x=i_w_margin + i_n_padding,
+            i_y=i_h_margin + i_n_padding,
+            i_box_width=w_inner,
+            i_lines=ls_wrapped_lines,
+            i_font=st_font,
+            i_text_color=i_tn_color
+        )
+
+        return i_h_border
+
+
 if __name__ == "__main__":
     cl_image = Image.new("RGB", (400, 300), (255, 255, 255))
 
     s_font_path = convert_to_path(["font","fantasy.ttf"])
 
-    h_box = Cl_multiline_text.render_fixed_size_text_box(
+    h_box = Cl_multiline_text.render_fixed_size_text_box_center(
         i_cl_imgage = cl_image,
         i_s_text = "This is a reusable multiline text box renderer This is a reusable multiline text box renderer . . ..",
         i_w_margin = 20,
