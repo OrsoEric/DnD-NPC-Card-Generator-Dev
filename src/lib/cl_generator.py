@@ -560,34 +560,38 @@ class Cl_npc_character_sheet_generator:
         #----------------------------------------------------------------------
 
         #create an image for the NPC ilustration
-        g_npc_illustration : St_image = St_image(
+        cl_npc_illustration : St_image = St_image(
             i_w_card_mm = self.g_w_card_width_mm,
             i_h_card_mm = self.g_h_card_height_mm,
             i_dot_per_inch = self.g_n_dots_per_inch
         )
 
         #load the NPC illustration and resize it
-        g_npc_illustration.load_image( i_ls_npc_illustration_path )
+        cl_npc_illustration.load_image( i_ls_npc_illustration_path )
 
         #draw NPC illustration on the front
-        self.g_cl_image_card_front.draw_image( g_npc_illustration, (0,0), t_size_front )
+        self.g_cl_image_card_front.draw_image( cl_npc_illustration, (0,0), t_size_front )
 
         #----------------------------------------------------------------------
         #   DRAW: FRONT MASK
         #----------------------------------------------------------------------
 
         #create an image for the NPC ilustration
-        g_npc_illustration : St_image = St_image(
+        cl_front_mask : St_image = St_image(
             i_w_card_mm = self.g_w_card_width_mm,
             i_h_card_mm = self.g_h_card_height_mm,
             i_dot_per_inch = self.g_n_dots_per_inch
         )
 
         #load the NPC illustration and resize it
-        g_npc_illustration.load_image( i_ls_mask_front_path )
+        cl_front_mask.load_image( i_ls_mask_front_path )
+
+        self.g_cl_image_card_front.compose_image( cl_front_mask, 0.3 )
+
+        #cl_front_mask.g_cl_image.convert('RGBA')
 
         #draw NPC illustration on the front
-        self.g_cl_image_card_front.draw_image( g_npc_illustration, (0,0), t_size_front )
+        #self.g_cl_image_card_front.draw_image( cl_front_mask, (0,0), t_size_front )
 
         #----------------------------------------------------------------------
         #   DRAW: FRONT

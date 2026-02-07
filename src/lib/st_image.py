@@ -197,6 +197,56 @@ class St_image:
                 del self.g_cl_image
                 self.g_cl_image = None
 
+    def apply_global_opacity_to_image(
+        self,
+        i_desired_opacity: float
+    ) -> bool:
+        """
+        Applies a uniform opacity factor to every pixel of an RGBA image.
+
+        Parameters
+        ----------
+        i_original_image : PIL.Image.Image
+            The source image; it must already be in RGBA mode.
+        i_desired_opacity : float
+            Desired global opacity (0.0 – fully transparent, 1.0 – fully opaque).
+
+        Returns
+        -------
+        PIL.Image.Image
+            A new image with the alpha channel scaled by *i_desired_opacity*.
+        """
+        # Retrieve the pixel data as a NumPy array for efficient manipulation
+        ln_pixels = self.g_cl_image.load()
+
+        n_width, n_height = self.g_cl_image.size
+
+        # Iterate over every pixel to modify its alpha component
+        for i_x in range(n_width):
+            for j_y in range(n_height):
+                r_value, g_value, b_value, a_value = ln_pixels[i_x, j_y]
+                # Scale the existing alpha by the desired opacity
+                n_new_alpha: int = int(round(a_value * i_desired_opacity))
+                n_new_alpha = max(0, min(255, n_new_alpha))  # clamp to [0,255]
+                ln_pixels[i_x, j_y] = (r_value, g_value, b_value, n_new_alpha)
+
+        return False #OK
+
+    def compose_image(
+        self, 
+        i_st_mask_with_transparency : "St_image",
+        i_n_opacity : float
+    ) -> bool:
+        
+        i_st_mask_with_transparency.apply_global_opacity_to_image( i_n_opacity )
+
+        self.g_cl_image = PIL.Image.alpha_composite(
+            self.g_cl_image.convert("RGBA"),
+            i_st_mask_with_transparency.g_cl_image.convert("RGBA")
+        )
+
+        return False #OK
+
     def load_image(
         self,
         i_ls_path_parts : list[str]
