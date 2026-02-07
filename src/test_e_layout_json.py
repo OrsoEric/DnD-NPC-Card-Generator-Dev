@@ -100,8 +100,6 @@ CN_DEFAULT_BACKGROUND_COLOR: tuple[int, int, int] = (255, 255, 255)  # white
 CN_DEFAULT_BORDER_COLOR: tuple[int, int, int] = (0, 0, 0)            # black
 CN_BORDER_WIDTH: int = 5
 
-
-
 def draw_layout_to_image(
     i_layout: List[Dict[str, Any]],
     i_card_width: int,
@@ -170,31 +168,41 @@ def draw_layout_to_image(
     # Render each layout item; skip anything that isn’t a dict
     for st_item in ast_abilities:
         
-
-        s_text: str = st_item.get("s_name", "")
-        n_w_pos: int = st_item.get("w_pos", 0)
-        n_h_pos: int = st_item.get("h_pos", 0)
-        n_font_size: int = st_item.get("h_font", 12)
+        #PPT part per thousand of the whole image
+        #This way it's scale independent
+        s_text : str = st_item.get("s_name", "")
+        w_pos_ppt : int = st_item.get("w_pos_ppt", 0)
+        h_pos_ppt : int = st_item.get("h_pos_ppt", 0)
+        h_font_ppt : int = st_item.get("h_font_ppt", 0)
+        #PX
+        w_pos_px = i_card_width * w_pos_ppt / 1000
+        h_pos_px = i_card_height * h_pos_ppt / 1000
+        h_font_px = i_card_height * h_font_ppt / 1000
 
         try:
             cl_item_font: font.FreeTypeFont = font.truetype(
-                "arial.ttf",
-                n_font_size,
+                "verdana.ttf",
+                h_font_px,
             )
         except OSError:
             cl_item_font = cl_default_font
+            print("ERR: failed to load font")
 
         if (cursor_h <= 0):
-            cursor_w = n_w_pos
-            cursor_h = n_h_pos
+            cursor_w = w_pos_px
+            cursor_h = h_pos_px
         else:
-            cursor_w += n_w_pos
-            cursor_h += n_h_pos
+            cursor_w += w_pos_px
+            cursor_h += h_pos_px
 
+        #add the header for the attribute or ability 
         cl_draw.text((cursor_w, cursor_h), s_text, fill=(0, 0, 0), font=cl_item_font)
+        #fetch the numerical value of attribute or ability
+        cl_draw.text((cursor_w, cursor_h), "+10", fill=(0, 0, 0), font=cl_item_font, anchor="ra")
+
+        
 
     return cl_image
-
 
 # --------------------------------------------------------------------------- #
 # Example class that uses the above helpers – demonstrates a minimal card
