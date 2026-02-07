@@ -18,7 +18,6 @@ or later rendering in any graphics library you choose.
 import logging
 
 import json
-from pathlib import Path
 from typing import List
 
 #OS independent path
@@ -61,7 +60,7 @@ def load_layout(
     # --------------------------------------------------------------------- #
     # 1. Read and parse the JSON file
     # --------------------------------------------------------------------- #
-    l_layout_path: Path = Path(*i_ls_file_path).with_suffix(".json")
+    l_layout_path = convert_to_path(i_ls_file_path)
     print(f"Log Path: {l_layout_path}")
     if not l_layout_path.is_file():
         raise FileNotFoundError(f"Layout file does not exist: {i_ls_file_path}")
