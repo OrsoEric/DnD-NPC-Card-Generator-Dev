@@ -37,6 +37,9 @@ class Cl_npc:
             self.g_d_npc = d_json_data
 
         return False #OK
+    
+    def __str__(self) -> str:
+        return f"{self.g_d_npc.keys()}"
 
 if __name__ == "__main__":
     # Setup logging

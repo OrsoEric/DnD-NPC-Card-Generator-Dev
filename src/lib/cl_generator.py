@@ -249,7 +249,7 @@ class Cl_npc_character_sheet_generator:
             #check that the name of the attribute is amongst the NPC stats
             if s_attribute in ls_npc_key:
                 #then copy over the value
-                d_attribute["n_value"] = s_attribute
+                d_attribute["n_value"] = i_d_npc[s_attribute]
                 logging.debug(f"NPC value {s_attribute} assigned to layout value {d_attribute}")
             else:
                 logging.error(f"ERR: unable to find attributr {s_attribute} in layout keys {ls_npc_key}")
