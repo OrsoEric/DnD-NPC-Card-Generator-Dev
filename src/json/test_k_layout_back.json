@@ -7,7 +7,7 @@
             "w_top_left_ppt": 50,
             "h_top_left_ppt": 20,
             "w_size_ppt": 900,
-            "h_size_left_ppt": 150,
+            "h_size_ppt": 150,
             "h_font_ppt": 20
         },
         {
@@ -16,7 +16,7 @@
             "w_top_left_ppt": 400,
             "h_top_left_ppt": 180,
             "w_size_ppt": 500,
-            "h_size_left_ppt": 50,
+            "h_size_ppt": 50,
             "h_font_ppt": 20
         },
         {
@@ -25,7 +25,7 @@
             "w_top_left_ppt": 400,
             "h_top_left_ppt": 230,
             "w_size_ppt": 500,
-            "h_size_left_ppt": 50,
+            "h_size_ppt": 50,
             "h_font_ppt": 20
         },
         {
@@ -34,7 +34,7 @@
             "w_top_left_ppt": 400,
             "h_top_left_ppt": 280,
             "w_size_ppt": 500,
-            "h_size_left_ppt": 50,
+            "h_size_ppt": 50,
             "h_font_ppt": 20
         },
         {
@@ -43,7 +43,7 @@
             "w_top_left_ppt": 400,
             "h_top_left_ppt": 330,
             "w_size_ppt": 500,
-            "h_size_left_ppt": 70,
+            "h_size_ppt": 70,
             "h_font_ppt": 20
         },
         {
@@ -52,7 +52,7 @@
             "w_top_left_ppt": 400,
             "h_top_left_ppt": 400,
             "w_size_ppt": 500,
-            "h_size_left_ppt": 100,
+            "h_size_ppt": 100,
             "h_font_ppt": 20
         }
     ],
@@ -250,9 +250,6 @@
     "ACTIONS": {
         "s_name": "ACTIONS",
         "s_text": "this covers active and passives, height is adaptive based on previous ability lines",
-        "w_top_left_ppt": 400,
-        "h_top_left_ppt": 500,
-        "w_size_ppt": 500,
         "h_font_title_ppt": 25,
         "h_font_body_ppt": 20,
         "h_font_flavor_text_ppt": 15

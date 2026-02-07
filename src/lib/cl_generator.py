@@ -209,7 +209,7 @@ class Cl_npc_character_sheet_generator:
             w_top_left_ppt: int = st_text_box.get("w_top_left_ppt", 0)
             h_top_left_ppt: int = st_text_box.get("h_top_left_ppt", 0)
             w_size_ppt: int = st_text_box.get("w_size_ppt", 0)
-            h_size_ppt: int = st_text_box.get("h_size_left_ppt", 0)
+            h_size_ppt: int = st_text_box.get("h_size_ppt", 0)
             h_font_ppt: int = int(st_text_box.get("h_font_ppt", 0))
             
             # Convert PPT values to pixels
@@ -305,19 +305,22 @@ class Cl_npc_character_sheet_generator:
             d_header_box = dict(ld_text_boxes[-1])          # shallow copy of the last entry
             d_header_box["s_name"] = f"ACTION{0}"
             d_header_box["s_text"] = d_action_npc.get("s_name", "")
+            d_header_box["s_name"] = f"ACTION{0}"
             ld_text_boxes.append(d_header_box)
             logging.debug(f"Added header text box: {d_header_box}")
 
             # ---------- Body text box (s_text) ----------
             d_body_box = dict(ld_text_boxes[-1])             # copy of the newly appended entry
-            d_header_box["s_name"] = f"ACTION{0}"
+            d_body_box["s_name"] = f"ACTION{0}"
             d_body_box["s_text"] = d_action_npc.get("s_text", "")
+            #auto height
+            d_body_box["h_size_ppt"] = 0
             ld_text_boxes.append(d_body_box)
             logging.debug(f"Added body text box: {d_body_box}")
 
             # ---------- Description text box (s_action) ----------
             d_description_box = dict(ld_text_boxes[-1])     # copy of the latest entry
-            d_header_box["s_name"] = f"ACTION{0}"
+            d_description_box["s_name"] = f"ACTION{0}"
             d_description_box["s_text"] = d_action_npc.get("s_action", "")
             ld_text_boxes.append(d_description_box)
             logging.debug(f"Added description text box: {d_description_box}")
