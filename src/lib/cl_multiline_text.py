@@ -138,14 +138,38 @@ class Cl_multiline_text:
             i_n_padding: int = 5,
             i_x_draw_border: bool = False,
             i_tn_border_color: tuple[int, int, int] = (0, 0, 0)
-            ) -> bool:
+            ) -> int:
         """
         Render wrapped text into a fixed-size rectangle on an existing image.
         """
 
+
         cl_draw: ImageDraw.Draw = ImageDraw.Draw(i_cl_imgage)
 
         st_font = ImageFont.truetype(i_s_font_name, i_n_font_size)
+
+
+        # f the height of the text box is zero, activate the adaptive height
+        x_adaptive_height = (i_h_border <= 0)
+
+        # Wrap text to inner width
+        w_inner: int = i_w_border - (2 * i_n_padding)
+
+        #text border wrapper
+        ls_wrapped_lines: List[str] = (
+            Cl_multiline_text.wrap_text_into_lines(
+                i_text=i_s_text,
+                i_max_width=w_inner,
+                i_draw=cl_draw,
+                i_font=st_font
+            )
+        )
+
+        if (x_adaptive_height == True):
+            n_lines = len(ls_wrapped_lines)
+            h_text = n_lines * i_n_font_size + i_n_padding * 2
+            i_h_border = h_text
+
 
         if i_n_font_size <= 0:
             print(f"ERR: invalid font size: {i_n_font_size}")
@@ -162,28 +186,18 @@ class Cl_multiline_text:
                 outline=i_tn_border_color
             )
 
-        # Wrap text to inner width
-        inner_width: int = i_w_border - (2 * i_n_padding)
-
-        wrapped_lines: List[str] = (
-            Cl_multiline_text.wrap_text_into_lines(
-                i_text=i_s_text,
-                i_max_width=inner_width,
-                i_draw=cl_draw,
-                i_font=st_font
-            )
-        )
-
         # Render
         Cl_multiline_text.draw_wrapped_text(
             i_draw=cl_draw,
             i_x=i_w_margin + i_n_padding,
             i_y=i_h_margin + i_n_padding,
-            i_lines=wrapped_lines,
+            i_lines=ls_wrapped_lines,
             i_font=st_font,
             i_text_color=i_tn_color
         )
-        return False #OK
+
+        #return height of text box
+        return i_h_border
 
 if __name__ == "__main__":
     cl_image = Image.new("RGB", (400, 300), (255, 255, 255))

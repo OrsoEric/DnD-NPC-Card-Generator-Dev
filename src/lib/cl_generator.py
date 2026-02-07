@@ -156,6 +156,7 @@ class Cl_npc_character_sheet_generator:
             print("ERR: field doesn't exist, json is wrong")
             return True #ERROR
 
+        #cursor
         w_cursor = 0
         h_cursor = 0
 
@@ -200,6 +201,10 @@ class Cl_npc_character_sheet_generator:
             else: 
                 cl_draw.text((w_cursor, h_cursor), f"{n_value}", fill=(0, 0, 0), font=cl_item_font, anchor="ra")
 
+        #cursor
+        w_cursor = 0
+        h_cursor = 0
+
         for st_text_box in ast_text_boxes:
             logging.debug(f"drawing text box: {st_text_box}")
             #TODO: I should make this into a structure
@@ -216,8 +221,14 @@ class Cl_npc_character_sheet_generator:
             w_top_left_px = int(w_size_px * w_top_left_ppt / 1000)
             h_top_left_px = int(h_size_px * h_top_left_ppt / 1000)
             w_text_box_px = int(w_size_px * w_size_ppt / 1000)
-            h_text_box_px = int( h_size_px * h_size_ppt / 1000)
+            
             h_font_px = int(h_size_px * h_font_ppt / 1000)
+
+            #0 height mean that the text box renderer with automatically calculate and return height
+            if (h_size_ppt <= 0):
+                h_text_box_px = 0
+            else:
+                h_text_box_px = int( h_size_px * h_size_ppt / 1000)    
 
             Cl_multiline_text.render_fixed_size_text_box(
                 i_cl_imgage = i_cl_image.g_cl_image,
