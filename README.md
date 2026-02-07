@@ -14,6 +14,36 @@ I should make a tool to import sheets into OpenVTT and to print those sheets
 
 I copied the VTT html page using F12 and element picker
 
+# STATS
+
+CORE STATS
+- HP
+- AC
+- PROF
+- CR
+- Initiative
+- Passive Perception WIS+PROF
+- Speed
+
+ATTRIBUTES, SAVE
+- STR
+- DEX
+- CON
+- INT
+- WIS
+- CHA
+
+PROFICIENCISES
+- ABILITIES
+
+RESISTENCE, IMMUNITY, WEAKNESS
+- DAMAGE TYPE
+
+
+
+
+
+
 # IDEAS
 
 ## Card MTG Landscaper
@@ -47,10 +77,16 @@ I use the front for illustration and stat block
 I use the rear for abilities and skills
 
 
+How many cards I need?
 
 
 
 
+
+
+# ComfyUI
+
+I should make a ComfyUI node to generate the NPC card
 
 
 
