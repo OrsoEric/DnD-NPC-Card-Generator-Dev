@@ -28,46 +28,21 @@ from lib.st_image import St_image
 
 from lib.cl_generator import Cl_npc_character_sheet_generator
 
+
 def generate_card() -> bool:
-    #look at the input folder, and scan for image/json files with same name, our NPCs
-    ltss_npc_input_path = find_file_pair_image_json("input")
+    x_fail = Cl_npc_character_sheet_generator.find_and_generate_cards(
+        #card layout descriptor
+        i_ls_layout_file_path  = ["src", "json", "npc_layout.json"],
+        #card image frame overlay
+        i_ls_mask_front_path = ["mask", "front_mask_d.png"],
+        i_ls_mask_back_path =["mask", "front_mask_d.png"] ,
+        #pair of image and json
+        i_s_input_folder = "input",
+        #where save output
+        i_s_output_folder ="output"
+    )
 
-    if (len(ltss_npc_input_path) < 0):
-        logging.error("ERR: no valid file pair in the input folder")
-        return True #FAIL
-
-    for tss_npc_input_path in ltss_npc_input_path:
-        
-        #unpack
-        s_input_npc_image_path = tss_npc_input_path[0]
-        s_input_npc_json_path = tss_npc_input_path[1]
-        logging.info(f"Processing NPC files {s_input_npc_image_path} {s_input_npc_json_path} ")
-
-        
-        s_output_image_path = build_path_output_jpg( "output", s_input_npc_image_path )
-        # construct the output path
-        logging.info(f"Output image path {s_output_image_path}")
-
-        cl_generator = Cl_npc_character_sheet_generator(
-            i_w_card_width_mm=63.5,
-            i_h_card_height_mm=88.9,
-            i_n_dots_per_inch = 300,
-            i_background_color=(255, 255, 255),
-            i_border_color=(0, 0, 0)
-        )
-        logging.info("Constructed NPC generator class...")
-
-        # Generate the card back
-        cl_generated_image = cl_generator.generate_card(
-            i_ls_layout_file_path=["src", "json", "npc_layout.json"],
-            #i_ls_mask_front_path=["mask", "front_mask_transparent.png"],
-            i_ls_mask_front_path=["mask", "front_mask_d.png"],
-            i_ls_npc_illustration_path= s_input_npc_image_path,
-            i_ls_npc_json_path = s_input_npc_json_path,
-            i_ls_output_file_path=s_output_image_path
-        )
-
-    return False #OK
+    return x_fail
 
 # Example usage
 if __name__ == "__main__":
@@ -84,7 +59,6 @@ if __name__ == "__main__":
     logging.info("BEGIN")
 
     generate_card()
-
 
     logging.info("END")
     print("Card back generated successfully!")
