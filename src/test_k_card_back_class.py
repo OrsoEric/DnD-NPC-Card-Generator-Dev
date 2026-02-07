@@ -103,129 +103,6 @@ class Cl_npc_character_sheet_generator:
         logging.info("Layout loaded successfully")
         return ln_layout_data
 
-    #this seems unused
-    def load_layout(
-        self,
-        i_ls_file_path: List[str],
-        i_card_width: int,
-        i_card_height: int,
-    ) -> List[St_attribute_ability]:
-        """
-        Load a card layout from JSON and convert it into a list of
-        :class:`St_attribute_ability` objects.
-
-        The JSON file is expected to contain an ``attributes_and_abilities`` key
-        whose value is an array.  Each element may use *percent‑per‑thousand*
-        (`*_ppt`) values to describe positions and font sizes relative to the
-        card dimensions – these are converted into pixel coordinates.
-
-        Parameters
-        ----------
-        i_file_path : str
-            Path to the JSON file that defines the layout.
-        i_card_width : int
-            Width of the card in pixels.  This value is used for scaling
-            percent‑based positions.
-        i_card_height : int
-            Height of the card in pixels.
-
-        Returns
-        -------
-        List[St_attribute_ability]
-            A list, one entry per attribute/ability defined in the JSON,
-            with all coordinates expressed in absolute pixel values.
-        """
-
-        # --------------------------------------------------------------------- #
-        # 1. Read and parse the JSON file
-        # --------------------------------------------------------------------- #
-        l_layout_path = convert_to_path(i_ls_file_path)
-        logging.info(f"Loading layout from: {l_layout_path}")
-        if not l_layout_path.is_file():
-            raise FileNotFoundError(f"Layout file does not exist: {i_ls_file_path}")
-
-        with l_layout_path.open("r", encoding="utf-8") as cl_file:
-            ln_json_data: dict[str, object] = json.load(cl_file)
-
-        try:
-            lst_abilities: List[dict[str, object]] = ln_json_data["attributes_and_abilities"]
-            logging.info(f"Number of abilities: {len(lst_abilities)}")
-
-            lst_text_box: List[dict[str, object]] = ln_json_data["text_boxes"]
-            logging.debug(f"Number of Text Boxes: {len(lst_text_box)}")
-
-        except KeyError as exc:
-            raise ValueError("JSON layout must contain an 'attributes_and_abilities' key") from exc
-
-        # --------------------------------------------------------------------- #
-        # 2. Convert each entry to St_attribute_ability
-        # --------------------------------------------------------------------- #
-        l_result: List[St_attribute_ability] = []
-
-        h_cursor = 0
-        w_cursor = 0
-
-        
-        for st_item in lst_abilities:
-            # ----------------------------------------------------------------- #
-            #   Name
-            # ----------------------------------------------------------------- #
-            s_name: str = str(st_item.get("s_name", ""))
-
-            n_w_pos_ppt: int | float = st_item.get("w_pos_ppt", 0)
-            n_h_pos_ppt: int | float = st_item.get("h_pos_ppt", 0)
-
-            w_name_px: int = int(i_card_width * n_w_pos_ppt / 1000)
-            h_name_px: int = int(i_card_height * n_h_pos_ppt / 1000)
-
-            if (h_cursor <= 0):
-                w_cursor = w_name_px
-                h_cursor = h_name_px
-            else:
-                w_cursor += w_name_px
-                h_cursor += h_name_px
-
-            # ----------------------------------------------------------------- #
-            #   Font Size
-            # ----------------------------------------------------------------- #
-
-            h_font_ppt : int = st_item.get("h_font_ppt", 0)
-            h_font_px = i_card_height * h_font_ppt / 1000
-
-            # ----------------------------------------------------------------- #
-            #   Modifier
-            # ----------------------------------------------------------------- #
-            s_modifier_value: str = str(st_item.get("s_modifier_value", ""))
-
-            # The layout may provide a dedicated position for the modifier.
-            # If it is missing we simply use the same X coordinate as the name.
-            n_w_mod_pos_ppt: int | float = st_item.get("w_pos_modifier_ppt")
-            if n_w_mod_pos_ppt is not None:
-                w_mod_px: int = int(i_card_width * n_w_mod_pos_ppt / 1000)
-            else:
-                w_mod_px: int = w_name_px
-
-            # ----------------------------------------------------------------- #
-            #   Assemble the dataclass instance
-            # ----------------------------------------------------------------- #
-            cl_ability: St_attribute_ability = St_attribute_ability(
-                s_name=s_name,
-                w_name_pos_px = w_cursor,
-                h_name_pos_px = h_cursor,
-                h_name_font = h_font_px,
-
-                s_modifier_value=s_modifier_value,
-                w_modifier_pos_px=w_cursor -w_mod_px,
-            )
-            l_result.append(cl_ability)
-
-        
-        for st_text_box in lst_text_box:
-            logging.debug(f"Processing: {st_text_box}")
-
-        logging.info(f"Successfully converted {len(l_result)} layout items")
-        return l_result
-
     def draw_layout_to_image(
         self,
         i_ld_layout: List[Dict[str, Any]],
@@ -327,6 +204,35 @@ class Cl_npc_character_sheet_generator:
 
         for st_text_box in ast_text_boxes:
             logging.debug(f"Processing Text Box: {st_text_box}")
+
+            #load text box parameters
+            s_label: str = st_text_box.get("s_name", "") 
+            s_text: str = st_text_box.get("s_text", "")
+            w_top_left_ppt: int = st_text_box.get("h_top_left_ppt", 0)
+            h_top_left_ppt: int = st_text_box.get("h_top_left_ppt", 0)
+            w_size_ppt: int = st_text_box.get("w_size_ppt", 0)
+            h_size_left_ppt: int = st_text_box.get("h_size_left_ppt", 0)
+            h_font_ppt: int = st_text_box.get("h_font_ppt", 0)
+            
+            # Convert PPT values to pixels
+            w_top_left_px = w_size_px * w_top_left_ppt / 1000
+            h_top_left_px = h_size_px * w_top_left_px / 1000
+            h_font_px = h_size_px * h_font_ppt / 1000
+
+            Cl_multiline_text.render_fixed_size_text_box(
+                i_cl_imgage = i_cl_image.g_cl_image,
+                i_s_text = s_text,
+                i_w_margin = w_top_left_px,
+                i_h_margin = h_top_left_px,
+                i_w_border = 250,
+                i_h_border = 120,
+                i_s_font_name = "arial.ttf",
+                i_n_font_size = 18,
+                i_tn_color = (127, 127, 127),
+                i_n_padding = 5,
+                i_x_draw_border = True,
+                i_tn_border_color = (255,0,0)
+            )
 
 
         logging.info("Layout drawing completed successfully")
