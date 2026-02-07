@@ -7,7 +7,7 @@
     "CR": "1",
     "HP": "30",
     "AC": "18",
-    "SPEED": "6",
+    "SPEED": "SPEED: Walk: 6sq | Swim: 2sq",
 
     "DESCRIPTION": "Long form desciption. this is a long multiline description of the actor that can cover many topics like flavour, physical description, behaviour, habitat, history and myths.",
 
@@ -20,6 +20,9 @@
     "SPELLCASTING": "Spell ability: STRENGTH\nSpell List: Druid\nSpell Bonus: +4\nSpell Save DC: 14",
 
     "PROFICIENCY": 2,
+
+    "INITIATIVE": -7,
+
     "STRENGTH": -2,
     "STR SAVE": -1,
     "ATHLETICS": 0,

@@ -29,6 +29,15 @@
             "h_font_ppt": 20
         },
         {
+            "s_name": "SPEED",
+            "s_text": "this speed with various means",
+            "w_top_left_ppt": 400,
+            "h_top_left_ppt": 180,
+            "w_size_ppt": 500,
+            "h_size_ppt": 0,
+            "h_font_ppt": 20
+        },
+        {
             "s_name": "IMMUNITY",
             "s_text": "this covers damage resistencce, vulnerabilities and immunities",
             "w_top_left_ppt": 400,
@@ -61,15 +70,21 @@
     [
         {
             "s_name": "PROFICIENCY",
-            "w_pos_ppt": 100,
-            "h_pos_ppt": 175,
-            "h_font_ppt": 25
+            "w_pos_ppt": 80,
+            "h_pos_ppt": 150,
+            "h_font_ppt": 24
+        },
+        {
+            "s_name": "INITIATIVE",
+            "w_pos_ppt": 0,
+            "h_pos_ppt": 30,
+            "h_font_ppt": 24
         },
         {
             "s_name": "STRENGTH",
             "w_pos_ppt": 0,
             "h_pos_ppt": 30,
-            "h_font_ppt": 25
+            "h_font_ppt": 24
         },
         {
             "s_name": "STR SAVE",
@@ -117,7 +132,7 @@
             "s_name": "CONSTITUTION",
             "w_pos_ppt": 0,
             "h_pos_ppt": 30,
-            "h_font_ppt": 25
+            "h_font_ppt": 24
         },
         {
             "s_name": "CON SAVE",
@@ -129,7 +144,7 @@
             "s_name": "INTELLIGENCE",
             "w_pos_ppt": 0,
             "h_pos_ppt": 30,
-            "h_font_ppt": 25
+            "h_font_ppt": 24
         },
         {
             "s_name": "INT SAVE",
@@ -171,7 +186,7 @@
             "s_name": "WISDOM",
             "w_pos_ppt": 0,
             "h_pos_ppt": 30,
-            "h_font_ppt": 25
+            "h_font_ppt": 24
         },
         {
             "s_name": "WIS SAVE",
@@ -213,7 +228,7 @@
             "s_name": "CHARISMA",
             "w_pos_ppt": 0,
             "h_pos_ppt": 30,
-            "h_font_ppt": 25
+            "h_font_ppt": 24
         },
         {
             "s_name": "CHA SAVE",

@@ -232,17 +232,18 @@ class Cl_npc_character_sheet_generator:
         h_size_px = i_cl_image.g_h_card_px
 
         # Draw a simple rectangle border
-        cl_draw.rectangle(
-            [
-                (self.CN_BORDER_WIDTH, self.CN_BORDER_WIDTH),
-                (
-                    w_size_px - self.CN_BORDER_WIDTH,
-                    h_size_px - self.CN_BORDER_WIDTH,
-                ),
-            ],
-            outline=self.g_tn_border_color,
-            width=self.CN_BORDER_WIDTH,
-        )
+        if False:
+            cl_draw.rectangle(
+                [
+                    (self.CN_BORDER_WIDTH, self.CN_BORDER_WIDTH),
+                    (
+                        w_size_px - self.CN_BORDER_WIDTH,
+                        h_size_px - self.CN_BORDER_WIDTH,
+                    ),
+                ],
+                outline=self.g_tn_border_color,
+                width=self.CN_BORDER_WIDTH,
+            )
 
         # Default font – Pillow will fallback to a built‑in one if the path is wrong
         cl_default_font = font.load_default()
