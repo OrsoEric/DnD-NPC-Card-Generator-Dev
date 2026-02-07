@@ -1,5 +1,6 @@
-[2026-02-06 17:39:19,206] INFO test_p_detect_npc:103 > BEGIN 
-[2026-02-06 17:39:19,206] DEBUG test_p_detect_npc:57 > input\dice_golem.jpg | .jpg 
-[2026-02-06 17:39:19,207] DEBUG test_p_detect_npc:57 > input\dice_golem.json | .json 
-[2026-02-06 17:39:19,207] INFO test_p_detect_npc:106 > 0 | [] 
-[2026-02-06 17:39:19,207] INFO test_p_detect_npc:108 > END 
+[2026-02-06 17:53:34,753] INFO test_p_detect_npc:109 > BEGIN 
+[2026-02-06 17:53:34,753] DEBUG test_p_detect_npc:57 > input\dice_golem.jpg | .jpg 
+[2026-02-06 17:53:34,753] DEBUG test_p_detect_npc:57 > input\dice_golem.json | .json 
+[2026-02-06 17:53:34,754] DEBUG test_p_detect_npc:74 >  ENTRY dice_golem | {'jpg': WindowsPath('D:/Data/Project/D&D/Character Sheet Generator/input/dice_golem.jpg'), 'png': None, 'json': WindowsPath('D:/Data/Project/D&D/Character Sheet Generator/input/dice_golem.json')} 
+[2026-02-06 17:53:34,754] INFO test_p_detect_npc:112 > 1 | [(WindowsPath('D:/Data/Project/D&D/Character Sheet Generator/input/dice_golem.jpg'), WindowsPath('D:/Data/Project/D&D/Character Sheet Generator/input/dice_golem.json'))] 
+[2026-02-06 17:53:34,760] INFO test_p_detect_npc:114 > END 

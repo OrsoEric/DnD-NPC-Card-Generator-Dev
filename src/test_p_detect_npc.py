@@ -18,7 +18,7 @@ from lib.cl_utility_path import convert_to_path
 # -*- coding: utf-8 -*-
 
 
-def find_file_pair_image_json(i_s_folder : str) -> List[Tuple[Path, Path, Path]]:
+def find_file_pair_image_json(i_s_folder : str) -> List[Tuple[Path, Path]]:
     """
     Locate pairs of JPEG/PNG images and a JSON file that share the same stem in the given directory.
 
@@ -48,33 +48,39 @@ def find_file_pair_image_json(i_s_folder : str) -> List[Tuple[Path, Path, Path]]
     # Mapping from file stem to the paths of jpg, png and json files
     d_stem_to_files = dict()
 
-    for s_path in i_cl_path.iterdir():
+    for d_paths in i_cl_path.iterdir():
         
-        if not s_path.is_file():
+        if not d_paths.is_file():
             continue  # Skip directories or non‑files
 
-        s_extension_lower: str = s_path.suffix.lower()
-        logging.debug(f"{s_path} | {s_extension_lower}")
-        s_stem: str = s_path.stem
+        s_extension_lower: str = d_paths.suffix.lower()
+        logging.debug(f"{d_paths} | {s_extension_lower}")
+        s_file_without_extension: str = d_paths.stem
 
         # Ensure we have an entry for this stem
-        d_entry = d_stem_to_files.setdefault(s_stem, {"jpg": None, "png": None, "json": None})
+        d_entry = d_stem_to_files.setdefault(s_file_without_extension, {"jpg": None, "png": None, "json": None})
 
         if s_extension_lower == ".jpg":
-            d_entry["jpg"] = s_path.resolve()
+            d_entry["jpg"] = d_paths.resolve()
         elif s_extension_lower == ".png":
-            d_entry["png"] = s_path.resolve()
+            d_entry["png"] = d_paths.resolve()
         elif s_extension_lower == ".json":
-            d_entry["json"] = s_path.resolve()
+            d_entry["json"] = d_paths.resolve()
 
     # ---- Build result -----------------------------------------------
-    l_pairs: List[Tuple[Path, Path, Path]] = []
+    ltss_image_json: List[Tuple[Path, Path]] = []
 
-    for s_stem, m_files in d_stem_to_files.items():
-        if all(m_files.values()):  # All three files are present
-            l_pairs.append((m_files["jpg"], m_files["png"], m_files["json"]))
+    for s_file_without_extension, d_paths in d_stem_to_files.items():
+        logging.debug(f" ENTRY {s_file_without_extension} | {d_paths}")
+        #if I have a jpg, and a json
+        if (d_paths["jpg"] and d_paths["json"]):
+            ltss_image_json.append( (d_paths["jpg"], d_paths["json"]) )
+        elif (d_paths["png"] and d_paths["json"]):
+            ltss_image_json.append( (d_paths["png"], d_paths["json"]) )
+        else:
+            pass
 
-    return l_pairs
+    return ltss_image_json
 
 
 # --------------------------------------------------------------------
