@@ -4,7 +4,14 @@
     "NAME": "Blobby",
     "RACE": "Slime",
 
+    "CHALLENGE RATING": 1,
+    "HP": 30,
+    "AC": 18,
+    "SPEED": 6,
+
     "DESCRIPTION": "Long form desciption. this is a long multiline description of the actor that can cover many topics like flavour, physical description, behaviour, habitat, history and myths.",
+
+    "SPELLCASTING": "Spell ability: STRENGTH\nSpell List: Druid",
 
     "IMMUNITY" : "IMMUNITY: Ice, Fire, Blunt",
     "RESISTENCE" : "RESISTENCE: Pierce",

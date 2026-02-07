@@ -38,27 +38,60 @@ class Cl_multiline_text:
             i_text: str,
             i_max_width: int,
             i_draw: ImageDraw.Draw,
-            i_font: ImageFont.FreeTypeFont) -> List[str]:
+            i_font: ImageFont.FreeTypeFont
+    ) -> List[str]:
+        """
+        Wrap the supplied text into lines that fit within ``i_max_width`` pixels.
 
-        words: List[str] = i_text.split()
-        wrapped_lines: List[str] = []
-        current_line: str = ""
+        The function also honours explicit newline characters (``\n``).  Each
+        paragraph is wrapped independently; an empty line in the source text
+        results in a blank string in the returned list, preserving paragraph
+        separation.
 
-        for word in words:
-            tentative_line: str = f"{current_line} {word}".strip()
+        Parameters:
+            i_text (str): Raw text that may contain spaces and ``\n``.
+            i_max_width (int): The maximum width of a line in pixels.
+            i_draw (ImageDraw.Draw): Pillow drawing context used for measuring
+                text widths.
+            i_font (ImageFont.FreeTypeFont): Font used to render the text.
 
-            if (Cl_multiline_text.measure_text_width(
-                    i_draw, tentative_line, i_font) <= i_max_width):
-                current_line = tentative_line
-            else:
-                if current_line:
-                    wrapped_lines.append(current_line)
-                current_line = word
+        Returns:
+            List[str]: A list of strings, each representing a single wrapped line.
+        """
+        # Split on newline to get individual paragraphs.  Empty parts correspond
+        # to blank lines that must be preserved in the output.
+        ln_paragraphs: List[str] = i_text.split('\n')
+        ln_wrapped_lines: List[str] = []
 
-        if current_line:
-            wrapped_lines.append(current_line)
+        for paragraph_index, paragraph_text in enumerate(ln_paragraphs):
+            # Preserve explicit blank lines.
+            if not paragraph_text:
+                ln_wrapped_lines.append('')
+                continue
 
-        return wrapped_lines
+            # Tokenise the paragraph into words.
+            ln_words: List[str] = paragraph_text.split()
+            st_current_line: str = ''
+            for word_index, current_word in enumerate(ln_words):
+                # Build a tentative line by appending the next word.
+                st_tentative_line: str = f"{st_current_line} {current_word}".strip()
+
+                # Measure whether this tentative line fits within ``i_max_width``.
+                if (Cl_multiline_text.measure_text_width(
+                        i_draw, st_tentative_line, i_font) <= i_max_width):
+                    st_current_line = st_tentative_line
+                else:
+                    # The word does not fit – commit the current line and start a new one.
+                    if st_current_line:
+                        ln_wrapped_lines.append(st_current_line)
+                    st_current_line = current_word
+
+            # Append any remaining text after processing all words in the paragraph.
+            if st_current_line:
+                ln_wrapped_lines.append(st_current_line)
+
+        return ln_wrapped_lines
+
 
     # --------------------------------------------------------------
     #  Rendering
