@@ -11,6 +11,7 @@ import logging
 
 import json
 from typing import List, Dict, Any, Tuple, Optional
+from pathlib import Path
 
 import PIL.Image as image
 import PIL.ImageDraw as draw
@@ -514,8 +515,8 @@ class Cl_npc_character_sheet_generator:
         self,
         i_ls_layout_file_path: List[str],
         i_ls_mask_front_path : List[str],
-        i_ls_npc_illustration_path : List[str],
-        i_ls_npc_json_path: List[str],
+        i_ls_npc_illustration_path : List[str] | Path,
+        i_ls_npc_json_path: List[str] | Path,
         i_ls_output_file_path: List[str],
         i_background_color: Optional[Tuple[int, int, int]] = None,
         i_border_color: Optional[Tuple[int, int, int]] = None

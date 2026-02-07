@@ -8,6 +8,7 @@
 import logging
 import json
 from typing import Any, Dict
+from pathlib import Path
 
 from lib.cl_utility_path import convert_to_path
 
@@ -24,11 +25,17 @@ class Cl_npc:
 
         return
 
-    def load_from_file( self, i_ls_path: list[str]) -> bool: 
+    def load_from_file(
+        self,
+        i_ls_path: list[str] | Path
+    ) -> bool: 
         """
         """
         
-        s_path = convert_to_path(i_ls_path)
+        if type(i_ls_path) is type(list()):
+            s_path = convert_to_path(i_ls_path)
+        else:
+            s_path = i_ls_path
 
         logging.info(f"Json Path {s_path}")
 

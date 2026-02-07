@@ -16,6 +16,8 @@ import logging
 from lib.cl_utility_path import convert_to_path
 import PIL.Image
 
+from pathlib import Path
+
 # --------------------------------------------------------------------------- #
 # CLASS DEFINITION
 # --------------------------------------------------------------------------- #
@@ -249,7 +251,7 @@ class St_image:
 
     def load_image(
         self,
-        i_ls_path_parts : list[str]
+        i_ls_path : list[str] | Path
     ) -> bool:
         """
         Load an image from the supplied path components and store it in this
@@ -276,13 +278,18 @@ class St_image:
             caught.
         """
         # Convert list of path components into a Path object.
-        st_image_path = convert_to_path(i_ls_path_parts)
+        
+        if type(i_ls_path) is type(list()):
+            s_image_path = convert_to_path(i_ls_path)
+        else:
+            s_image_path = i_ls_path
+
 
         try:
-            cl_image_loaded : PIL.Image.Image = PIL.Image.open(st_image_path)
+            cl_image_loaded : PIL.Image.Image = PIL.Image.open(s_image_path)
             
         except Exception as exc:  # pragma: no cover – defensive
-            logging.exception("Failed to load image from %s: %s", st_image_path, exc)
+            logging.exception("Failed to load image from %s: %s", s_image_path, exc)
             return True  # ERROR
         
 
@@ -299,7 +306,7 @@ class St_image:
 
     def save_image(
         self,
-        i_path_parts: list[str]
+        i_ls_path: list[str]
     ) -> bool:
         """
         Persist the current image to disk as a PNG file.
@@ -320,11 +327,14 @@ class St_image:
         if self.g_cl_image is None:
             return True #ERROR
 
-        st_path = convert_to_path(i_path_parts)
+        if type(i_ls_path) is type(list()):
+            s_image_path = convert_to_path(i_ls_path)
+        else:
+            s_image_path = i_ls_path
 
-        logging.debug(f"input: {i_path_parts} path: {st_path}")
+        logging.debug(f"input: {i_ls_path} path: {s_image_path}")
 
-        self.g_cl_image.save(str(st_path), format="PNG")
+        self.g_cl_image.save(str(s_image_path), format="PNG")
 
         return False #OK
 
