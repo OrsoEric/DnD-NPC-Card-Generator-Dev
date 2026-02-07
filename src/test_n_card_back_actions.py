@@ -19,10 +19,8 @@ import PIL.ImageDraw as draw
 import PIL.ImageFont as font
 
 from lib.cl_utility_path import convert_to_path
-from lib.st_attribute_ability import St_attribute_ability
 from lib.st_image import St_image
 #this utility allows to draw a multiline text box onto an image
-from lib.cl_multiline_text import Cl_multiline_text
 
 from lib.cl_generator import Cl_npc_character_sheet_generator
 

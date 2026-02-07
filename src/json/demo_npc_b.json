@@ -59,20 +59,17 @@
     "ACTIONS": [
         {
             "s_name": "Aura of the Slime God",
-            "s_type": "passive",
-            "s_text": "Slimes within 6sq radious get +10AC",
+            "s_text": "(passive) Slimes within 6sq radious get +10AC",
             "s_flavor": "The slime god infuses the soft jelly of other slimes sticky and tough that wraps and stick to both weapons and magic making them ineffective"
         },
         {
             "s_name": "Boink Boink Boink",
-            "s_type": "attack (1 action)",
-            "s_text": "Jump in a 6sq range, inflicting 10d10 blunt damage.\nAffected creatures make a CON SAVE. On FAIL, they are absorbed",
+            "s_text": "(1 action) Jump in a 6sq range, inflicting 10d10 blunt damage.\nAffected creatures make a CON SAVE. On FAIL, they are absorbed",
             "s_flavor": "Few survivors report being mesmerized by the gracious movement of the slime compressing disappearing into the air, unable to take their eyess off the slime as if fills their field of view before landing on them."
         },
         {
             "s_name": "Stomach of the Slime God",
-            "s_type": "passive",
-            "s_text": "Absorbed creatures make a CON SAVE\nSUCCESS: the creatures are freed.\nFAIL the creatre takes 1010 acid damage.",
+            "s_text": "(passive) Absorbed creatures make a CON SAVE\nSUCCESS: the creatures are freed.\nFAIL the creatre takes 1010 acid damage.",
             "s_flavor": "Adventurers that lose a limb to the slime jelly report it not hurting at all, and feeling like a worm tender embrace."
         }
     ],

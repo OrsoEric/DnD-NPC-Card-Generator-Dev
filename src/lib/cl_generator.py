@@ -237,9 +237,9 @@ class Cl_npc_character_sheet_generator:
                     i_h_border = 0,
                     i_s_font_name = "arial.ttf",
                     i_n_font_size = h_font_px,
-                    i_tn_color = (127, 127, 127),
+                    i_tn_color = (0, 0, 0),
                     i_n_padding = 5,
-                    i_x_draw_border = True,
+                    i_x_draw_border = False,
                     i_tn_border_color = (255,0,0)
                 )
 
@@ -259,9 +259,9 @@ class Cl_npc_character_sheet_generator:
                     i_h_border = h_text_box_px,
                     i_s_font_name = "arial.ttf",
                     i_n_font_size = h_font_px,
-                    i_tn_color = (127, 127, 127),
+                    i_tn_color = (0, 0, 0),
                     i_n_padding = 5,
-                    i_x_draw_border = True,
+                    i_x_draw_border = False,
                     i_tn_border_color = (255,0,0)
                 )
 
@@ -329,6 +329,10 @@ class Cl_npc_character_sheet_generator:
             print("ERR: field doesn't exist, json is wrong")
             return True #ERROR
 
+        h_font_title_ppt = st_layout_action["h_font_title_ppt"]
+        h_font_body_ppt = st_layout_action["h_font_body_ppt"]
+        h_font_flavor_text_ppt = st_layout_action["h_font_flavor_text_ppt"]
+
         #load the actions from the NPC
         ld_action_npc = i_d_npc["ACTIONS"]
 
@@ -341,26 +345,29 @@ class Cl_npc_character_sheet_generator:
                 return True  # ERROR
 
             # ---------- Header text box (s_name) ----------
-            d_header_box = dict(ld_text_boxes[-1])          # shallow copy of the last entry
+            d_header_box = dict(ld_text_boxes[-1])     
             d_header_box["s_name"] = f"ACTION{0}"
             d_header_box["s_text"] = d_action_npc.get("s_name", "ERR:Failed to load")
-            d_header_box["s_name"] = f"ACTION{0}"
+            d_header_box["h_font_ppt"] = h_font_title_ppt
+
             ld_text_boxes.append(d_header_box)
             logging.debug(f"Added header text box: {d_header_box}")
 
             # ---------- Body text box (s_text) ----------
-            d_body_box = dict(ld_text_boxes[-1])             # copy of the newly appended entry
+            d_body_box = dict(ld_text_boxes[-1])      
             d_body_box["s_name"] = f"ACTION{0}"
             d_body_box["s_text"] = d_action_npc.get("s_text", "ERR:Failed to load")
             #auto height
             d_body_box["h_size_ppt"] = 0
+            d_body_box["h_font_ppt"] = h_font_body_ppt
             ld_text_boxes.append(d_body_box)
             logging.debug(f"Added body text box: {d_body_box}")
 
             # ---------- Description text box (s_action) ----------
-            d_description_box = dict(ld_text_boxes[-1])     # copy of the latest entry
+            d_description_box = dict(ld_text_boxes[-1])   
             d_description_box["s_name"] = f"ACTION{0}"
-            d_description_box["s_text"] = d_action_npc.get("s_action", "ERR:Failed to load")
+            d_description_box["s_text"] = d_action_npc.get("s_flavor", "ERR:Failed to load")
+            d_description_box["h_font_ppt"] = h_font_flavor_text_ppt
             ld_text_boxes.append(d_description_box)
             logging.debug(f"Added description text box: {d_description_box}")
 
