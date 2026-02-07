@@ -1,0 +1,5 @@
+[2026-01-27 07:13:20,941] INFO test_j_multiline_text_lib:27 > BEGIN 
+[2026-01-27 07:13:20,942] DEBUG st_image:77 > W mm: 63.5 | H mm 88.9 
+[2026-01-27 07:13:20,942] DEBUG st_image:86 > W px: 750 | H px 1050 
+[2026-01-27 07:13:20,948] DEBUG st_image:153 > input: ['output', 'test_j_card_multiline_library.jpg'] path: output\test_j_card_multiline_library.jpg 
+[2026-01-27 07:13:20,987] INFO test_j_multiline_text_lib:52 > END 
