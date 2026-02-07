@@ -600,6 +600,15 @@ class Cl_npc_character_sheet_generator:
         t_size_back = self.g_cl_image_card_back.get_size()
         self.g_cl_image_card.draw_image( self.g_cl_image_card_back, (t_size_back[0],0), t_size_back )
 
+        cl_draw = draw.Draw(self.g_cl_image_card.g_cl_image)
+
+        # Draw a vertical line that spans the full height of the composite.
+        cl_draw.line(
+            xy=((t_size_back[0], 0), (t_size_back[0], t_size_back[1])),
+            fill=(0, 0, 0),
+            width=4
+        )
+
         # Save the image
         self.g_cl_image_card.save_image(i_ls_output_file_path)
 
