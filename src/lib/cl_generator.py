@@ -277,7 +277,11 @@ class Cl_npc_character_sheet_generator:
                 logging.error(f"ERR: unable to find attributr {s_attribute} in layout keys {ls_npc_key}")
                 return True #FAIL
 
-        
+        #ACTIONS
+        #I spawn a text box for the action title
+        #I spawn a text box for the action text
+        #TODO: eventually I'd like text SVG for damage types and dice but it gets difficult
+
         try:
             st_layout_action = i_ld_layout["ACTIONS"]
         except KeyError:
