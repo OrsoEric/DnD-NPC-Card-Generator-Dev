@@ -6,6 +6,10 @@
 
     "DESCRIPTION": "Long form desciption. this is a long multiline description of the actor that can cover many topics like flavour, physical description, behaviour, habitat, history and myths.",
 
+    "IMMUNITY" : "IMMUNITY: Ice, Fire, Blunt",
+    "RESISTENCE" : "RESISTENCE: Pierce",
+    "WEAKNESS" : "WEAKNESS: Psychic, Stun, Confusion",
+
     "PROFICIENCY": 2,
     "STRENGTH": -2,
     "STR SAVE": -1,
