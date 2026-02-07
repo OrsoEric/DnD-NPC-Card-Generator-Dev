@@ -97,78 +97,95 @@ def draw_layout_to_image(
 
         cl_draw.text((n_x_pos, n_y_pos), s_text, fill=(0, 0, 0), font=cl_item_font)
 
+CN_DEFAULT_BACKGROUND_COLOR: tuple[int, int, int] = (255, 255, 255)  # white
+CN_DEFAULT_BORDER_COLOR: tuple[int, int, int] = (0, 0, 0)            # black
+CN_BORDER_WIDTH: int = 5
+
+
+
+def draw_layout_to_image(
+    i_layout: List[Dict[str, Any]],
+    i_card_width: int,
+    i_card_height: int,
+    i_background_color: tuple[int, int, int] | None = None,
+    i_border_color: tuple[int, int, int] | None = None,
+) -> image.Image:
+    """
+    Render the supplied layout into a new PIL Image.
+
+    Parameters
+    ----------
+    i_layout : list[dict]
+        Layout data returned by :func:`load_layout_from_json`.
+    i_card_width : int
+        Width of the output card in pixels.
+    i_card_height : int
+        Height of the output card in pixels.
+    i_background_color : tuple[int, int, int] or None, default=None
+        RGB background colour.  If ``None`` a default white is used.
+    i_border_color : tuple[int, int, int] or None, default=None
+        RGB border colour.  If ``None`` a default black is used.
+
+    Returns
+    -------
+    PIL.Image.Image
+        An image object that contains the drawn layout.
+    """
+    tn_background_color: tuple[int, int, int] = (
+        i_background_color or CN_DEFAULT_BACKGROUND_COLOR
+    )
+    tn_border_color: tuple[int, int, int] = (
+        i_border_color or CN_DEFAULT_BORDER_COLOR
+    )
+
+    # Create base image and drawing context
+    cl_image: image.Image = image.new(
+        "RGB",
+        (i_card_width, i_card_height),
+        tn_background_color,
+    )
+    cl_draw: draw.Draw = draw.Draw(cl_image)
+
+    # Draw a simple rectangle border
+    cl_draw.rectangle(
+        [
+            (CN_BORDER_WIDTH, CN_BORDER_WIDTH),
+            (
+                i_card_width - CN_BORDER_WIDTH,
+                i_card_height - CN_BORDER_WIDTH,
+            ),
+        ],
+        outline=tn_border_color,
+        width=CN_BORDER_WIDTH,
+    )
+
+    # Default font – Pillow will fallback to a built‑in one if the path is wrong
+    cl_default_font: font.FreeTypeFont = font.load_default()
+
+    ast_abilities = i_layout["layout"]
+
+
+    # Render each layout item; skip anything that isn’t a dict
+    for st_item in ast_abilities:
+        
+
+        s_text: str = st_item.get("s_name", "")
+        n_x_pos: int = st_item.get("w_pos", 0)
+        n_y_pos: int = st_item.get("h_pos", 0)
+        n_font_size: int = st_item.get("h_font", 12)
+
+        try:
+            cl_item_font: font.FreeTypeFont = font.truetype(
+                "arial.ttf",
+                n_font_size,
+            )
+        except OSError:
+            cl_item_font = cl_default_font
+
+        cl_draw.text((n_x_pos, n_y_pos), s_text, fill=(0, 0, 0), font=cl_item_font)
+
     return cl_image
 
-
-# --------------------------------------------------------------------------- #
-# Example class that uses the above helpers – demonstrates a minimal card
-# generator. The style is kept intentionally simple so it can be extended.
-# --------------------------------------------------------------------------- #
-class Cl_card_generator:
-    """
-    Class that encapsulates constants and helper methods for generating
-    card images based on an external layout definition file.
-    """
-
-    # Constants (public class variables)
-    cn_card_width: int = 400
-    cn_card_height: int = 600
-    cn_background_color: tuple[int, int, int] = (255, 255, 255)  # white
-    cn_border_color: tuple[int, int, int] = (0, 0, 0)  # black
-
-    def __init__(self, i_layout_file_path: str):
-        """
-        Load the layout from *i_layout_file_path* and keep it for later use.
-
-        Parameters:
-            i_layout_file_path (str): Path to the JSON file containing the layout.
-        """
-        self.ln_loaded_layout = load_layout_from_json(i_layout_file_path)
-
-    def generate_card_back(self) -> image.Image:
-        """
-        Generate a card back that contains only the border and background.
-
-        Returns:
-            PIL.Image.Image: The generated card back image.
-        """
-        cl_image = image.new(
-            "RGB",
-            (self.cn_card_width, self.cn_card_height),
-            self.cn_background_color,
-        )
-        cl_draw = draw.Draw(cl_image)
-
-        # Draw the border
-        n_border_width = 5
-        cl_draw.rectangle(
-            [
-                (n_border_width, n_border_width),
-                (
-                    self.cn_card_width - n_border_width,
-                    self.cn_card_height - n_border_width,
-                ),
-            ],
-            outline=self.cn_border_color,
-            width=n_border_width,
-        )
-        return cl_image
-
-    def generate_full_card(self) -> image.Image:
-        """
-        Generate a full card that contains the border, background and all layout
-        items.
-
-        Returns:
-            PIL.Image.Image: The generated card image.
-        """
-        return draw_layout_to_image(
-            self.ln_loaded_layout,
-            self.cn_card_width,
-            self.cn_card_height,
-            self.cn_background_color,
-            self.cn_border_color,
-        )
 
 # --------------------------------------------------------------------------- #
 # Example class that uses the above helpers – demonstrates a minimal card
@@ -182,5 +199,16 @@ if __name__ == "__main__":
 
     print(st_layout_back)
 
-    cl_card_generator = Cl_card_generator()
-    cl_card_generator.d
+    # Create an image from that data
+    cl_card_image: image.Image = draw_layout_to_image(
+        st_layout_back,
+        i_card_width=400,
+        i_card_height=600,
+        i_background_color=(255, 255, 255),
+        i_border_color=(0, 0, 0),
+    )
+
+    # Persist the result
+    c_s_output_path: Path = Path("output") / "test_e_back_json.png"
+
+    cl_card_image.save(c_s_output_path)
