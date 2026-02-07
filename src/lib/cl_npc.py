@@ -20,7 +20,7 @@ class Cl_npc:
         dictionary with the npc definition
         """
 
-        g_d_npc : dict = dict()
+        self.g_d_npc : dict = dict()
 
         return
 
@@ -33,7 +33,8 @@ class Cl_npc:
         logging.info(f"Json Path {s_path}")
 
         with open(s_path, "r", encoding="utf-8") as file_obj:
-            json_data: Dict[str, Any] = json.load(file_obj)
+            d_json_data: Dict[str, Any] = json.load(file_obj)
+            self.g_d_npc = d_json_data
 
         return False #OK
 

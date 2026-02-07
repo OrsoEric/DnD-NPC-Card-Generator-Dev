@@ -242,8 +242,6 @@ class Cl_npc_character_sheet_generator:
 
         ls_npc_key = i_d_npc.keys()
 
-        ls_layout_key = i_d_layout.keys()
-
         #scan the layout
         for d_attribute in i_ld_layout:
             #fetch the name of the attribute
@@ -256,17 +254,6 @@ class Cl_npc_character_sheet_generator:
             else:
                 logging.error(f"ERR: unable to find attributr {s_attribute} in layout keys {ls_npc_key}")
                 return True #FAIL
-
-
-        logging.debug("searching for common keys...")
-        logging.debug(f"NPC Key: {ls_npc_key}")
-
-        logging.debug(f"Layout Key: {ls_layout_key}")
-
-        for s_npc_key in ls_npc_key:
-            logging.debug(f"npc key: {s_npc_key}")
-            if (s_npc_key in ls_layout_key):
-                logging.debug(f"Key {s_npc_key} in both NPC and Layout")
 
         return False #OK
 
@@ -302,7 +289,8 @@ class Cl_npc_character_sheet_generator:
         st_layout = self.load_layout_from_json(convert_to_path(i_ls_layout_file_path))
 
         # Load the NPC stats
-        cl_npc : Cl_npc = Cl_npc.from_file( i_ls_npc_file_path )
+        cl_npc : Cl_npc = Cl_npc()
+        cl_npc.load_from_file( i_ls_npc_file_path )
         logging.debug(f"Loading NPC from file: {cl_npc}")
 
         ld_attributes_and_abilities : List[Dict] = st_layout["attributes_and_abilities"]
@@ -311,7 +299,7 @@ class Cl_npc_character_sheet_generator:
         logging.info("Combining attributes values from NPC into Layout...")
 
         #assign the stats
-        x_fail = self.load_values_back_from_npc_dict( ld_attributes_and_abilities , cl_npc. .g_d_npc )
+        x_fail = self.load_values_back_from_npc_dict( ld_attributes_and_abilities , cl_npc.g_d_npc )
         if x_fail:
             logging.error("failed to load values from NPC into layout.")
 
