@@ -103,7 +103,7 @@ class Cl_npc_character_sheet_generator:
             ln_layout_data = json.load(cl_file)
         return ln_layout_data
 
-    def draw_layout_to_image(
+    def draw_layout_back_to_image(
         self,
         i_ld_layout: List[Dict[str, Any]],
         i_cl_image : St_image
@@ -375,9 +375,7 @@ class Cl_npc_character_sheet_generator:
 
         return False  # SUCCESS
 
-
-
-    def generate_card_back(
+    def generate_card(
         self,
         i_ls_layout_file_path: List[str],
         i_ls_npc_file_path: List[str],
@@ -422,7 +420,7 @@ class Cl_npc_character_sheet_generator:
             logging.error("failed to load values from NPC into layout.")
 
         # Draw the layout to an image
-        cl_image = self.draw_layout_to_image(
+        cl_image = self.draw_layout_back_to_image(
             st_layout,
             self.g_cl_image_card_back
         )
