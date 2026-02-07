@@ -14,7 +14,7 @@
             "s_name": "IMMUNITY",
             "s_text": "this covers damage resistencce, vulnerabilities and immunities",
             "w_top_left_ppt": 400,
-            "h_top_left_ppt": 300,
+            "h_top_left_ppt": 180,
             "w_size_ppt": 500,
             "h_size_left_ppt": 50,
             "h_font_ppt": 20
@@ -23,7 +23,7 @@
             "s_name": "RESISTENCE",
             "s_text": "this covers damage resistencce, vulnerabilities and immunities",
             "w_top_left_ppt": 400,
-            "h_top_left_ppt": 350,
+            "h_top_left_ppt": 230,
             "w_size_ppt": 500,
             "h_size_left_ppt": 50,
             "h_font_ppt": 20
@@ -32,16 +32,25 @@
             "s_name": "WEAKNESS",
             "s_text": "this covers damage resistencce, vulnerabilities and immunities",
             "w_top_left_ppt": 400,
-            "h_top_left_ppt": 400,
+            "h_top_left_ppt": 280,
             "w_size_ppt": 500,
             "h_size_left_ppt": 50,
+            "h_font_ppt": 20
+        },
+        {
+            "s_name": "RESOURCES",
+            "s_text": "this covers resources available to the entity",
+            "w_top_left_ppt": 400,
+            "h_top_left_ppt": 330,
+            "w_size_ppt": 500,
+            "h_size_left_ppt": 70,
             "h_font_ppt": 20
         },
         {
             "s_name": "SPELLCASTING",
             "s_text": "this covers damage resistencce, vulnerabilities and immunities",
             "w_top_left_ppt": 400,
-            "h_top_left_ppt": 200,
+            "h_top_left_ppt": 400,
             "w_size_ppt": 500,
             "h_size_left_ppt": 100,
             "h_font_ppt": 20

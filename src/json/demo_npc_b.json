@@ -11,11 +11,13 @@
 
     "DESCRIPTION": "Long form desciption. this is a long multiline description of the actor that can cover many topics like flavour, physical description, behaviour, habitat, history and myths.",
 
-    "SPELLCASTING": "Spell ability: STRENGTH\nSpell List: Druid",
+    "RESOURCES": "Actions: 1\nBonus Actions: 1\nReactions: 1",
 
     "IMMUNITY" : "IMMUNITY: Ice, Fire, Blunt",
     "RESISTENCE" : "RESISTENCE: Pierce",
     "WEAKNESS" : "WEAKNESS: Psychic, Stun, Confusion",
+
+    "SPELLCASTING": "Spell ability: STRENGTH\nSpell List: Druid\nSpell Bonus: +4\nSpell Save DC: 14",
 
     "PROFICIENCY": 2,
     "STRENGTH": -2,
@@ -54,9 +56,23 @@
     "PERFORMANCE": 0,
     "PERSUASION": 3,
 
-    "SPELL LIST": "Druid",
-    "SPELL ABILITY" : "STRENGTH",
-    "SPELL BONUS": 4,
-    "SPELL SAVE DC": 4
-    
+    "ACTIONS": [
+        {
+            "s_name": "Aura of the Slime God",
+            "s_type": "passive",
+            "s_text": "Slimes within 6sq radious get +10AC"
+        },
+        {
+            "s_name": "Boink Boink Boink",
+            "s_type": "attack (1 action)",
+            "s_text": "Jump in a 6sq range, inflicting 10d10 blunt damage.\nAffected creatures make a CON SAVE. On FAIL, they are absorbed"
+        },
+        {
+            "s_name": "Stomach of the Slime God",
+            "s_type": "passive",
+            "s_text": "Absorbed creatures make a CON SAVE\nSUCCESS: the creatures are freed.\nFAIL the creatre takes 1010 acid damage."
+        }
+    ],
+
+    "catch_stray_coma" : ""
 }
