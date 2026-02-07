@@ -1,3 +1,7 @@
+"""
+python src\test_c_creature_pil.py
+"""
+
 from PIL import Image, ImageDraw, ImageFont
 
 #used for OS independent path
@@ -26,7 +30,14 @@ class CreatureCardGenerator:
         return Image.Image()
 
     def generate_card_front(
-        self, i_creature_name: str, i_race_class: str, i_armor_class: int, i_initiative: int, i_speed: int, i_health: int, i_challenge_rating: int
+        self,
+        i_creature_name: str,
+        i_race_class: str,
+        i_armor_class: int,
+        i_initiative: int,
+        i_speed: int,
+        i_health: int,
+        i_challenge_rating: int
     ) -> Image.Image:
         """
         Generates a creature card image with the provided information.
@@ -86,6 +97,26 @@ class CreatureCardGenerator:
 
         return ln_image
 
+    def generate_card_back(
+        self,
+    ):
+        # Create a new image with specified dimensions and background color
+        cl_image = Image.new("RGB", (self.cn_card_width, self.cn_card_height), self.cn_background_color)
+        cl_draw = ImageDraw.Draw(cl_image)  
+
+        # Draw the border
+        n_border_width = 5
+        cl_draw.rectangle(
+            [
+                (n_border_width, n_border_width),
+                (self.cn_card_width - n_border_width, self.cn_card_height - n_border_width)
+            ],
+            outline=self.cn_border_color,
+            width=n_border_width
+        )
+
+        return cl_image
+
 
 # Example usage:
 if __name__ == "__main__":
@@ -101,6 +132,17 @@ if __name__ == "__main__":
     )
 
     s_save_path : Path = Path("output") / Path("test_c_card_front.png")
-
     ln_card_image.save(str(s_save_path))  # Save the image to a file
     print("Creature card generated and saved as creature_card.png")
+
+    
+
+
+
+
+
+    
+    cl_card_image_back = generator.generate_card_back()
+    s_save_path_back : Path = Path("output") / Path("test_c_card_back.png")
+    cl_card_image_back.save(str(s_save_path_back))  # Save the image to a file
+
