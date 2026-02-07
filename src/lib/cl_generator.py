@@ -123,14 +123,83 @@ class Cl_npc_character_sheet_generator:
         """
         """
 
+        w_size_px = i_cl_image.g_w_card_px
+        h_size_px = i_cl_image.g_h_card_px
+
         try:
             ast_text_boxes = i_ld_layout["FRONT_TEXT_BOXES"]
         except KeyError:
             logging.error("ERR: field doesn't exist, json is wrong")
             return True #ERROR
 
+        #cursor
+        w_cursor : int = 0
+        h_cursor : int = 0
+
         for st_text_box in ast_text_boxes:
             logging.debug(f"Front Text Box {st_text_box}")
+            #TODO: I should make this into a structure
+            #load text box parameters
+            s_label: str = st_text_box.get("s_name", "") 
+            s_text: str = st_text_box.get("s_text", "")
+            w_top_left_ppt: int = st_text_box.get("w_top_left_ppt", 0)
+            h_top_left_ppt: int = st_text_box.get("h_top_left_ppt", 0)
+            w_size_ppt: int = st_text_box.get("w_size_ppt", 0)
+            h_size_ppt: int = st_text_box.get("h_size_ppt", 0)
+            h_font_ppt: int = int(st_text_box.get("h_font_ppt", 0))
+            
+            # Convert PPT values to pixels
+            w_top_left_px = int(w_size_px * w_top_left_ppt / 1000)
+            h_top_left_px = int(h_size_px * h_top_left_ppt / 1000)
+            w_text_box_px = int(w_size_px * w_size_ppt / 1000)
+            
+            h_font_px = int(h_size_px * h_font_ppt / 1000)
+
+            #0 height mean that the text box renderer with automatically calculate and return height
+            if (h_size_ppt <= 0):
+                h_text_box_px = 0
+
+                h_rendered = Cl_multiline_text.render_fixed_size_text_box(
+                    i_cl_imgage = i_cl_image.g_cl_image,
+                    i_s_text = s_text,
+                    i_w_margin = w_top_left_px,
+                    i_h_margin = h_cursor,
+                    i_w_border = w_text_box_px,
+                    i_h_border = 0,
+                    i_s_font_name = "arial.ttf",
+                    i_n_font_size = h_font_px,
+                    i_tn_color = (0, 0, 0),
+                    i_n_padding = 5,
+                    i_x_draw_border = False,
+                    i_tn_border_color = (255,0,0)
+                )
+
+                h_cursor = h_cursor + h_rendered
+
+
+            #height is given
+            else:
+                h_text_box_px = int( h_size_px * h_size_ppt / 1000)    
+
+                h_rendered = Cl_multiline_text.render_fixed_size_text_box(
+                    i_cl_imgage = i_cl_image.g_cl_image,
+                    i_s_text = s_text,
+                    i_w_margin = w_top_left_px,
+                    i_h_margin = h_top_left_px,
+                    i_w_border = w_text_box_px,
+                    i_h_border = h_text_box_px,
+                    i_s_font_name = "arial.ttf",
+                    i_n_font_size = h_font_px,
+                    i_tn_color = (0, 0, 0),
+                    i_n_padding = 5,
+                    i_x_draw_border = False,
+                    i_tn_border_color = (255,0,0)
+                )
+
+                #move the cursor
+                h_cursor = h_top_left_px + h_text_box_px
+
+
 
 
         return False #SUCCESS
@@ -191,8 +260,8 @@ class Cl_npc_character_sheet_generator:
             return True #ERROR
 
         #cursor
-        w_cursor = 0
-        h_cursor = 0
+        w_cursor : int = 0
+        h_cursor : int = 0
 
         # Render each layout item; skip anything that isn't a dict
         for st_item in ast_abilities:
@@ -471,7 +540,6 @@ class Cl_npc_character_sheet_generator:
         if x_fail:
             logging.error("failed to load values from NPC into layout.")
 
-
         # Draw the layout to an image
         cl_image = self.draw_layout_back_to_image(
             st_layout,
@@ -480,12 +548,15 @@ class Cl_npc_character_sheet_generator:
 
         #----------------------------------------------------------------------
         #   DRAW: COMBINE FRONT AND BACK
-        #----------------------------------------------------------------------
+        #----------------------------------------------------------------------        
 
-        t_size = self.g_cl_image_card_back.get_size()
+        #draw the front on the main image with offset
+        t_size_front = self.g_cl_image_card_back.get_size()
+        self.g_cl_image_card.draw_image( self.g_cl_image_card_front, (0,0), t_size_front )
 
         #draw the back on the main image with offset
-        self.g_cl_image_card.draw_image( self.g_cl_image_card_back, (t_size[0],0), t_size )
+        t_size_back = self.g_cl_image_card_back.get_size()
+        self.g_cl_image_card.draw_image( self.g_cl_image_card_back, (t_size_back[0],0), t_size_back )
 
         # Save the image
         self.g_cl_image_card.save_image(i_ls_output_file_path)
