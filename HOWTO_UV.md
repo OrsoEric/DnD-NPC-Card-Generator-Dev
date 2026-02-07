@@ -18,3 +18,5 @@ python src\test_f_text_box.py
 python src\test_g_card_back_description.py
 
 python src\test_h_card_back_class.py
+
+python src\test_i_text_multiline.py
