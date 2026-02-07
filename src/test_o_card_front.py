@@ -49,7 +49,8 @@ if __name__ == "__main__":
     # Generate the card back
     cl_generated_image = cl_generator.generate_card(
         i_ls_layout_file_path=["src", "json", "npc_layout.json"],
-        i_ls_mask_front_path=["mask", "front_mask_transparent.png"],
+        #i_ls_mask_front_path=["mask", "front_mask_transparent.png"],
+        i_ls_mask_front_path=["mask", "front_mask_d.png"],
         i_ls_npc_illustration_path= ["input", "dice golem.jpg"],
         i_ls_npc_json_path = ["src", "json", "demo_npc_b.json"],
         i_ls_output_file_path=["output","test_o_card_back.png"]

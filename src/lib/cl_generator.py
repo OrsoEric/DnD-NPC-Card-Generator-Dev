@@ -586,7 +586,7 @@ class Cl_npc_character_sheet_generator:
         #load the NPC illustration and resize it
         cl_front_mask.load_image( i_ls_mask_front_path )
 
-        self.g_cl_image_card_front.compose_image( cl_front_mask, 0.3 )
+        self.g_cl_image_card_front.compose_image( cl_front_mask, 0.6 )
 
         #cl_front_mask.g_cl_image.convert('RGBA')
 

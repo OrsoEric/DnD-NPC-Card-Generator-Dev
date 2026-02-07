@@ -1,4 +1,5 @@
 #2026-02-04 adaptive height of the text box
+# 
 
 # ------------------------------------------------------------------
 #  Imports
@@ -7,6 +8,7 @@ import PIL.Image as Image
 import PIL.ImageDraw as ImageDraw
 import PIL.ImageFont as ImageFont
 from typing import List
+from lib.cl_utility_path import convert_to_path
 
 # ------------------------------------------------------------------
 #  Multiline Text Utility Class
@@ -119,7 +121,9 @@ class Cl_multiline_text:
                 (i_x, i_y + y_offset),
                 line,
                 fill=i_text_color,
-                font=i_font
+                font=i_font,
+                stroke_width=2,
+                stroke_fill=(255,255,255)
             )
             y_offset += line_height + i_line_spacing
 
@@ -204,6 +208,8 @@ class Cl_multiline_text:
 if __name__ == "__main__":
     cl_image = Image.new("RGB", (400, 300), (255, 255, 255))
 
+    s_font_path = convert_to_path(["font","fantasy.ttf"])
+
     h_box = Cl_multiline_text.render_fixed_size_text_box(
         i_cl_imgage = cl_image,
         i_s_text = "This is a reusable multiline text box renderer This is a reusable multiline text box renderer . . ..",
@@ -211,7 +217,7 @@ if __name__ == "__main__":
         i_h_margin = 20,
         i_w_border = 250,
         i_h_border = 0,
-        i_s_font_name = "arial.ttf",
+        i_s_font_name = s_font_path,
         i_n_font_size = 18,
         i_tn_color = (127, 127, 127),
         i_n_padding = 5,
