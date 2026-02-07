@@ -1,140 +1,140 @@
-{
-  "layout": [
+[
     {
-      "s_name": "strength",
-      "w_pos": 10,
-      "h_pos": 10,
-      "h_font": 14
+        "s_name": "strength",
+        "w_pos": 10,
+        "h_pos": 10,
+        "h_font": 14
     },
     {
-      "s_name": "dexterity",
-      "w_pos": 10,
-      "h_pos": 30,
-      "h_font": 14
-    },
-    {
-      "s_name": "constitution",
-      "w_pos": 10,
-      "h_pos": 50,
-      "h_font": 14
-    },
-    {
-      "s_name": "intelligence",
-      "w_pos": 10,
-      "h_pos": 70,
-      "h_font": 14
-    },
-    {
-      "s_name": "wisdom",
-      "w_pos": 10,
-      "h_pos": 90,
-      "h_font": 14
-    },
-    {
-      "s_name": "charisma",
-      "w_pos": 10,
-      "h_pos": 110,
-      "h_font": 14
+        "s_name": "athletics",
+        "w_pos": 20,
+        "h_pos": 20,
+        "h_font": 12
     },
 
     {
-      "s_name": "athletics",
-      "w_pos": 30,
-      "h_pos": 130,
-      "h_font": 12
+        "s_name": "dexterity",
+        "w_pos": 0,
+        "h_pos": 20,
+        "h_font": 14
     },
     {
-      "s_name": "acrobatics",
-      "w_pos": 30,
-      "h_pos": 150,
-      "h_font": 12
+        "s_name": "acrobatics",
+        "w_pos": 0,
+        "h_pos": 20,
+        "h_font": 12
     },
     {
-      "s_name": "stealth",
-      "w_pos": 30,
-      "h_pos": 170,
-      "h_font": 12
-    },
-
-    {
-      "s_name": "arcana",
-      "w_pos": 30,
-      "h_pos": 190,
-      "h_font": 12
-    },
-    {
-      "s_name": "investigation",
-      "w_pos": 30,
-      "h_pos": 210,
-      "h_font": 12
-    },
-    {
-      "s_name": "history",
-      "w_pos": 30,
-      "h_pos": 230,
-      "h_font": 12
-    },
-    {
-      "s_name": "nature",
-      "w_pos": 30,
-      "h_pos": 250,
-      "h_font": 12
-    },
-    {
-      "s_name": "religion",
-      "w_pos": 30,
-      "h_pos": 270,
-      "h_font": 12
+        "s_name": "stealth",
+        "w_pos": 0,
+        "h_pos": 20,
+        "h_font": 12
     },
 
     {
-      "s_name": "insight",
-      "w_pos": 50,
-      "h_pos": 290,
-      "h_font": 12
+        "s_name": "constitution",
+        "w_pos": 0,
+        "h_pos": 20,
+        "h_font": 14
     },
+    
     {
-      "s_name": "perception",
-      "w_pos": 50,
-      "h_pos": 310,
-      "h_font": 12
-    },
-    {
-      "s_name": "medicine",
-      "w_pos": 50,
-      "h_pos": 330,
-      "h_font": 12
-    },
-    {
-      "s_name": "survival",
-      "w_pos": 50,
-      "h_pos": 350,
-      "h_font": 12
+        "s_name": "intelligence",
+        "w_pos": 0,
+        "h_pos": 20,
+        "h_font": 14
     },
 
     {
-      "s_name": "deception",
-      "w_pos": 70,
-      "h_pos": 370,
-      "h_font": 12
+        "s_name": "arcana",
+        "w_pos": 0,
+        "h_pos": 20,
+        "h_font": 12
     },
     {
-      "s_name": "intimidation",
-      "w_pos": 70,
-      "h_pos": 390,
-      "h_font": 12
+        "s_name": "investigation",
+        "w_pos": 0,
+        "h_pos": 20,
+        "h_font": 12
     },
     {
-      "s_name": "performance",
-      "w_pos": 70,
-      "h_pos": 410,
-      "h_font": 12
+        "s_name": "history",
+        "w_pos": 0,
+        "h_pos": 20,
+        "h_font": 12
     },
     {
-      "s_name": "persuasion",
-      "w_pos": 70,
-      "h_pos": 430,
-      "h_font": 12
+        "s_name": "nature",
+        "w_pos": 0,
+        "h_pos": 20,
+        "h_font": 12
+    },
+    {
+        "s_name": "religion",
+        "w_pos": 0,
+        "h_pos": 20,
+        "h_font": 12
+    },
+
+    {
+        "s_name": "wisdom",
+        "w_pos": 0,
+        "h_pos": 20,
+        "h_font": 14
+    },
+    {
+        "s_name": "insight",
+        "w_pos": 0,
+        "h_pos": 20,
+        "h_font": 12
+    },
+    {
+        "s_name": "perception",
+        "w_pos": 0,
+        "h_pos": 20,
+        "h_font": 12
+    },
+    {
+        "s_name": "medicine",
+        "w_pos": 0,
+        "h_pos": 20,
+        "h_font": 12
+    },
+    {
+        "s_name": "survival",
+        "w_pos": 0,
+        "h_pos": 20,
+        "h_font": 12
+    },
+
+    {
+        "s_name": "charisma",
+        "w_pos": 0,
+        "h_pos": 20,
+        "h_font": 14
+    },
+    {
+        "s_name": "deception",
+        "w_pos": 0,
+        "h_pos": 20,
+        "h_font": 12
+    },
+    {
+        "s_name": "intimidation",
+        "w_pos": 0,
+        "h_pos": 20,
+        "h_font": 12
+    },
+    {
+        "s_name": "performance",
+        "w_pos": 0,
+        "h_pos": 20,
+        "h_font": 12
+    },
+    {
+        "s_name": "persuasion",
+        "w_pos": 0,
+        "h_pos": 20,
+        "h_font": 12
     }
-  ]
-}
+]

@@ -17,7 +17,6 @@ import PIL.Image as image
 import PIL.ImageDraw as draw
 import PIL.ImageFont as font
 
-
 def load_layout_from_json(
     i_file_path: str,
 ) -> List[Dict[str, Any]]:
@@ -162,16 +161,19 @@ def draw_layout_to_image(
     # Default font – Pillow will fallback to a built‑in one if the path is wrong
     cl_default_font: font.FreeTypeFont = font.load_default()
 
-    ast_abilities = i_layout["layout"]
+    #ast_abilities = i_layout["layout"]
+    ast_abilities = i_layout
 
+    cursor_w = 0
+    cursor_h = 0
 
     # Render each layout item; skip anything that isn’t a dict
     for st_item in ast_abilities:
         
 
         s_text: str = st_item.get("s_name", "")
-        n_x_pos: int = st_item.get("w_pos", 0)
-        n_y_pos: int = st_item.get("h_pos", 0)
+        n_w_pos: int = st_item.get("w_pos", 0)
+        n_h_pos: int = st_item.get("h_pos", 0)
         n_font_size: int = st_item.get("h_font", 12)
 
         try:
@@ -182,7 +184,14 @@ def draw_layout_to_image(
         except OSError:
             cl_item_font = cl_default_font
 
-        cl_draw.text((n_x_pos, n_y_pos), s_text, fill=(0, 0, 0), font=cl_item_font)
+        if (cursor_h <= 0):
+            cursor_w = n_w_pos
+            cursor_h = n_h_pos
+        else:
+            cursor_w += n_w_pos
+            cursor_h += n_h_pos
+
+        cl_draw.text((cursor_w, cursor_h), s_text, fill=(0, 0, 0), font=cl_item_font)
 
     return cl_image
 
