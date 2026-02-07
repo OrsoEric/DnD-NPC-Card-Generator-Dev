@@ -126,6 +126,18 @@ def find_file_pair_image_json(i_s_folder : str) -> List[Tuple[Path, Path]]:
 
     return lt_image_json_pairs
 
+def build_path_output_jpg(output_folder: str, image_path: Path) -> Path:
+    """
+    Construct a .jpg output path inside `output_folder` using the stem of `image_path`.
+
+    Example:
+        image_path = /data/foo/bar/image_001.png
+        output_folder = "output"
+        -> output/image_001.jpg
+    """
+    cl_output = Path(output_folder).resolve()
+    return cl_output / f"{image_path.stem}.jpg"
+
 
 # Example usage for testing purposes
 if __name__ == "__main__":

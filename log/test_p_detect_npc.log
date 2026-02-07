@@ -1,6 +1,7 @@
-[2026-02-06 17:53:34,753] INFO test_p_detect_npc:109 > BEGIN 
-[2026-02-06 17:53:34,753] DEBUG test_p_detect_npc:57 > input\dice_golem.jpg | .jpg 
-[2026-02-06 17:53:34,753] DEBUG test_p_detect_npc:57 > input\dice_golem.json | .json 
-[2026-02-06 17:53:34,754] DEBUG test_p_detect_npc:74 >  ENTRY dice_golem | {'jpg': WindowsPath('D:/Data/Project/D&D/Character Sheet Generator/input/dice_golem.jpg'), 'png': None, 'json': WindowsPath('D:/Data/Project/D&D/Character Sheet Generator/input/dice_golem.json')} 
-[2026-02-06 17:53:34,754] INFO test_p_detect_npc:112 > 1 | [(WindowsPath('D:/Data/Project/D&D/Character Sheet Generator/input/dice_golem.jpg'), WindowsPath('D:/Data/Project/D&D/Character Sheet Generator/input/dice_golem.json'))] 
-[2026-02-06 17:53:34,760] INFO test_p_detect_npc:114 > END 
+[2026-02-07 11:06:38,124] INFO test_p_detect_npc:46 > BEGIN 
+[2026-02-07 11:06:38,125] DEBUG cl_utility_path:97 > Inspecting input\dice_golem.jpg (extension: .jpg) 
+[2026-02-07 11:06:38,125] DEBUG cl_utility_path:97 > Inspecting input\dice_golem.json (extension: .json) 
+[2026-02-07 11:06:38,125] DEBUG cl_utility_path:119 > Found entry 'dice_golem': {'jpg': WindowsPath('F:/Data/Project/D&D/Character Sheet Generator/input/dice_golem.jpg'), 'png': None, 'json': WindowsPath('F:/Data/Project/D&D/Character Sheet Generator/input/dice_golem.json')} 
+[2026-02-07 11:06:38,125] INFO test_p_detect_npc:49 > 1 | [(WindowsPath('F:/Data/Project/D&D/Character Sheet Generator/input/dice_golem.jpg'), WindowsPath('F:/Data/Project/D&D/Character Sheet Generator/input/dice_golem.json'))] 
+[2026-02-07 11:06:38,125] INFO test_p_detect_npc:52 > Output image path F:\Data\Project\D&D\Character Sheet Generator\output\dice_golem.jpg 
+[2026-02-07 11:06:38,125] INFO test_p_detect_npc:54 > END 
