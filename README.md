@@ -24,6 +24,9 @@ But perhaps I can do square aspect ratio, it's easier to generate?
 
 I'm leaning toward MTG
 
+2.5 x 3.5 in
+63.5 x 88.9 mm
+
 
 ## OpenVTT
 
@@ -93,7 +96,6 @@ I use the front for illustration and stat block
 
 I use the rear for abilities and skills
 
-
 How many cards I need?
 
 The front I think of name, race, class, and four core numbers
@@ -126,7 +128,9 @@ The back could be manual image, or better just no background? It's there for inf
 
 I am thinking of doing a patreon, and release NPCs individuallty with also their statue and base
 
+Linktree
 
+I want to package my one shots so that other people can make use of them
 
 
 
