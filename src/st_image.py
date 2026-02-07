@@ -160,11 +160,11 @@ class St_image:
 # --------------------------------------------------------------------------- #
 
 #from st_image import St_image
+if __name__ == "__main__":
+    st = St_image(
+        i_w_card_mm=63.5,
+        i_h_card_mm = 88.9,
+        i_dot_per_inch = 300
+    )
 
-st = St_image(
-    i_w_card_mm=63.5,
-    i_h_card_mm = 88.9,
-    i_dot_per_inch = 300
-)
-
-st.save_image(["output", "test_bench_st_image"])   # creates output/card.png
+    st.save_image(["output", "test_bench_st_image"])   # creates output/card.png
