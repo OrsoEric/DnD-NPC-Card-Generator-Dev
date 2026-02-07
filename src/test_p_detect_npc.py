@@ -1,5 +1,5 @@
 #   call .venv\Scripts\activate.bat
-#   python src\test_o_card_front.py
+#   python src\test_p_detect_npc.py
 
 """
 detects content from the input folder
@@ -11,63 +11,87 @@ Generations will be dumped in the output folder
 
 import logging
 from typing import List, Dict, Tuple
+from pathlib import Path
 
 from lib.cl_utility_path import convert_to_path
 
-def scan_for_file_pairs(i_base_dir: Path) -> List[Tuple[Path, Path]]:
+# -*- coding: utf-8 -*-
+
+
+def find_file_pair_image_json(i_s_folder : str) -> List[Tuple[Path, Path, Path]]:
     """
-    Scan a directory for image‑JSON file pairs that share the same base name.
+    Locate pairs of JPEG/PNG images and a JSON file that share the same stem in the given directory.
 
-    The function looks for files with extensions defined in
-    :class:`Configuration` and returns a list of tuples.
-    Each tuple contains the absolute paths to an image file
-    and its corresponding JSON metadata file.
+    Parameters:
+        i_cl_path (pathlib.Path): Path to the input directory containing image and JSON files.
 
-    Parameters
-    ----------
-    i_base_dir : pathlib.Path
-        Absolute path to the directory that should be scanned.
+    Returns:
+        List[Tuple[pathlib.Path, pathlib.Path, pathlib.Path]]: A list where each tuple contains
+            the paths of a JPEG file, its matching PNG counterpart, and the associated JSON file.
+            Only complete triplets (all three files present) are returned.
 
-    Returns
-    -------
-    List[Tuple[pathlib.Path, pathlib.Path]]
-        A list of found pairs.  The list is sorted lexicographically by base name.
+    Raises:
+        FileNotFoundError: If the supplied path does not exist.
+        NotADirectoryError: If the supplied path is not a directory.
     """
-    # Maps base names to their image and JSON paths
-    l_image_files: Dict[str, Path] = {}
-    l_json_files: Dict[str, Path] = {}
 
-    # Collect all files in the directory
-    for ln_file_path in i_base_dir.iterdir():
-        if not ln_file_path.is_file():
-            continue
+    i_cl_path : Path = Path(i_s_folder)
 
-        s_suffix_lower: str = ln_file_path.suffix.lower()
+    # ---- Validation ----------------------------------------------------
+    if not i_cl_path.exists():
+        raise FileNotFoundError(f"Folder not found: {i_cl_path}")
 
-        # Detect image files
-        if s_suffix_lower in ["jpg, "png"]:
-            l_image_files[ln_file_path.stem] = ln_file_path.resolve()
-        # Detect JSON metadata files
-        elif s_suffix_lower == Configuration.c_json_extension:
-            l_json_files[ln_file_path.stem] = ln_file_path.resolve()
+    if not i_cl_path.is_dir():
+        raise NotADirectoryError(f"Provided path is not a directory: {i_cl_path}")
 
-    # Find common base names that have both an image and a JSON file
-    l_common_bases: List[str] = sorted(
-        set(l_image_files.keys()) & set(l_json_files.keys())
-    )
+    # ---- Gather files -----------------------------------------------
+    # Mapping from file stem to the paths of jpg, png and json files
+    d_stem_to_files = dict()
 
-    l_pairs: List[Tuple[Path, Path]] = []
-    for s_base in l_common_bases:
-        l_pairs.append((l_image_files[s_base], l_json_files[s_base]))
+    for s_path in i_cl_path.iterdir():
+        
+        if not s_path.is_file():
+            continue  # Skip directories or non‑files
+
+        s_extension_lower: str = s_path.suffix.lower()
+        logging.debug(f"{s_path} | {s_extension_lower}")
+        s_stem: str = s_path.stem
+
+        # Ensure we have an entry for this stem
+        d_entry = d_stem_to_files.setdefault(s_stem, {"jpg": None, "png": None, "json": None})
+
+        if s_extension_lower == ".jpg":
+            d_entry["jpg"] = s_path.resolve()
+        elif s_extension_lower == ".png":
+            d_entry["png"] = s_path.resolve()
+        elif s_extension_lower == ".json":
+            d_entry["json"] = s_path.resolve()
+
+    # ---- Build result -----------------------------------------------
+    l_pairs: List[Tuple[Path, Path, Path]] = []
+
+    for s_stem, m_files in d_stem_to_files.items():
+        if all(m_files.values()):  # All three files are present
+            l_pairs.append((m_files["jpg"], m_files["png"], m_files["json"]))
 
     return l_pairs
+
+
+# --------------------------------------------------------------------
+# Example usage (uncomment to run as a script)
+#
+# if __name__ == "__main__":
+#     input_dir = pathlib.Path("input")
+#     triplets = i_find_image_json_pairs(input_dir)
+#     for jpg, png, json_file in triplets:
+#         print(f"JPEG: {jpg}\nPNG:  {png}\nJSON: {json_file}\n---")
 
 
 
 # Example usage
 if __name__ == "__main__":
     # Setup logging
-    s_log_path = convert_to_path(["log","test_p_detect_npc.py"])
+    s_log_path = convert_to_path(["log","test_p_detect_npc.log"])
     print(f"Log Path: {s_log_path}")
 
     logging.basicConfig(
@@ -77,6 +101,9 @@ if __name__ == "__main__":
         filemode='w'
     )
     logging.info("BEGIN")
+
+    lts_pair = find_file_pair_image_json("input")
+    logging.info(f"{len(lts_pair)} | {lts_pair}")
 
     logging.info("END")
 
