@@ -1,0 +1,4 @@
+[2026-01-27 18:28:42,702] INFO test_l_load_npc:230 > BEGIN 
+[2026-01-27 18:28:42,702] INFO test_l_load_npc:208 > Json Path src\json\demo_npc_b.json 
+[2026-01-27 18:28:42,703] INFO test_l_load_npc:233 > NPC: <__main__.Cl_npc object at 0x0000023AAB449400> 
+[2026-01-27 18:28:42,703] INFO test_l_load_npc:236 > END 

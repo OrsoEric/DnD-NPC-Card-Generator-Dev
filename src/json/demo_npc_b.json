@@ -1,0 +1,45 @@
+{
+    "system": "DnD5E",
+    "actor": "NPC",
+    "name": "Blobby",
+    "race": "Slime",
+
+    "description": "Long form desciption",
+
+    "PROFICIENCY": 0,
+    "STRENGTH": 0,
+    "STR SAVE": 0,
+    "ATHLETICS": 0,
+
+    "DEXTERITY": 0,
+    "DEX SAVE": 0,
+    "ACROBATICS": 0,
+    "SLEIGHT OF HAND": 0,
+    "STEALTH": 0,
+
+    "CONSTITUTION": 0,
+    "CON SAVE": 0,
+
+    "INTELLIGENCE": 0,
+    "INT SAVE": 0,
+    "ARCANA": 0,
+    "INVESTIGATION": 0,
+    "HISTORY": 0,
+    "NATURE": 0,
+    "RELIGION": 0,
+
+    "WISDOM": 0,
+    "WIS SAVE": 0,
+    "ANIMAL HANDLING": 0,
+    "INSIGHT": 0,
+    "PERCEPTION": 0,
+    "MEDICINE": 0,
+    "SURVIVAL": 0,
+
+    "CHARISMA": 3,
+    "CHA SAVE": 0,
+    "DECEPTION": 0,
+    "INTIMIDATION": 0,
+    "PERFORMANCE": 0,
+    "PERSUASION": 3
+}
