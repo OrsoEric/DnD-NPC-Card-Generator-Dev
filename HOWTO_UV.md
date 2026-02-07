@@ -1,0 +1,16 @@
+# Create UV 
+
+uv venv .venv --python 3.13
+
+call .venv\Scripts\activate.bat
+
+uv init
+
+uv add pillow
+
+
+# Use UV 
+
+call .venv\Scripts\activate.bat
+
+python src\test_f_text_box.py
