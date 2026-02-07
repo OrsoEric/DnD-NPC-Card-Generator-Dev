@@ -1,10 +1,10 @@
 {
     "system": "DnD5E",
     "actor": "NPC",
-    "name": "Blobby",
-    "race": "Slime",
+    "NAME": "Blobby",
+    "RACE": "Slime",
 
-    "description": "Long form desciption",
+    "DESCRIPTION": "Long form desciption. this is a long multiline description of the actor that can cover many topics like flavour, physical description, behaviour, habitat, history and myths.",
 
     "PROFICIENCY": 2,
     "STRENGTH": -2,

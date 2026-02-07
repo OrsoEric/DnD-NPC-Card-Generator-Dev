@@ -236,7 +236,7 @@ class Cl_npc_character_sheet_generator:
 
         return False #OK
 
-    def load_values_back_from_npc_dict( self, i_ld_layout : List[Dict], i_d_npc : Dict ) -> bool:
+    def load_values_back_from_npc_dict( self, i_ld_layout : Dict, i_d_npc : Dict ) -> bool:
         """
         given a npc dictionary, fill the values from the layout file
         """
@@ -246,8 +246,11 @@ class Cl_npc_character_sheet_generator:
 
         ls_npc_key = i_d_npc.keys()
 
-        #scan the layout
-        for d_attribute in i_ld_layout:
+        ld_attributes_and_abilities : List[Dict] = i_ld_layout["attributes_and_abilities"]
+        logging.debug(f"Layout: {ld_attributes_and_abilities}")
+
+        #scan the layout attribute fields
+        for d_attribute in ld_attributes_and_abilities:
             #fetch the name of the attribute
             s_attribute = d_attribute["s_name"] 
             #check that the name of the attribute is amongst the NPC stats
@@ -258,6 +261,26 @@ class Cl_npc_character_sheet_generator:
             else:
                 logging.error(f"ERR: unable to find attributr {s_attribute} in layout keys {ls_npc_key}")
                 return True #FAIL
+
+        ld_text_boxes : List[Dict] = i_ld_layout["text_boxes"]
+
+        #scan the layout text fields
+        for d_attribute in ld_text_boxes:
+            #fetch the name of the attribute
+            s_attribute = d_attribute["s_name"] 
+            #check that the name of the attribute is amongst the NPC stats
+            if s_attribute in ls_npc_key:
+                #then copy over the value
+                d_attribute["s_text"] = i_d_npc[s_attribute]
+                logging.debug(f"NPC value {s_attribute} assigned to layout value {d_attribute}")
+            else:
+                logging.error(f"ERR: unable to find attributr {s_attribute} in layout keys {ls_npc_key}")
+                return True #FAIL
+
+
+
+
+
 
         return False #OK
 
@@ -297,13 +320,11 @@ class Cl_npc_character_sheet_generator:
         cl_npc.load_from_file( i_ls_npc_file_path )
         logging.debug(f"Loading NPC from file: {cl_npc}")
 
-        ld_attributes_and_abilities : List[Dict] = st_layout["attributes_and_abilities"]
-        logging.debug(f"Layout: {ld_attributes_and_abilities}")
 
         logging.info("Combining attributes values from NPC into Layout...")
 
         #assign the stats
-        x_fail = self.load_values_back_from_npc_dict( ld_attributes_and_abilities , cl_npc.g_d_npc )
+        x_fail = self.load_values_back_from_npc_dict( st_layout , cl_npc.g_d_npc )
         if x_fail:
             logging.error("failed to load values from NPC into layout.")
 
