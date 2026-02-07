@@ -519,6 +519,7 @@ class Cl_npc_character_sheet_generator:
         self,
         i_ls_layout_file_path: List[str],
         i_ls_mask_front_path : List[str],
+        i_ls_mask_back_path : List[str],
         i_ls_npc_illustration_path : List[str] | Path,
         i_ls_npc_json_path: List[str] | Path,
         i_ls_output_file_path: List[str] | Path,
@@ -597,6 +598,22 @@ class Cl_npc_character_sheet_generator:
 
         #draw NPC illustration on the front
         #self.g_cl_image_card_front.draw_image( cl_front_mask, (0,0), t_size_front )
+
+        #----------------------------------------------------------------------
+        #   DRAW: BACK MASK
+        #----------------------------------------------------------------------
+
+        #create an image for the NPC ilustration
+        cl_back_mask : St_image = St_image(
+            i_w_card_mm = self.g_w_card_width_mm,
+            i_h_card_mm = self.g_h_card_height_mm,
+            i_dot_per_inch = self.g_n_dots_per_inch
+        )
+
+        #load the NPC illustration and resize it
+        cl_back_mask.load_image( i_ls_mask_back_path )
+
+        self.g_cl_image_card_back.compose_image( cl_back_mask, 1.0 )
 
         #----------------------------------------------------------------------
         #   DRAW: FRONT
@@ -706,7 +723,7 @@ class Cl_npc_character_sheet_generator:
             cl_generated_image = cl_generator.generate_card(
                 i_ls_layout_file_path=i_ls_layout_file_path,
                 i_ls_mask_front_path=i_ls_mask_front_path,
-                #i_ls_mask_back_path=i_ls_mask_back_path,
+                i_ls_mask_back_path=i_ls_mask_back_path,
                 i_ls_npc_illustration_path= s_input_npc_image_path,
                 i_ls_npc_json_path = s_input_npc_json_path,
                 i_ls_output_file_path=s_output_image_path
