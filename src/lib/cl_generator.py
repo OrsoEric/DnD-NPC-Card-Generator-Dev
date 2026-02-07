@@ -115,6 +115,28 @@ class Cl_npc_character_sheet_generator:
             ln_layout_data = json.load(cl_file)
         return ln_layout_data
 
+    def draw_layout_front_to_image(
+        self,
+        i_ld_layout: List[Dict[str, Any]],
+        i_cl_image : St_image
+    ) -> bool:
+        """
+        """
+
+        try:
+            ast_text_boxes = i_ld_layout["FRONT_TEXT_BOXES"]
+        except KeyError:
+            logging.error("ERR: field doesn't exist, json is wrong")
+            return True #ERROR
+
+        for st_text_box in ast_text_boxes:
+            logging.debug(f"Front Text Box {st_text_box}")
+
+
+        return False #SUCCESS
+
+
+
     def draw_layout_back_to_image(
         self,
         i_ld_layout: List[Dict[str, Any]],
@@ -415,6 +437,10 @@ class Cl_npc_character_sheet_generator:
             The generated image object.
         """
         
+        #----------------------------------------------------------------------
+        #   LOAD JSON
+        #----------------------------------------------------------------------
+
         # Load the layout from JSON
         st_layout = self.load_layout_from_json(convert_to_path(i_ls_layout_file_path))
 
@@ -423,19 +449,38 @@ class Cl_npc_character_sheet_generator:
         cl_npc.load_from_file( i_ls_npc_file_path )
         logging.debug(f"Loading NPC from file: {cl_npc}")
 
+        #----------------------------------------------------------------------
+        #   DRAW: FRONT
+        #----------------------------------------------------------------------
 
-        logging.info("Combining attributes values from NPC into Layout...")
+        #Draw layout front to image
+
+        cl_image = self.draw_layout_front_to_image(
+            st_layout,
+            self.g_cl_image_card_front
+        )
+
+
+        #----------------------------------------------------------------------
+        #   DRAW: BACK
+        #----------------------------------------------------------------------
 
         #assign the stats
+        logging.info("Combining attributes values from NPC into Layout...")
         x_fail = self.load_values_back_from_npc_dict( st_layout , cl_npc.g_d_npc )
         if x_fail:
             logging.error("failed to load values from NPC into layout.")
+
 
         # Draw the layout to an image
         cl_image = self.draw_layout_back_to_image(
             st_layout,
             self.g_cl_image_card_back
         )
+
+        #----------------------------------------------------------------------
+        #   DRAW: COMBINE FRONT AND BACK
+        #----------------------------------------------------------------------
 
         t_size = self.g_cl_image_card_back.get_size()
 

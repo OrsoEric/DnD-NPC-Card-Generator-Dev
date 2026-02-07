@@ -48,7 +48,7 @@ if __name__ == "__main__":
 
     # Generate the card back
     cl_generated_image = cl_generator.generate_card(
-        i_ls_layout_file_path=["src", "json", "test_k_layout_back.json"],
+        i_ls_layout_file_path=["src", "json", "npc_layout.json"],
         i_ls_npc_file_path = ["src", "json", "demo_npc_b.json"],
         i_ls_output_file_path=["output","test_o_card_back.png"]
     )
