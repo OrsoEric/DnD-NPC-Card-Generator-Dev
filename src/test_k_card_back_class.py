@@ -103,6 +103,7 @@ class Cl_npc_character_sheet_generator:
         logging.info("Layout loaded successfully")
         return ln_layout_data
 
+    #this seems unused
     def load_layout(
         self,
         i_ls_file_path: List[str],
@@ -134,6 +135,7 @@ class Cl_npc_character_sheet_generator:
             A list, one entry per attribute/ability defined in the JSON,
             with all coordinates expressed in absolute pixel values.
         """
+
         # --------------------------------------------------------------------- #
         # 1. Read and parse the JSON file
         # --------------------------------------------------------------------- #
@@ -147,8 +149,11 @@ class Cl_npc_character_sheet_generator:
 
         try:
             lst_abilities: List[dict[str, object]] = ln_json_data["attributes_and_abilities"]
+            logging.info(f"Number of abilities: {len(lst_abilities)}")
 
             lst_text_box: List[dict[str, object]] = ln_json_data["text_boxes"]
+            logging.debug(f"Number of Text Boxes: {len(lst_text_box)}")
+
         except KeyError as exc:
             raise ValueError("JSON layout must contain an 'attributes_and_abilities' key") from exc
 
@@ -160,7 +165,7 @@ class Cl_npc_character_sheet_generator:
         h_cursor = 0
         w_cursor = 0
 
-        logging.info(f"Number of abilities: {len(lst_abilities)}")
+        
         for st_item in lst_abilities:
             # ----------------------------------------------------------------- #
             #   Name
@@ -214,7 +219,7 @@ class Cl_npc_character_sheet_generator:
             )
             l_result.append(cl_ability)
 
-        logging.debug(f"Number of Text Boxes: {len(lst_text_box)}")
+        
         for st_text_box in lst_text_box:
             logging.debug(f"Processing: {st_text_box}")
 
@@ -270,13 +275,20 @@ class Cl_npc_character_sheet_generator:
             print("ERR: field doesn't exist, json is wrong")
             return True #ERROR
 
+        try:
+            ast_text_boxes = i_ld_layout["text_boxes"]
+        except KeyError:
+            logging.error("JSON layout missing 'text_boxes' key")
+            print("ERR: field doesn't exist, json is wrong")
+            return True #ERROR
+
         w_cursor = 0
         h_cursor = 0
 
         # Render each layout item; skip anything that isn't a dict
         for st_item in ast_abilities:
             
-            logging.debug(f"Processing item {st_item}")
+            logging.debug(f"Processing Ability: {st_item}")
 
             # PPT part per thousand of the whole image
             # This way it's scale independent
@@ -313,6 +325,10 @@ class Cl_npc_character_sheet_generator:
             # Fetch the numerical value of attribute or ability
             cl_draw.text((w_cursor, h_cursor), "+10", fill=(0, 0, 0), font=cl_item_font, anchor="ra")
 
+        for st_text_box in ast_text_boxes:
+            logging.debug(f"Processing Text Box: {st_text_box}")
+
+
         logging.info("Layout drawing completed successfully")
         return False #OK
 
@@ -346,7 +362,7 @@ class Cl_npc_character_sheet_generator:
         
         # Load the layout from JSON
         st_layout = self.load_layout_from_json(convert_to_path(i_ls_layout_file_path))
-        logging.info("Layout loaded successfully")
+        logging.debug(f"Attributes loaded: {st_layout}")
 
 
         # Draw the layout to an image
