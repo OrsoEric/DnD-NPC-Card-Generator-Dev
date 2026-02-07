@@ -4,17 +4,180 @@
     "name": "Blobby",
     "race": "Slime",
     "stat": {
-        "HP": 30
-    }
-    "abilities": {
-        "strength": {
+        "health": 30,
+        "armor_class": 8,
+        "speed": { 
+            "walk_squares": 2
+        },
+        "challenge_rating": 0.5,
+        "alignment": "Unaligned",
+        "proficiency_bonus": 2
+    },
 
+    "strength": {
+        "score": 7,
+        "modifier": -2,
+        "saving_throw": {
+            "x_proficient": true,
+            "modifier": -2
+        },
+        "abilities": {
+            "athletics": {
+                "x_proficient": true,
+                "modifier": -2
+            }
         }
+    },
 
+    "dexterity": {
+        "score": 12,
+        "modifier": 0,
+        "saving_throw": {
+            "x_proficient": false,
+            "modifier": 0
+        },
+        "abilities": {
+            "acrobatics": {
+                "x_proficient": true,
+                "modifier": 0
+            },
+            "stealth": {
+                "x_proficient": true,
+                "modifier": 0
+            }
+        }
     },
-    "audio": {
-        "sample_rate": 22050,
-        "quality": "stacked_llama"
+
+    "constitution": {
+        "score": 11,
+        "modifier": 0,
+        "saving_throw": {
+            "x_proficient": false,
+            "modifier": 0
+        },
+        "abilities": {}
     },
-    ""
+
+    "intelligence": {
+        "score": 3,
+        "modifier": -4,
+        "saving_throw": {
+            "x_proficient": false,
+            "modifier": -4
+        },
+        "abilities": {
+            "arcana": {
+                "x_proficient": false,
+                "modifier": -4
+            },
+            "investigation": {
+                "x_proficient": false,
+                "modifier": -4
+            },
+            "history": {
+                "x_proficient": false,
+                "modifier": -4
+            },
+            "nature": {
+                "x_proficient": false,
+                "modifier": -4
+            },
+            "religion": {
+                "x_proficient": false,
+                "modifier": -4
+            }
+        }
+    },
+
+    "wisdom": {
+        "score": 13,
+        "modifier": 1,
+        "saving_throw": {
+            "x_proficient": false,
+            "modifier": 1
+        },
+        "abilities": {
+            "insight": {
+                "x_proficient": false,
+                "modifier": 1
+            },
+            "perception": {
+                "x_proficient": true,
+                "modifier": 1
+            },
+            "medicine": {
+                "x_proficient": false,
+                "modifier": 1
+            },
+            "survival": {
+                "x_proficient": false,
+                "modifier": 1
+            }
+        }
+    },
+
+    "charisma": {
+        "score": 8,
+        "modifier": -1,
+        "saving_throw": {
+            "x_proficient": false,
+            "modifier": -1
+        },
+        "abilities": {
+            "deception": {
+                "x_proficient": false,
+                "modifier": -1
+            },
+            "intimidation": {
+                "x_proficient": false,
+                "modifier": -1
+            },
+            "performance": {
+                "x_proficient": false,
+                "modifier": -1
+            },
+            "persuasion": {
+                "x_proficient": false,
+                "modifier": -1
+            }
+        }
+    },
+
+    "damageResistances": [
+        "bludgeoning",
+        "piercing",
+        "slashing"
+    ],
+    "damageImmunities": [
+        "acid"
+    ],
+    "damageVulnerabilities": [
+        "fire"
+    ],
+
+    "senses": {
+        "darkvision": 60,
+        "passivePerception": 8
+    },
+
+    "languages": [
+        { 
+            "name": "Common", 
+            "x_can_speak": false, 
+            "x_can_understand": true 
+        }
+    ],
+
+    "traits": [
+        {
+            "name": "Amphibious",
+            "description": "Blobby can breathe both air and water."
+        },
+        {
+            "name": "Transparent",
+            "description": "When it moves through a space, it is difficult for creatures to see it."
+        }
+    ],
+
+    "equipment": []
 }
