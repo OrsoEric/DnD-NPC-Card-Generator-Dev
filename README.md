@@ -180,9 +180,10 @@ I want to package my one shots so that other people can make use of them
 
 uv venv .venv --python 3.13
 
-.venv\Scripts\activate
+```.venv\Scripts\activate```
 
 I do have PIL in the system python
 
 
-
+```json
+```
