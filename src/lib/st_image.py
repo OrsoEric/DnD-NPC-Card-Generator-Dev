@@ -87,6 +87,78 @@ class St_image:
 
         return False #OK
 
+    def get_size( self ):
+        
+        return (self.g_w_card_px, self.g_h_card_px)
+
+    # ----------------------------------------------------------------------- #
+    # 
+    # ----------------------------------------------------------------------- #
+
+    def draw_image(
+        self,
+        i_source_st_image: "St_image",
+        i_offset_px: tuple[int, int],
+        i_size_px: tuple[int, int]
+    ) -> bool:
+        """
+        Draw a portion of *i_source_st_image* onto the current image.
+
+        Parameters
+        ----------
+        i_source_st_image : St_image
+            The source image from which data will be extracted.  Its internal
+            Pillow image must already exist.
+        i_offset_px : tuple[int, int]
+            The (x, y) pixel coordinates inside *self.g_cl_image* where the
+            top‑left corner of the drawn region will be placed.
+        i_size_px : tuple[int, int]
+            Desired width and height in pixels for the region to be copied.
+            If this size differs from the source image's native dimensions,
+            the source is resized accordingly before pasting.
+
+        Returns
+        -------
+        bool
+            ``False`` indicates a successful operation; ``True`` would signal an
+            error (this mirrors the style of the other methods in this class).
+        """
+        if self.g_cl_image is None:
+            logging.error("No destination image available for drawing.")
+            return True  # ERROR
+
+        if i_source_st_image.g_cl_image is None:
+            logging.error("Source St_image has no image to draw.")
+            return True  # ERROR
+
+        lcl_source_img: PIL.Image.Image = i_source_st_image.g_cl_image
+
+        # If the requested size differs from the source's actual size, resize it.
+        if (i_size_px[0] != lcl_source_img.width or
+                i_size_px[1] != lcl_source_img.height):
+            lcl_source_img = lcl_source_img.resize(
+                (i_size_px[0], i_size_px[1]),
+                resample=PIL.Image.Resampling.LANCZOS
+            )
+
+        # Paste the processed source image onto the destination at the given offset.
+        try:
+            self.g_cl_image.paste(lcl_source_img, i_offset_px)
+        except Exception as exc:  # pragma: no cover – unlikely but defensive
+            logging.exception("Failed to paste image: %s", exc)
+            return True  # ERROR
+
+        logging.debug(
+            "Pasted source image (%sx%s) at offset (%d,%d) onto destination "
+            "(%dx%d).",
+            lcl_source_img.width, lcl_source_img.height,
+            i_offset_px[0], i_offset_px[1],
+            self.g_cl_image.width, self.g_cl_image.height
+        )
+
+        return False  # OK
+
+
     def create_image(
         self,
         i_w_size_px : int,
@@ -171,6 +243,8 @@ class St_image:
             )
         else:
             return f"{self.__class__.__name__}()"
+
+
 
 # --------------------------------------------------------------------------- #
 # TEST BENCH

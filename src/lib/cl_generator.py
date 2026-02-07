@@ -72,6 +72,18 @@ class Cl_npc_character_sheet_generator:
             i_border_color or self.CN_DEFAULT_BORDER_COLOR
         )
 
+        self.g_cl_image_card : St_image = St_image(
+            i_w_card_mm = self.g_w_card_width_mm *2,
+            i_h_card_mm = self.g_h_card_height_mm,
+            i_dot_per_inch = self.g_n_dots_per_inch
+        )
+
+        self.g_cl_image_card_front : St_image = St_image(
+            i_w_card_mm = self.g_w_card_width_mm,
+            i_h_card_mm = self.g_h_card_height_mm,
+            i_dot_per_inch = self.g_n_dots_per_inch
+        )
+
         self.g_cl_image_card_back : St_image = St_image(
             i_w_card_mm = self.g_w_card_width_mm,
             i_h_card_mm = self.g_h_card_height_mm,
@@ -425,7 +437,14 @@ class Cl_npc_character_sheet_generator:
             self.g_cl_image_card_back
         )
 
+        t_size = self.g_cl_image_card_back.get_size()
+
+        #draw the back on the main image with offset
+        self.g_cl_image_card.draw_image( self.g_cl_image_card_back, (t_size[0],0), t_size )
+
         # Save the image
-        self.g_cl_image_card_back.save_image(i_ls_output_file_path)
+        self.g_cl_image_card.save_image(i_ls_output_file_path)
+
+        #Here I need to create a full image
         
         return False #OK
