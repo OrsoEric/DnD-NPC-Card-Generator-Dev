@@ -540,6 +540,9 @@ class Cl_npc_character_sheet_generator:
             The generated image object.
         """
         
+        #SIZE of the image
+        t_size_front = self.g_cl_image_card_back.get_size()
+
         #----------------------------------------------------------------------
         #   LOAD JSON
         #----------------------------------------------------------------------
@@ -551,6 +554,24 @@ class Cl_npc_character_sheet_generator:
         cl_npc : Cl_npc = Cl_npc()
         cl_npc.load_from_file( i_ls_npc_json_path )
         logging.debug(f"Loading NPC from file: {cl_npc}")
+
+        #----------------------------------------------------------------------
+        #   DRAW: ILLUSTRATION FRONT
+        #----------------------------------------------------------------------
+
+        #create an image for the NPC ilustration
+        g_npc_illustration : St_image = St_image(
+            i_w_card_mm = self.g_w_card_width_mm,
+            i_h_card_mm = self.g_h_card_height_mm,
+            i_dot_per_inch = self.g_n_dots_per_inch
+        )
+
+        #load the NPC illustration and resize it
+        g_npc_illustration.load_image( i_ls_npc_illustration_path )
+        #g_npc_illustration.save_image(["text_npc.jpg"])
+
+        #draw NPC illustration on the front
+        self.g_cl_image_card_front.draw_image( g_npc_illustration, (0,0), t_size_front )
 
         #----------------------------------------------------------------------
         #   DRAW: FRONT
@@ -596,17 +617,6 @@ class Cl_npc_character_sheet_generator:
 
         #i_ls_mask_front_path
 
-        g_npc_illustration : St_image = St_image(
-            i_w_card_mm = self.g_w_card_width_mm,
-            i_h_card_mm = self.g_h_card_height_mm,
-            i_dot_per_inch = self.g_n_dots_per_inch
-        )
-
-        g_npc_illustration.load_image( i_ls_npc_illustration_path )
-        g_npc_illustration.save_image(["text_npc.jpg"])
-
-        #draw the front on the main image with offset
-        t_size_front = self.g_cl_image_card_back.get_size()
         self.g_cl_image_card.draw_image( self.g_cl_image_card_front, (0,0), t_size_front )
 
         #draw the back on the main image with offset
