@@ -61,6 +61,12 @@ PROFICIENCISES
 RESISTENCE, IMMUNITY, WEAKNESS
 - DAMAGE TYPE
 
+DESCRIPTION
+
+I would like to have a description of the creature and habit
+
+I can do small and wall of text to fit all in the back?
+
 
 # LAYOUT
 
@@ -109,6 +115,12 @@ Creature size, weight and dimensions
 The back should have abilities, attributes, resistencies, 
 
 I do use a separate card for the active abilities? Most creatures should fit a single card I think. I flip it and have both
+
+## Active and Passives
+
+I'm thinking the active and passive abilities can be another card where I have one card for each attack and passive with its own back
+
+But NPC usually have 
 
 ## Material
 
