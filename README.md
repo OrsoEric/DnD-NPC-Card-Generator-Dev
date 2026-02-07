@@ -8,13 +8,32 @@ NPC generator
 
 PC generator
 
-# OpenVTT
+## ComfyUI
+
+I should make a ComfyUI node to generate the NPC card
+
+My thinking is it takes an image
+
+## Aspect Ratio
+
+I am thinking MTG aspect ratio because of the sleeves I have that are compatible
+
+Monsters can have a landscape or portrait configuration depending on the creature? Like alligators are landscape, while humanoids are portrait?
+
+But perhaps I can do square aspect ratio, it's easier to generate?
+
+I'm leaning toward MTG
+
+
+## OpenVTT
 
 I should make a tool to import sheets into OpenVTT and to print those sheets
 
 I copied the VTT html page using F12 and element picker
 
 # STATS
+
+What information makes it into the card?
 
 CORE STATS
 - HP
@@ -40,11 +59,7 @@ RESISTENCE, IMMUNITY, WEAKNESS
 - DAMAGE TYPE
 
 
-
-
-
-
-# IDEAS
+# LAYOUT
 
 ## Card MTG Landscaper
 
@@ -70,6 +85,8 @@ on left column
 
 - skills
 
+Not enough space for everything. I want it to be artistic
+
 ## Card MTG portrait double sided
 
 I use the front for illustration and stat block
@@ -79,14 +96,34 @@ I use the rear for abilities and skills
 
 How many cards I need?
 
+The front I think of name, race, class, and four core numbers
+HP AC Initiative and Passive perceptin
+Perhaps with their glyps like shield, heart, eye, foot
+I should have the speed, in there, I don't really need passive perception here
+I am thinking of speed in various mediums walk, swim, fly, float
+
+Creature size, weight and dimensions
+
+The back should have abilities, attributes, resistencies, 
+
+I do use a separate card for the active abilities? Most creatures should fit a single card I think. I flip it and have both
+
+## Material
+
+I should 2D print on some hard smooth paper and get some premium finish I think
+
+# PYTHON
+
+Perhaps I should do a json image, that will create all the outputs using python PIL
+
+I can use an LLM to generate the json base, and tweak it
+
+I should have full image, with opacity
+
+The back could be manual image, or better just no background? It's there for info using clear sleeves
 
 
 
-
-
-# ComfyUI
-
-I should make a ComfyUI node to generate the NPC card
 
 
 
