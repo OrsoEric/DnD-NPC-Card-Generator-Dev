@@ -267,7 +267,7 @@
             "h_font_ppt": 50
         },
         {
-            "s_name": "SPECIES",
+            "s_name": "RACE",
             "s_text": "this text box holds the NPC species, class, rank",
             "w_top_left_ppt": 50,
             "h_top_left_ppt": 120,

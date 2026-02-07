@@ -377,6 +377,37 @@ class Cl_npc_character_sheet_generator:
 
 
         return False #OK
+    
+    def load_values_front_from_npc_dict( self, i_ld_layout : Dict, i_d_npc : Dict ) -> bool:
+        """
+        given a npc dictionary, fill the values from the layout file
+        """
+
+        #copy the dictionary key from the NPC over to the layout value field
+        ls_npc_key = i_d_npc.keys()
+
+        try:
+            ld_text_boxes : List[Dict] = i_ld_layout["FRONT_TEXT_BOXES"]
+        except KeyError:
+            logging.error(f"ERR: field {"FRONT_TEXT_BOXES"} doesn't exist, json is wrong")
+            return True #ERROR
+
+        #scan the layout text fields
+        for d_attribute in ld_text_boxes:
+            #fetch the name of the attribute
+            s_attribute = d_attribute["s_name"] 
+            #check that the name of the attribute is amongst the NPC stats
+            if s_attribute in ls_npc_key:
+                #then copy over the value
+                d_attribute["s_text"] = i_d_npc[s_attribute]
+                logging.debug(f"NPC value {s_attribute} assigned to layout value {d_attribute}")
+            else:
+                logging.error(f"ERR: unable to find attributr {s_attribute} in layout keys {ls_npc_key}")
+                return True #FAIL
+            
+        logging.debug(f"FRONT: Loaded {len(ld_text_boxes)} text boxes")
+
+        return False #OK
 
     def load_values_back_from_npc_dict( self, i_ld_layout : Dict, i_d_npc : Dict ) -> bool:
         """
@@ -522,29 +553,39 @@ class Cl_npc_character_sheet_generator:
         #   DRAW: FRONT
         #----------------------------------------------------------------------
 
-        #Draw layout front to image
+        x_fail = self.load_values_front_from_npc_dict( st_layout , cl_npc.g_d_npc )
+        if x_fail:
+            logging.error("failed to load values from NPC into FRONT layout.")
+            return True #FAIL
 
-        cl_image = self.draw_layout_front_to_image(
+
+        #Draw layout front to image
+        x_fail = self.draw_layout_front_to_image(
             st_layout,
             self.g_cl_image_card_front
         )
+        if x_fail:
+            logging.error("ERR: failed to draw back layout to FRONT image")
+            return True #FAIL
 
 
         #----------------------------------------------------------------------
         #   DRAW: BACK
         #----------------------------------------------------------------------
 
-        #assign the stats
-        logging.info("Combining attributes values from NPC into Layout...")
         x_fail = self.load_values_back_from_npc_dict( st_layout , cl_npc.g_d_npc )
         if x_fail:
-            logging.error("failed to load values from NPC into layout.")
+            logging.error("failed to load values from NPC into back layout.")
+            return True #FAIL
 
         # Draw the layout to an image
-        cl_image = self.draw_layout_back_to_image(
+        x_fail = self.draw_layout_back_to_image(
             st_layout,
             self.g_cl_image_card_back
         )
+        if x_fail:
+            logging.error("ERR: failed to draw back layout to back image")
+            return True #FAIL
 
         #----------------------------------------------------------------------
         #   DRAW: COMBINE FRONT AND BACK
