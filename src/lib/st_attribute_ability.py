@@ -28,5 +28,4 @@ class St_attribute_ability:
 
     s_modifier_value: str
     w_modifier_pos_px: int
-    h_modifier_font : int
 

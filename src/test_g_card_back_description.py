@@ -97,6 +97,13 @@ def load_layout(
             h_cursor += h_name_px
 
         # ----------------------------------------------------------------- #
+        #   Font Size
+        # ----------------------------------------------------------------- #
+
+        h_font_ppt : int = st_item.get("h_font_ppt", 0)
+        h_font_px = i_card_height * h_font_ppt / 1000
+
+        # ----------------------------------------------------------------- #
         #   Modifier
         # ----------------------------------------------------------------- #
         s_modifier_value: str = str(st_item.get("s_modifier_value", ""))
@@ -116,11 +123,10 @@ def load_layout(
             s_name=s_name,
             w_name_pos_px = w_cursor,
             h_name_pos_px = h_cursor,
-            h_name_font = 0,
+            h_name_font = h_font_px,
 
             s_modifier_value=s_modifier_value,
             w_modifier_pos_px=w_cursor -w_mod_px,
-            h_modifier_font = 0,
         )
         l_result.append(cl_ability)
 
