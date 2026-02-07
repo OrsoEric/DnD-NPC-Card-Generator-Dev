@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import List, Tuple
 
 def convert_to_path(
-    i_ls_path_components: List[str]
+    i_ls_path_components: List[str] | Path
 ) -> Path:
     """
     Convert a list of path components into a cross-platform Path object.
@@ -39,8 +39,11 @@ def convert_to_path(
     WindowsPath('C:\\\\Users\\\\Documents\\\\file.txt')  # On Windows
     """
     
-    # Create a Path object from the list of components
-    cl_path: Path = Path(*i_ls_path_components)
+    if type(i_ls_path_components) is type(list()):
+        # Create a Path object from the list of components
+        cl_path: Path = Path(*i_ls_path_components)
+    else:
+        cl_path = i_ls_path_components
     
     return cl_path
 

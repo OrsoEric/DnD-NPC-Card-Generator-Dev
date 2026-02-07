@@ -21,6 +21,8 @@ from lib.cl_utility_path import convert_to_path
 
 from lib.cl_utility_path import find_file_pair_image_json
 
+from lib.cl_utility_path import build_path_output_jpg
+
 from lib.st_image import St_image
 #this utility allows to draw a multiline text box onto an image
 
@@ -37,15 +39,14 @@ def generate_card() -> bool:
     for tss_npc_input_path in ltss_npc_input_path:
         
         #unpack
-        s_image_path = tss_npc_input_path[0]
-        s_json_path = tss_npc_input_path[1]
-        logging.info(f"Processing NPC files {s_image_path} {s_json_path} ")
+        s_input_npc_image_path = tss_npc_input_path[0]
+        s_input_npc_json_path = tss_npc_input_path[1]
+        logging.info(f"Processing NPC files {s_input_npc_image_path} {s_input_npc_json_path} ")
 
         
+        s_output_image_path = build_path_output_jpg( "output", s_input_npc_image_path )
         # construct the output path
-        logging.info(f"Processing NPC files {Path("output",f"{s_json_path.name}") } ")
-        
-
+        logging.info(f"Output image path {s_output_image_path}")
 
         cl_generator = Cl_npc_character_sheet_generator(
             i_w_card_width_mm=63.5,
@@ -61,11 +62,10 @@ def generate_card() -> bool:
             i_ls_layout_file_path=["src", "json", "npc_layout.json"],
             #i_ls_mask_front_path=["mask", "front_mask_transparent.png"],
             i_ls_mask_front_path=["mask", "front_mask_d.png"],
-            i_ls_npc_illustration_path= s_image_path,
-            i_ls_npc_json_path = s_json_path,
-            i_ls_output_file_path=["output","test_q_card_back.png"]
+            i_ls_npc_illustration_path= s_input_npc_image_path,
+            i_ls_npc_json_path = s_input_npc_json_path,
+            i_ls_output_file_path=s_output_image_path
         )
-        
 
     return False #OK
 
