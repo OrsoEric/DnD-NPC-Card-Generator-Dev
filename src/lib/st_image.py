@@ -197,6 +197,56 @@ class St_image:
                 del self.g_cl_image
                 self.g_cl_image = None
 
+    def load_image(
+        self,
+        i_ls_path_parts : list[str]
+    ) -> bool:
+        """
+        Load an image from the supplied path components and store it in this
+        instance.
+
+        The function accepts a list of strings that together form the file
+        system location of an image (e.g. ``["data", "card.png"]``).  It
+        converts those parts to a :class:`pathlib.Path` using
+        :func:`convert_to_path`, opens the file with Pillow, and assigns the
+        resulting :class:`PIL.Image.Image` object to :attr:`g_cl_image`.
+
+        The method follows the error‑handling convention used throughout the
+        class: a return value of ``False`` indicates success while ``True``
+        signals that an exception was raised during loading.
+
+        Parameters:
+            i_path_parts (list): Sequential path components that form the full
+                image location.  Each element should be a string; missing
+                directories will cause Pillow to raise an error and the
+                method will return ``True``.
+
+        Returns:
+            bool: ``False`` on successful load, ``True`` if an exception was
+            caught.
+        """
+        # Convert list of path components into a Path object.
+        st_image_path = convert_to_path(i_ls_path_parts)
+
+        try:
+            cl_image_loaded : PIL.Image.Image = PIL.Image.open(st_image_path)
+            
+        except Exception as exc:  # pragma: no cover – defensive
+            logging.exception("Failed to load image from %s: %s", st_image_path, exc)
+            return True  # ERROR
+        
+
+        # and the LANCZOS filter for high‑quality downsampling.
+        cl_image_resized: PIL.Image.Image = cl_image_loaded.resize(
+            (self.g_w_card_px, self.g_h_card_px),
+            resample=PIL.Image.LANCZOS
+        )
+
+        self.g_cl_image = cl_image_resized
+
+        return False  # OK
+
+
     def save_image(
         self,
         i_path_parts: list[str]

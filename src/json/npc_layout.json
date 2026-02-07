@@ -42,7 +42,7 @@
             "s_text": "this covers damage resistencce, vulnerabilities and immunities",
             "w_top_left_ppt": 400,
             "h_top_left_ppt": 180,
-            "w_size_ppt": 500,
+            "w_size_ppt": 550,
             "h_size_ppt": 0,
             "h_font_ppt": 20
         },
@@ -51,7 +51,7 @@
             "s_text": "this covers damage resistencce, vulnerabilities and immunities",
             "w_top_left_ppt": 400,
             "h_top_left_ppt": 230,
-            "w_size_ppt": 500,
+            "w_size_ppt": 550,
             "h_size_ppt": 0,
             "h_font_ppt": 20
         },
@@ -60,7 +60,7 @@
             "s_text": "this covers damage resistencce, vulnerabilities and immunities",
             "w_top_left_ppt": 400,
             "h_top_left_ppt": 280,
-            "w_size_ppt": 500,
+            "w_size_ppt": 550,
             "h_size_ppt": 0,
             "h_font_ppt": 20
         }

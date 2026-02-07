@@ -513,7 +513,9 @@ class Cl_npc_character_sheet_generator:
     def generate_card(
         self,
         i_ls_layout_file_path: List[str],
-        i_ls_npc_file_path: List[str],
+        i_ls_mask_front_path : List[str],
+        i_ls_npc_illustration_path : List[str],
+        i_ls_npc_json_path: List[str],
         i_ls_output_file_path: List[str],
         i_background_color: Optional[Tuple[int, int, int]] = None,
         i_border_color: Optional[Tuple[int, int, int]] = None
@@ -547,7 +549,7 @@ class Cl_npc_character_sheet_generator:
 
         # Load the NPC stats
         cl_npc : Cl_npc = Cl_npc()
-        cl_npc.load_from_file( i_ls_npc_file_path )
+        cl_npc.load_from_file( i_ls_npc_json_path )
         logging.debug(f"Loading NPC from file: {cl_npc}")
 
         #----------------------------------------------------------------------
@@ -591,6 +593,17 @@ class Cl_npc_character_sheet_generator:
         #----------------------------------------------------------------------
         #   DRAW: COMBINE FRONT AND BACK
         #----------------------------------------------------------------------        
+
+        #i_ls_mask_front_path
+
+        g_npc_illustration : St_image = St_image(
+            i_w_card_mm = self.g_w_card_width_mm,
+            i_h_card_mm = self.g_h_card_height_mm,
+            i_dot_per_inch = self.g_n_dots_per_inch
+        )
+
+        g_npc_illustration.load_image( i_ls_npc_illustration_path )
+        g_npc_illustration.save_image(["text_npc.jpg"])
 
         #draw the front on the main image with offset
         t_size_front = self.g_cl_image_card_back.get_size()
