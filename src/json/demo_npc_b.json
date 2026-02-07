@@ -45,5 +45,11 @@
     "DECEPTION": 0,
     "INTIMIDATION": 0,
     "PERFORMANCE": 0,
-    "PERSUASION": 3
+    "PERSUASION": 3,
+
+    "SPELL LIST": "Druid",
+    "SPELL ABILITY" : "STRENGTH",
+    "SPELL BONUS": 4,
+    "SPELL SAVE DC": 4
+    
 }

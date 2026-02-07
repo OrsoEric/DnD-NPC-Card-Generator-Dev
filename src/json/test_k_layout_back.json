@@ -4,37 +4,37 @@
         {
             "s_name": "DESCRIPTION",
             "s_text": "this is a long multiline description of the actor that can cover many topics like flavour, physical description, behaviour, habitat, history and myths.",
-            "w_top_left_ppt": 20,
+            "w_top_left_ppt": 50,
             "h_top_left_ppt": 20,
-            "w_size_ppt": 800,
-            "h_size_left_ppt": 200,
+            "w_size_ppt": 900,
+            "h_size_left_ppt": 150,
             "h_font_ppt": 20
         },
         {
             "s_name": "IMMUNITY",
             "s_text": "this covers damage resistencce, vulnerabilities and immunities",
-            "w_top_left_ppt": 600,
+            "w_top_left_ppt": 400,
             "h_top_left_ppt": 300,
-            "w_size_ppt": 350,
-            "h_size_left_ppt": 100,
+            "w_size_ppt": 500,
+            "h_size_left_ppt": 50,
             "h_font_ppt": 20
         },
         {
             "s_name": "RESISTENCE",
             "s_text": "this covers damage resistencce, vulnerabilities and immunities",
-            "w_top_left_ppt": 600,
-            "h_top_left_ppt": 400,
-            "w_size_ppt": 350,
-            "h_size_left_ppt": 100,
+            "w_top_left_ppt": 400,
+            "h_top_left_ppt": 350,
+            "w_size_ppt": 500,
+            "h_size_left_ppt": 50,
             "h_font_ppt": 20
         },
         {
             "s_name": "WEAKNESS",
             "s_text": "this covers damage resistencce, vulnerabilities and immunities",
-            "w_top_left_ppt": 600,
-            "h_top_left_ppt": 500,
-            "w_size_ppt": 350,
-            "h_size_left_ppt": 100,
+            "w_top_left_ppt": 400,
+            "h_top_left_ppt": 400,
+            "w_size_ppt": 500,
+            "h_size_left_ppt": 50,
             "h_font_ppt": 20
         }
     ],

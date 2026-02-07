@@ -206,7 +206,7 @@ class Cl_npc_character_sheet_generator:
             #load text box parameters
             s_label: str = st_text_box.get("s_name", "") 
             s_text: str = st_text_box.get("s_text", "")
-            w_top_left_ppt: int = st_text_box.get("h_top_left_ppt", 0)
+            w_top_left_ppt: int = st_text_box.get("w_top_left_ppt", 0)
             h_top_left_ppt: int = st_text_box.get("h_top_left_ppt", 0)
             w_size_ppt: int = st_text_box.get("w_size_ppt", 0)
             h_size_ppt: int = st_text_box.get("h_size_left_ppt", 0)
@@ -214,7 +214,7 @@ class Cl_npc_character_sheet_generator:
             
             # Convert PPT values to pixels
             w_top_left_px = int(w_size_px * w_top_left_ppt / 1000)
-            h_top_left_px = int(h_size_px * w_top_left_px / 1000)
+            h_top_left_px = int(h_size_px * h_top_left_ppt / 1000)
             w_text_box_px = int(w_size_px * w_size_ppt / 1000)
             h_text_box_px = int( h_size_px * h_size_ppt / 1000)
             h_font_px = int(h_size_px * h_font_ppt / 1000)
