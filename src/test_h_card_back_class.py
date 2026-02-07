@@ -309,7 +309,7 @@ class Cl_npc_character_sheet_generator:
         i_ls_output_file_path: List[str],
         i_background_color: Optional[Tuple[int, int, int]] = None,
         i_border_color: Optional[Tuple[int, int, int]] = None
-    ) -> image.Image:
+    ) -> bool:
         """
         Generate a card back image from the specified JSON layout file.
         
@@ -348,7 +348,7 @@ class Cl_npc_character_sheet_generator:
         self.g_cl_image_card_back.save_image(i_ls_output_file_path)
         logging.info("Image saved successfully")
         
-        return cl_image
+        return False #OK
 
 # Example usage
 if __name__ == "__main__":
