@@ -56,7 +56,39 @@ ATTRIBUTES, SAVE
 - CHA
 
 PROFICIENCISES
-- ABILITIES
+
+Strength
+
+Athletics
+
+Dexterity
+
+Acrobatics
+Sleight of Hand
+Stealth
+
+Intelligence
+
+Arcana
+History
+Investigation
+Nature
+Religion
+
+Wisdom
+
+Animal Handling
+Insight
+Medicine
+Perception
+Survival
+
+Charisma
+
+Deception
+Intimidation
+Performance
+Persuasion
 
 RESISTENCE, IMMUNITY, WEAKNESS
 - DAMAGE TYPE
@@ -144,8 +176,13 @@ Linktree
 
 I want to package my one shots so that other people can make use of them
 
+# UV
 
+uv venv .venv --python 3.13
 
+.venv\Scripts\activate
+
+I do have PIL in the system python
 
 
 

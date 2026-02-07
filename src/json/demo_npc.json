@@ -1,0 +1,20 @@
+{
+    "system": "DnD5E",
+    "actor": "NPC",
+    "name": "Blobby",
+    "race": "Slime",
+    "stat": {
+        "HP": 30
+    }
+    "abilities": {
+        "strength": {
+
+        }
+
+    },
+    "audio": {
+        "sample_rate": 22050,
+        "quality": "stacked_llama"
+    },
+    ""
+}
