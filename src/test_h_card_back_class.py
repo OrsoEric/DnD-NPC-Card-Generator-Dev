@@ -15,6 +15,7 @@ import PIL.ImageFont as font
 
 from lib.cl_utility_path import convert_to_path
 from lib.st_attribute_ability import St_attribute_ability
+from lib.st_image import St_image
 
 
 class Cl_npc_character_sheet_generator:
@@ -32,8 +33,9 @@ class Cl_npc_character_sheet_generator:
 
     def __init__(
         self,
-        i_card_width: int,
-        i_card_height: int,
+        i_w_card_width_mm: float,
+        i_h_card_height_mm: float,
+        i_n_dots_per_inch : int,
         i_background_color: Optional[Tuple[int, int, int]] = None,
         i_border_color: Optional[Tuple[int, int, int]] = None
     ):
@@ -51,14 +53,26 @@ class Cl_npc_character_sheet_generator:
         i_border_color : tuple[int, int, int] or None, default=None
             RGB border colour.  If ``None`` a default black is used.
         """
-        self.n_card_width: int = i_card_width
-        self.n_card_height: int = i_card_height
-        self.tn_background_color: Tuple[int, int, int] = (
+
+        self.g_w_card_width_mm: float = i_w_card_width_mm
+        self.g_h_card_height_mm: float = i_h_card_height_mm
+        self.g_n_dots_per_inch: int = i_n_dots_per_inch
+
+        self.g_tn_background_color: Tuple[int, int, int] = (
             i_background_color or self.CN_DEFAULT_BACKGROUND_COLOR
         )
-        self.tn_border_color: Tuple[int, int, int] = (
+
+        self.g_tn_border_color: Tuple[int, int, int] = (
             i_border_color or self.CN_DEFAULT_BORDER_COLOR
         )
+
+        self.g_cl_image_card_back : St_image = St_image(
+            i_w_card_mm = self.g_w_card_width_mm,
+            i_h_card_mm = self.g_h_card_height_mm,
+            i_dot_per_inch = self.g_n_dots_per_inch
+        )
+
+        return
 
     def load_layout_from_json(
         self,
@@ -198,8 +212,9 @@ class Cl_npc_character_sheet_generator:
 
     def draw_layout_to_image(
         self,
-        i_layout: List[Dict[str, Any]],
-    ) -> image.Image:
+        i_ld_layout: List[Dict[str, Any]],
+        i_cl_image : St_image
+    ) -> bool:
         """
         Draw the layout described by *i_layout* onto a new PIL Image.
         
@@ -216,19 +231,21 @@ class Cl_npc_character_sheet_generator:
         """
         logging.info("Drawing layout to image")
         # Create base image and drawing context
-        cl_image = image.new("RGB", (self.n_card_width, self.n_card_height), self.tn_background_color)
-        cl_draw = draw.Draw(cl_image)
+        cl_draw = draw.Draw(i_cl_image.g_cl_image)
+
+        w_size_px = i_cl_image.g_w_card_px
+        h_size_px = i_cl_image.g_h_card_px
 
         # Draw a simple rectangle border
         cl_draw.rectangle(
             [
                 (self.CN_BORDER_WIDTH, self.CN_BORDER_WIDTH),
                 (
-                    self.n_card_width - self.CN_BORDER_WIDTH,
-                    self.n_card_height - self.CN_BORDER_WIDTH,
+                    w_size_px - self.CN_BORDER_WIDTH,
+                    h_size_px - self.CN_BORDER_WIDTH,
                 ),
             ],
-            outline=self.tn_border_color,
+            outline=self.g_tn_border_color,
             width=self.CN_BORDER_WIDTH,
         )
 
@@ -236,14 +253,14 @@ class Cl_npc_character_sheet_generator:
         cl_default_font = font.load_default()
 
         try:
-            ast_abilities = i_layout["attributes_and_abilities"]
+            ast_abilities = i_ld_layout["attributes_and_abilities"]
         except KeyError:
             logging.error("JSON layout missing 'attributes_and_abilities' key")
             print("ERR: field doesn't exist, json is wrong")
-            return cl_draw
+            return True #ERROR
 
-        cursor_w = 0
-        cursor_h = 0
+        w_cursor = 0
+        h_cursor = 0
 
         # Render each layout item; skip anything that isn't a dict
         for st_item in ast_abilities:
@@ -256,9 +273,9 @@ class Cl_npc_character_sheet_generator:
             h_font_ppt: int = st_item.get("h_font_ppt", 0)
             
             # Convert PPT values to pixels
-            w_pos_px = self.n_card_width * w_pos_ppt / 1000
-            h_pos_px = self.n_card_height * h_pos_ppt / 1000
-            h_font_px = self.n_card_height * h_font_ppt / 1000
+            w_pos_px = w_size_px * w_pos_ppt / 1000
+            h_pos_px = h_size_px * h_pos_ppt / 1000
+            h_font_px = h_size_px * h_font_ppt / 1000
 
             # Load a truetype font if possible, otherwise fall back to the default
             try:
@@ -271,25 +288,25 @@ class Cl_npc_character_sheet_generator:
                 logging.warning("Failed to load verdana.ttf, using default font")
                 print("ERR: failed to load font")
 
-            if (cursor_h <= 0):
-                cursor_w = w_pos_px
-                cursor_h = h_pos_px
+            if (h_cursor <= 0):
+                w_cursor = w_pos_px
+                h_cursor = h_pos_px
             else:
-                cursor_w += w_pos_px
-                cursor_h += h_pos_px
+                w_cursor += w_pos_px
+                h_cursor += h_pos_px
 
             # Add the header for the attribute or ability 
-            cl_draw.text((cursor_w, cursor_h), s_text, fill=(0, 0, 0), font=cl_item_font)
+            cl_draw.text((w_cursor, h_cursor), s_text, fill=(0, 0, 0), font=cl_item_font)
             # Fetch the numerical value of attribute or ability
-            cl_draw.text((cursor_w, cursor_h), "+10", fill=(0, 0, 0), font=cl_item_font, anchor="ra")
+            cl_draw.text((w_cursor, h_cursor), "+10", fill=(0, 0, 0), font=cl_item_font, anchor="ra")
 
         logging.info("Layout drawing completed successfully")
-        return cl_image
+        return False #OK
 
     def generate_card_back(
         self,
-        i_layout_file_path: List[str],
-        i_output_file_path: str,
+        i_ls_layout_file_path: List[str],
+        i_ls_output_file_path: List[str],
         i_background_color: Optional[Tuple[int, int, int]] = None,
         i_border_color: Optional[Tuple[int, int, int]] = None
     ) -> image.Image:
@@ -315,20 +332,23 @@ class Cl_npc_character_sheet_generator:
         logging.info("Starting card back generation")
         
         # Load the layout from JSON
-        st_layout = self.load_layout_from_json(convert_to_path(i_layout_file_path))
+        st_layout = self.load_layout_from_json(convert_to_path(i_ls_layout_file_path))
         logging.info("Layout loaded successfully")
 
+
         # Draw the layout to an image
-        cl_image = self.draw_layout_to_image(st_layout)
+        cl_image = self.draw_layout_to_image(
+            st_layout,
+            self.g_cl_image_card_back
+        )
         logging.info("Image drawn successfully")
 
         # Save the image
-        logging.info(f"Saving image to: {i_output_file_path}")
-        cl_image.save(i_output_file_path)
+        logging.info(f"Saving image to: {i_ls_output_file_path}")
+        self.g_cl_image_card_back.save_image(i_ls_output_file_path)
         logging.info("Image saved successfully")
         
         return cl_image
-
 
 # Example usage
 if __name__ == "__main__":
@@ -338,24 +358,24 @@ if __name__ == "__main__":
 
     logging.basicConfig(
         filename=s_log_path,
-        level=logging.INFO,
+        level=logging.DEBUG,
         format='[%(asctime)s] %(levelname)s %(module)s:%(lineno)d > %(message)s ',
         filemode='w'
     )
     logging.info("BEGIN")
 
-    # Create a generator instance for A4 size at 300 DPI (approx. 2480x3508 pixels)
     cl_generator = Cl_npc_character_sheet_generator(
-        i_card_width=750,
-        i_card_height=1000,
+        i_w_card_width_mm=63.5,
+        i_h_card_height_mm=88.9,
+        i_n_dots_per_inch = 300,
         i_background_color=(255, 255, 255),
         i_border_color=(0, 0, 0)
     )
 
     # Generate the card back
     cl_generated_image = cl_generator.generate_card_back(
-        i_layout_file_path=["src", "json", "test_e_layout_back.json"],
-        i_output_file_path="output/test_h_card_back.png"
+        i_ls_layout_file_path=["src", "json", "test_e_layout_back.json"],
+        i_ls_output_file_path=["output","test_h_card_back.png"]
     )
     
     logging.info("END")

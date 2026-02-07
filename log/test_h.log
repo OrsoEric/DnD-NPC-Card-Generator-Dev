@@ -1,11 +1,14 @@
-[2026-01-18 11:22:13,360] INFO test_h_card_back_class:345 > BEGIN 
-[2026-01-18 11:22:13,360] INFO test_h_card_back_class:315 > Starting card back generation 
-[2026-01-18 11:22:13,360] INFO test_h_card_back_class:82 > Loading layout from: src\json\test_e_layout_back.json 
-[2026-01-18 11:22:13,360] INFO test_h_card_back_class:85 > Layout loaded successfully 
-[2026-01-18 11:22:13,360] INFO test_h_card_back_class:319 > Layout loaded successfully 
-[2026-01-18 11:22:13,360] INFO test_h_card_back_class:217 > Drawing layout to image 
-[2026-01-18 11:22:13,387] INFO test_h_card_back_class:286 > Layout drawing completed successfully 
-[2026-01-18 11:22:13,387] INFO test_h_card_back_class:323 > Image drawn successfully 
-[2026-01-18 11:22:13,387] INFO test_h_card_back_class:326 > Saving image to: output/test_h_card_back.png 
-[2026-01-18 11:22:13,405] INFO test_h_card_back_class:328 > Image saved successfully 
-[2026-01-18 11:22:13,405] INFO test_h_card_back_class:361 > END 
+[2026-01-18 12:17:19,355] INFO test_h_card_back_class:365 > BEGIN 
+[2026-01-18 12:17:19,355] DEBUG st_image:77 > W mm: 63.5 | H mm 88.9 
+[2026-01-18 12:17:19,355] DEBUG st_image:86 > W px: 750 | H px 1050 
+[2026-01-18 12:17:19,356] INFO test_h_card_back_class:332 > Starting card back generation 
+[2026-01-18 12:17:19,356] INFO test_h_card_back_class:96 > Loading layout from: src\json\test_e_layout_back.json 
+[2026-01-18 12:17:19,356] INFO test_h_card_back_class:99 > Layout loaded successfully 
+[2026-01-18 12:17:19,356] INFO test_h_card_back_class:336 > Layout loaded successfully 
+[2026-01-18 12:17:19,356] INFO test_h_card_back_class:232 > Drawing layout to image 
+[2026-01-18 12:17:19,382] INFO test_h_card_back_class:303 > Layout drawing completed successfully 
+[2026-01-18 12:17:19,382] INFO test_h_card_back_class:344 > Image drawn successfully 
+[2026-01-18 12:17:19,382] INFO test_h_card_back_class:347 > Saving image to: ['output', 'test_h_card_back.png'] 
+[2026-01-18 12:17:19,382] DEBUG st_image:153 > input: ['output', 'test_h_card_back.png'] path: output\test_h_card_back.png 
+[2026-01-18 12:17:19,400] INFO test_h_card_back_class:349 > Image saved successfully 
+[2026-01-18 12:17:19,400] INFO test_h_card_back_class:381 > END 

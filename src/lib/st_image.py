@@ -11,7 +11,9 @@ public API only exposes behaviour, not internal data.
 # IMPORTS
 # --------------------------------------------------------------------------- #
 
-import pathlib
+import logging
+
+from lib.cl_utility_path import convert_to_path
 import PIL.Image
 
 # --------------------------------------------------------------------------- #
@@ -44,16 +46,17 @@ class St_image:
         All parameters are kept private; they are prefixed with an underscore to
         signal that they should not be accessed directly from user code.
         """
-        self._w_card_mm: float = i_w_card_mm          #: Width of a standard card in millimetres.
-        self._h_card_mm: float = i_h_card_mm          #: Height of a standard card in millimetres.
-        self._dot_per_inch: int = i_dot_per_inch          #: DPI – dots (pixels) per inch.
-        self._mm_per_inch: float = 25.4        #: Millimetres per inch.
+        self.g_w_card_mm: float = i_w_card_mm          #: Width of a standard card in millimetres.
+        self.g_h_card_mm: float = i_h_card_mm          #: Height of a standard card in millimetres.
+        self.g_n_dot_per_inch: int = i_dot_per_inch          #: DPI – dots (pixels) per inch.
+        self.g_n_mm_per_inch: float = 25.4        #: Millimetres per inch.
 
-        # The image itself is created lazily; ``None`` indicates that no
-        # image exists yet.
-        self._image: PIL.Image.Image | None = None
+        self.g_w_card_px: int = int(0)
+        self.g_h_card_px: int = int(0)
 
-        self.create_image()
+        self.compute_px()
+
+        self.create_image( self.g_w_card_px, self.g_h_card_px )
 
         return
 
@@ -61,7 +64,9 @@ class St_image:
     # PUBLIC API
     # ----------------------------------------------------------------------- #
 
-    def compute_px(self) -> tuple[int, int]:
+    def compute_px(
+        self
+    ) -> bool:
         """
         Compute the pixel width and height that correspond to the physical
         card dimensions at the configured DPI.
@@ -69,15 +74,25 @@ class St_image:
         Returns:
             A two‑tuple ``(width_px, height_px)`` containing the size in pixels.
         """
-        n_width_px: int = int(
-            self._w_card_mm / self._mm_per_inch * self._dot_per_inch
-        )
-        n_height_px: int = int(
-            self._h_card_mm / self._mm_per_inch * self._dot_per_inch
-        )
-        return (n_width_px, n_height_px)
+        logging.debug(f"W mm: {self.g_w_card_mm} | H mm {self.g_h_card_mm}")
 
-    def create_image(self, i_color: str = "white") -> None:
+        self.g_w_card_px: int = int(
+            self.g_w_card_mm / self.g_n_mm_per_inch * self.g_n_dot_per_inch
+        )
+        self.g_h_card_px: int = int(
+            self.g_h_card_mm / self.g_n_mm_per_inch * self.g_n_dot_per_inch
+        )
+
+        logging.debug(f"W px: {self.g_w_card_px} | H px {self.g_h_card_px}")
+
+        return False #OK
+
+    def create_image(
+        self,
+        i_w_size_px : int,
+        i_h_size_px : int,
+        i_color: str = "white"
+    ) -> bool:
         """
         Create a new RGB image that matches the physical dimensions of the card.
 
@@ -89,10 +104,11 @@ class St_image:
                 Any colour recognised by Pillow can be used, e.g. "white",
                 "#FF00FF" or a tuple ``(R, G, B)``.
         """
-        n_width_px, n_height_px = self.compute_px()
-        self._image: PIL.Image.Image = PIL.Image.new(
-            mode="RGB", size=(n_width_px, n_height_px), color=i_color
+        self.g_cl_image: PIL.Image.Image = PIL.Image.new(
+            mode="RGB", size=(i_w_size_px, i_h_size_px), color=i_color
         )
+
+        return False #OK
 
     def destroy_image(self) -> None:
         """
@@ -102,14 +118,17 @@ class St_image:
         ``close`` protocol) and removes the reference so that Python's garbage
         collector can reclaim the memory.
         """
-        if self._image is not None:
+        if self.g_cl_image is not None:
             try:  # pragma: no cover
-                getattr(self._image, "close")()
+                getattr(self.g_cl_image, "close")()
             finally:
-                del self._image
-                self._image = None
+                del self.g_cl_image
+                self.g_cl_image = None
 
-    def save_image(self, i_path_parts: list[str]) -> None:
+    def save_image(
+        self,
+        i_path_parts: list[str]
+    ) -> bool:
         """
         Persist the current image to disk as a PNG file.
 
@@ -126,18 +145,16 @@ class St_image:
         Raises:
             ValueError: If no image has been created or loaded yet.
         """
-        if self._image is None:
-            raise ValueError(
-                "No image available to save – call create_image() first."
-            )
+        if self.g_cl_image is None:
+            return True #ERROR
 
-        # Build the destination path; ensure .png suffix.
-        p_path = pathlib.Path(*i_path_parts).with_suffix(".png")
+        st_path = convert_to_path(i_path_parts)
 
-        # Ensure that all parent directories exist.
-        p_path.parent.mkdir(parents=True, exist_ok=True)
+        logging.debug(f"input: {i_path_parts} path: {st_path}")
 
-        self._image.save(str(p_path), format="PNG")
+        self.g_cl_image.save(str(st_path), format="PNG")
+
+        return False #OK
 
     # ----------------------------------------------------------------------- #
     # REPRESENTATION HELPERS (optional)
@@ -148,9 +165,9 @@ class St_image:
         Return a concise representation that includes the size of the stored
         image if it exists.
         """
-        if self._image is not None:
+        if self.g_cl_image is not None:
             return (
-                f"{self.__class__.__name__}(image={self._image.size[0]}x{self._image.size[1]})"
+                f"{self.__class__.__name__}(image={self.g_cl_image.size[0]}x{self.g_cl_image.size[1]})"
             )
         else:
             return f"{self.__class__.__name__}()"
