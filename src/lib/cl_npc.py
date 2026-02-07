@@ -232,7 +232,4 @@ if __name__ == "__main__":
     cl_npx = Cl_npc.from_file(["src", "json", "demo_npc_b.json"])
     logging.info(f"NPC: {cl_npx.__dict__}" )
 
-
-
-
     logging.info("END")
