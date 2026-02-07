@@ -146,7 +146,9 @@ class Cl_npc_character_sheet_generator:
             ln_json_data: dict[str, object] = json.load(cl_file)
 
         try:
-            lv_abilities: List[dict[str, object]] = ln_json_data["attributes_and_abilities"]
+            lst_abilities: List[dict[str, object]] = ln_json_data["attributes_and_abilities"]
+
+            lst_text_box: List[dict[str, object]] = ln_json_data["text_boxes"]
         except KeyError as exc:
             raise ValueError("JSON layout must contain an 'attributes_and_abilities' key") from exc
 
@@ -158,7 +160,8 @@ class Cl_npc_character_sheet_generator:
         h_cursor = 0
         w_cursor = 0
 
-        for st_item in lv_abilities:
+        logging.info(f"Number of abilities: {len(lst_abilities)}")
+        for st_item in lst_abilities:
             # ----------------------------------------------------------------- #
             #   Name
             # ----------------------------------------------------------------- #
@@ -210,6 +213,10 @@ class Cl_npc_character_sheet_generator:
                 w_modifier_pos_px=w_cursor -w_mod_px,
             )
             l_result.append(cl_ability)
+
+        logging.debug(f"Number of Text Boxes: {len(lst_text_box)}")
+        for st_text_box in lst_text_box:
+            logging.debug(f"Processing: {st_text_box}")
 
         logging.info(f"Successfully converted {len(l_result)} layout items")
         return l_result

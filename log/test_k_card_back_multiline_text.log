@@ -1,45 +1,45 @@
-[2026-01-27 07:28:49,398] INFO test_k_card_back_class:371 > BEGIN 
-[2026-01-27 07:28:49,399] DEBUG st_image:77 > W mm: 63.5 | H mm 88.9 
-[2026-01-27 07:28:49,399] DEBUG st_image:86 > W px: 750 | H px 1050 
-[2026-01-27 07:28:49,400] INFO test_k_card_back_class:338 > Starting card back generation 
-[2026-01-27 07:28:49,400] INFO test_k_card_back_class:100 > Loading layout from: src\json\test_k_layout_back.json 
-[2026-01-27 07:28:49,414] INFO test_k_card_back_class:103 > Layout loaded successfully 
-[2026-01-27 07:28:49,414] INFO test_k_card_back_class:342 > Layout loaded successfully 
-[2026-01-27 07:28:49,414] INFO test_k_card_back_class:236 > Drawing layout to image 
-[2026-01-27 07:28:49,419] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'PROFICIENCY', 'w_pos_ppt': 100, 'h_pos_ppt': 175, 'h_font_ppt': 25} 
-[2026-01-27 07:28:49,422] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'STRENGTH', 'w_pos_ppt': 0, 'h_pos_ppt': 30, 'h_font_ppt': 25} 
-[2026-01-27 07:28:49,425] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'STR SAVE', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
-[2026-01-27 07:28:49,427] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'ATHLETICS', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
-[2026-01-27 07:28:49,429] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'DEXTERITY', 'w_pos_ppt': 0, 'h_pos_ppt': 30, 'h_font_ppt': 25} 
-[2026-01-27 07:28:49,431] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'DEX SAVE', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
-[2026-01-27 07:28:49,433] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'ACROBATICS', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
-[2026-01-27 07:28:49,436] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'SLEIGHT OF HAND', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
-[2026-01-27 07:28:49,439] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'STEALTH', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
-[2026-01-27 07:28:49,442] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'CONSTITUTION', 'w_pos_ppt': 0, 'h_pos_ppt': 30, 'h_font_ppt': 25} 
-[2026-01-27 07:28:49,444] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'CON SAVE', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
-[2026-01-27 07:28:49,447] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'INTELLIGENCE', 'w_pos_ppt': 0, 'h_pos_ppt': 30, 'h_font_ppt': 25} 
-[2026-01-27 07:28:49,449] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'INT SAVE', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
-[2026-01-27 07:28:49,451] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'ARCANA', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
-[2026-01-27 07:28:49,453] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'INVESTIGATION', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
-[2026-01-27 07:28:49,456] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'HISTORY', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
-[2026-01-27 07:28:49,458] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'NATURE', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
-[2026-01-27 07:28:49,460] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'RELIGION', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
-[2026-01-27 07:28:49,463] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'WISDOM', 'w_pos_ppt': 0, 'h_pos_ppt': 30, 'h_font_ppt': 25} 
-[2026-01-27 07:28:49,465] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'WIS SAVE', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
-[2026-01-27 07:28:49,467] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'ANIMAL HANDLING', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
-[2026-01-27 07:28:49,470] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'INSIGHT', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
-[2026-01-27 07:28:49,472] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'PERCEPTION', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
-[2026-01-27 07:28:49,475] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'MEDICINE', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
-[2026-01-27 07:28:49,477] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'SURVIVAL', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
-[2026-01-27 07:28:49,481] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'CHARISMA', 'w_pos_ppt': 0, 'h_pos_ppt': 30, 'h_font_ppt': 25} 
-[2026-01-27 07:28:49,483] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'CHA SAVE', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
-[2026-01-27 07:28:49,485] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'DECEPTION', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
-[2026-01-27 07:28:49,488] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'INTIMIDATION', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
-[2026-01-27 07:28:49,491] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'PERFORMANCE', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
-[2026-01-27 07:28:49,493] DEBUG test_k_card_back_class:272 > Processing item {'s_name': 'PERSUASION', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
-[2026-01-27 07:28:49,496] INFO test_k_card_back_class:309 > Layout drawing completed successfully 
-[2026-01-27 07:28:49,496] INFO test_k_card_back_class:350 > Image drawn successfully 
-[2026-01-27 07:28:49,496] INFO test_k_card_back_class:353 > Saving image to: ['output', 'test_k_card_back.png'] 
-[2026-01-27 07:28:49,496] DEBUG st_image:153 > input: ['output', 'test_k_card_back.png'] path: output\test_k_card_back.png 
-[2026-01-27 07:28:49,535] INFO test_k_card_back_class:355 > Image saved successfully 
-[2026-01-27 07:28:49,535] INFO test_k_card_back_class:387 > END 
+[2026-01-27 17:17:56,336] INFO test_k_card_back_class:378 > BEGIN 
+[2026-01-27 17:17:56,336] DEBUG st_image:77 > W mm: 63.5 | H mm 88.9 
+[2026-01-27 17:17:56,336] DEBUG st_image:86 > W px: 750 | H px 1050 
+[2026-01-27 17:17:56,338] INFO test_k_card_back_class:345 > Starting card back generation 
+[2026-01-27 17:17:56,338] INFO test_k_card_back_class:100 > Loading layout from: src\json\test_k_layout_back.json 
+[2026-01-27 17:17:56,338] INFO test_k_card_back_class:103 > Layout loaded successfully 
+[2026-01-27 17:17:56,338] INFO test_k_card_back_class:349 > Layout loaded successfully 
+[2026-01-27 17:17:56,338] INFO test_k_card_back_class:243 > Drawing layout to image 
+[2026-01-27 17:17:56,343] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'PROFICIENCY', 'w_pos_ppt': 100, 'h_pos_ppt': 175, 'h_font_ppt': 25} 
+[2026-01-27 17:17:56,347] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'STRENGTH', 'w_pos_ppt': 0, 'h_pos_ppt': 30, 'h_font_ppt': 25} 
+[2026-01-27 17:17:56,352] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'STR SAVE', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
+[2026-01-27 17:17:56,355] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'ATHLETICS', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
+[2026-01-27 17:17:56,357] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'DEXTERITY', 'w_pos_ppt': 0, 'h_pos_ppt': 30, 'h_font_ppt': 25} 
+[2026-01-27 17:17:56,360] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'DEX SAVE', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
+[2026-01-27 17:17:56,362] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'ACROBATICS', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
+[2026-01-27 17:17:56,364] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'SLEIGHT OF HAND', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
+[2026-01-27 17:17:56,367] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'STEALTH', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
+[2026-01-27 17:17:56,369] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'CONSTITUTION', 'w_pos_ppt': 0, 'h_pos_ppt': 30, 'h_font_ppt': 25} 
+[2026-01-27 17:17:56,372] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'CON SAVE', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
+[2026-01-27 17:17:56,375] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'INTELLIGENCE', 'w_pos_ppt': 0, 'h_pos_ppt': 30, 'h_font_ppt': 25} 
+[2026-01-27 17:17:56,377] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'INT SAVE', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
+[2026-01-27 17:17:56,380] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'ARCANA', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
+[2026-01-27 17:17:56,382] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'INVESTIGATION', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
+[2026-01-27 17:17:56,385] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'HISTORY', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
+[2026-01-27 17:17:56,387] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'NATURE', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
+[2026-01-27 17:17:56,389] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'RELIGION', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
+[2026-01-27 17:17:56,391] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'WISDOM', 'w_pos_ppt': 0, 'h_pos_ppt': 30, 'h_font_ppt': 25} 
+[2026-01-27 17:17:56,394] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'WIS SAVE', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
+[2026-01-27 17:17:56,396] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'ANIMAL HANDLING', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
+[2026-01-27 17:17:56,399] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'INSIGHT', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
+[2026-01-27 17:17:56,401] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'PERCEPTION', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
+[2026-01-27 17:17:56,403] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'MEDICINE', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
+[2026-01-27 17:17:56,406] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'SURVIVAL', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
+[2026-01-27 17:17:56,408] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'CHARISMA', 'w_pos_ppt': 0, 'h_pos_ppt': 30, 'h_font_ppt': 25} 
+[2026-01-27 17:17:56,410] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'CHA SAVE', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
+[2026-01-27 17:17:56,412] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'DECEPTION', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
+[2026-01-27 17:17:56,415] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'INTIMIDATION', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
+[2026-01-27 17:17:56,418] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'PERFORMANCE', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
+[2026-01-27 17:17:56,420] DEBUG test_k_card_back_class:279 > Processing item {'s_name': 'PERSUASION', 'w_pos_ppt': 0, 'h_pos_ppt': 25, 'h_font_ppt': 20} 
+[2026-01-27 17:17:56,423] INFO test_k_card_back_class:316 > Layout drawing completed successfully 
+[2026-01-27 17:17:56,423] INFO test_k_card_back_class:357 > Image drawn successfully 
+[2026-01-27 17:17:56,423] INFO test_k_card_back_class:360 > Saving image to: ['output', 'test_k_card_back.png'] 
+[2026-01-27 17:17:56,423] DEBUG st_image:153 > input: ['output', 'test_k_card_back.png'] path: output\test_k_card_back.png 
+[2026-01-27 17:17:56,463] INFO test_k_card_back_class:362 > Image saved successfully 
+[2026-01-27 17:17:56,463] INFO test_k_card_back_class:394 > END 
