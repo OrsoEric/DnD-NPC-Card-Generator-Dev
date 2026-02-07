@@ -1,5 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 
+#used for OS independent path
+from pathlib import Path
 
 class CreatureCardGenerator:
     """
@@ -19,8 +21,13 @@ class CreatureCardGenerator:
         Initializes the CreatureCardGenerator with default values.
         """
         pass
+    
+    def create_a4_sheet( self ) -> Image.Image:
+        return Image.Image()
 
-    def generate_card(self, i_creature_name: str, i_race_class: str, i_armor_class: int, i_initiative: int, i_speed: int, i_health: int, i_challenge_rating: int) -> Image.Image:
+    def generate_card_front(
+        self, i_creature_name: str, i_race_class: str, i_armor_class: int, i_initiative: int, i_speed: int, i_health: int, i_challenge_rating: int
+    ) -> Image.Image:
         """
         Generates a creature card image with the provided information.
 
@@ -83,7 +90,7 @@ class CreatureCardGenerator:
 # Example usage:
 if __name__ == "__main__":
     generator = CreatureCardGenerator()
-    ln_card_image = generator.generate_card(
+    ln_card_image = generator.generate_card_front(
         i_creature_name="Orc",
         i_race_class="Humanoid",
         i_armor_class=13,
@@ -93,5 +100,7 @@ if __name__ == "__main__":
         i_challenge_rating=1
     )
 
-    ln_card_image.save("creature_card.png")  # Save the image to a file
+    s_save_path : Path = Path("output") / Path("test_c_card_front.png")
+
+    ln_card_image.save(str(s_save_path))  # Save the image to a file
     print("Creature card generated and saved as creature_card.png")
