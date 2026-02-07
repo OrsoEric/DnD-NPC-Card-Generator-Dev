@@ -201,7 +201,7 @@ class Cl_npc_character_sheet_generator:
                 cl_draw.text((w_cursor, h_cursor), f"{n_value}", fill=(0, 0, 0), font=cl_item_font, anchor="ra")
 
         for st_text_box in ast_text_boxes:
-
+            logging.debug(f"drawing text box: {st_text_box}")
             #TODO: I should make this into a structure
             #load text box parameters
             s_label: str = st_text_box.get("s_name", "") 
@@ -277,6 +277,8 @@ class Cl_npc_character_sheet_generator:
                 logging.error(f"ERR: unable to find attributr {s_attribute} in layout keys {ls_npc_key}")
                 return True #FAIL
 
+        logging.debug(f"text boxes: {len(ld_text_boxes)}")
+
         #ACTIONS
         #I spawn a text box for the action title
         #I spawn a text box for the action text
@@ -287,6 +289,45 @@ class Cl_npc_character_sheet_generator:
         except KeyError:
             print("ERR: field doesn't exist, json is wrong")
             return True #ERROR
+
+        #load the actions from the NPC
+        ld_action_npc = i_d_npc["ACTIONS"]
+
+        for d_action_npc in ld_action_npc:
+            logging.info(f"Processing NPC action: {d_action_npc}")
+
+            # Ensure there is at least one existing text box to copy from
+            if not ld_text_boxes:
+                logging.error("No template text box available to clone")
+                return True  # ERROR
+
+            # ---------- Header text box (s_name) ----------
+            d_header_box = dict(ld_text_boxes[-1])          # shallow copy of the last entry
+            d_header_box["s_name"] = f"ACTION{0}"
+            d_header_box["s_text"] = d_action_npc.get("s_name", "")
+            ld_text_boxes.append(d_header_box)
+            logging.debug(f"Added header text box: {d_header_box}")
+
+            # ---------- Body text box (s_text) ----------
+            d_body_box = dict(ld_text_boxes[-1])             # copy of the newly appended entry
+            d_header_box["s_name"] = f"ACTION{0}"
+            d_body_box["s_text"] = d_action_npc.get("s_text", "")
+            ld_text_boxes.append(d_body_box)
+            logging.debug(f"Added body text box: {d_body_box}")
+
+            # ---------- Description text box (s_action) ----------
+            d_description_box = dict(ld_text_boxes[-1])     # copy of the latest entry
+            d_header_box["s_name"] = f"ACTION{0}"
+            d_description_box["s_text"] = d_action_npc.get("s_action", "")
+            ld_text_boxes.append(d_description_box)
+            logging.debug(f"Added description text box: {d_description_box}")
+
+        logging.debug(f"text boxes: {len(ld_text_boxes)}")
+
+        return False  # SUCCESS
+
+
+
 
         
 

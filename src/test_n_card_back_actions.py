@@ -29,7 +29,7 @@ from lib.cl_generator import Cl_npc_character_sheet_generator
 # Example usage
 if __name__ == "__main__":
     # Setup logging
-    s_log_path = convert_to_path(["log","test_m_card_back_multiline_text.log"])
+    s_log_path = convert_to_path(["log","test_n_card_back_action.log"])
     print(f"Log Path: {s_log_path}")
 
     logging.basicConfig(
@@ -52,7 +52,7 @@ if __name__ == "__main__":
     cl_generated_image = cl_generator.generate_card_back(
         i_ls_layout_file_path=["src", "json", "test_k_layout_back.json"],
         i_ls_npc_file_path = ["src", "json", "demo_npc_b.json"],
-        i_ls_output_file_path=["output","test_m_card_back_npc.png"]
+        i_ls_output_file_path=["output","test_n_card_back_actions.png"]
     )
     
     logging.info("END")

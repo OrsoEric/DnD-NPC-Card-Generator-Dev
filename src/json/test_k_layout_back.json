@@ -253,8 +253,8 @@
         "w_top_left_ppt": 400,
         "h_top_left_ppt": 500,
         "w_size_ppt": 500,
-        "h_size_per_line_ppt": 40,
         "h_font_title_ppt": 25,
-        "h_font_body_ppt": 20
+        "h_font_body_ppt": 20,
+        "h_font_flavor_text_ppt": 15
     }
 }
