@@ -294,7 +294,7 @@
             "s_name": "CR",
             "s_text": "this holds the Challenge Rating of the NPC",
             "w_top_left_ppt": 840,
-            "h_top_left_ppt": 22,
+            "h_top_left_ppt": 17,
             "w_size_ppt": 125,
             "h_size_ppt": 70,
             "h_font_ppt": 40
@@ -303,7 +303,7 @@
             "s_name": "AC",
             "s_text": "this holds the Armor class of the character",
             "w_top_left_ppt": 52,
-            "h_top_left_ppt": 880,
+            "h_top_left_ppt": 870,
             "w_size_ppt": 125,
             "h_size_ppt": 100,
             "h_font_ppt": 60
@@ -311,8 +311,8 @@
         {
             "s_name": "HP",
             "s_text": "this holds the Health of the character",
-            "w_top_left_ppt": 830,
-            "h_top_left_ppt": 880,
+            "w_top_left_ppt": 840,
+            "h_top_left_ppt": 870,
             "w_size_ppt": 100,
             "h_size_ppt": 100,
             "h_font_ppt": 60

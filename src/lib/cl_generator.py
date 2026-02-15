@@ -95,7 +95,7 @@ class Cl_npc_character_sheet_generator:
             i_dot_per_inch = self.g_n_dots_per_inch
         )
 
-        self.s_font_bold_path = convert_to_path(["font","CormorantGaramond-Bold.ttf"])
+        self.s_font_bold_path = convert_to_path(["font","CormorantGaramond-BoldItalic.ttf"])
 
         self.g_t_stroke = (200,200,250)
 
@@ -327,6 +327,8 @@ class Cl_npc_character_sheet_generator:
             w_size_ppt: int = st_text_box.get("w_size_ppt", 0)
             h_size_ppt: int = st_text_box.get("h_size_ppt", 0)
             h_font_ppt: int = int(st_text_box.get("h_font_ppt", 0))
+
+            t_text_color: Tuple[int,int,int] = st_text_box.get("t_text_color", (0,0,0)) 
             
             # Convert PPT values to pixels
             w_top_left_px = int(w_size_px * w_top_left_ppt / 1000)
@@ -348,7 +350,7 @@ class Cl_npc_character_sheet_generator:
                     i_h_border = 0,
                     i_s_font_name = self.s_font_bold_path,
                     i_n_font_size = h_font_px,
-                    i_tn_color = (0, 0, 0),
+                    i_tn_color = t_text_color,
                     i_n_padding = 5,
                     i_x_draw_border = False,
                     i_tn_border_color = (255,0,0),
@@ -372,7 +374,7 @@ class Cl_npc_character_sheet_generator:
                     i_h_border = h_text_box_px,
                     i_s_font_name = self.s_font_bold_path,
                     i_n_font_size = h_font_px,
-                    i_tn_color = (0, 0, 0),
+                    i_tn_color = t_text_color,
                     i_n_padding = 5,
                     i_x_draw_border = False,
                     i_tn_border_color = (255,0,0),
@@ -492,7 +494,7 @@ class Cl_npc_character_sheet_generator:
             d_header_box["s_name"] = f"ACTION{0}"
             d_header_box["s_text"] = d_action_npc.get("s_name", "ERR:Failed to load")
             d_header_box["h_font_ppt"] = h_font_title_ppt
-            d_header_box["t_color"] = (255,0,0)
+            d_header_box["t_text_color"] = (200,75,50)
 
             ld_text_boxes.append(d_header_box)
             logging.debug(f"Added header text box: {d_header_box}")
@@ -504,6 +506,7 @@ class Cl_npc_character_sheet_generator:
             #auto height
             d_body_box["h_size_ppt"] = 0
             d_body_box["h_font_ppt"] = h_font_body_ppt
+            d_body_box["t_text_color"] = (0,0,0)
             ld_text_boxes.append(d_body_box)
             logging.debug(f"Added body text box: {d_body_box}")
 
@@ -512,6 +515,7 @@ class Cl_npc_character_sheet_generator:
             d_description_box["s_name"] = f"ACTION{0}"
             d_description_box["s_text"] = d_action_npc.get("s_flavor", "ERR:Failed to load")
             d_description_box["h_font_ppt"] = h_font_flavor_text_ppt
+            d_description_box["t_text_color"] = (80,80,80)
             ld_text_boxes.append(d_description_box)
             logging.debug(f"Added description text box: {d_description_box}")
 
