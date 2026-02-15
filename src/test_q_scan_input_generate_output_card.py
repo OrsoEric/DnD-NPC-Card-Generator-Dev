@@ -35,7 +35,7 @@ def generate_card() -> bool:
         i_ls_layout_file_path  = ["src", "json", "npc_layout.json"],
         #card image frame overlay
         i_ls_mask_front_path = ["mask", "front_mask_transparent_c.png"],
-        i_ls_mask_back_path =["mask", "back_mask_e.png"] ,
+        i_ls_mask_back_path =["mask", "back_mask_g.png"] ,
         #pair of image and json
         i_s_input_folder = "input",
         #where save output

@@ -108,7 +108,10 @@ class Cl_multiline_text:
             i_lines: List[str],
             i_font: ImageFont.FreeTypeFont,
             i_text_color: tuple[int, int, int],
-            i_line_spacing: int = 0) -> None:
+            i_line_spacing: int = 0,
+            i_n_stroke: int = 1,
+            i_tn_stroke_color: tuple[int, int, int] = (0, 0, 0)
+    ) -> None:
 
         line_height: int = i_draw.textbbox(
             (0, 0), "A", font=i_font
@@ -122,8 +125,8 @@ class Cl_multiline_text:
                 line,
                 fill=i_text_color,
                 font=i_font,
-                stroke_width=2,
-                stroke_fill=(255,255,255)
+                stroke_width=i_n_stroke,
+                stroke_fill=i_tn_stroke_color
             )
             y_offset += line_height + i_line_spacing
 
@@ -143,7 +146,9 @@ class Cl_multiline_text:
             i_tn_color: tuple[int, int, int] = (0, 0, 0),
             i_n_padding: int = 5,
             i_x_draw_border: bool = False,
-            i_tn_border_color: tuple[int, int, int] = (0, 0, 0)
+            i_tn_border_color: tuple[int, int, int] = (0, 0, 0),
+            i_n_stroke: int = 1,
+            i_tn_stroke_color: tuple[int, int, int] = (0, 0, 0)
             ) -> int:
         """
         Render wrapped text into a fixed-size rectangle on an existing image.
@@ -199,7 +204,9 @@ class Cl_multiline_text:
             i_y=i_h_margin + i_n_padding,
             i_lines=ls_wrapped_lines,
             i_font=st_font,
-            i_text_color=i_tn_color
+            i_text_color=i_tn_color,
+            i_n_stroke = i_n_stroke,
+            i_tn_stroke_color = i_tn_stroke_color
         )
 
         #return height of text box

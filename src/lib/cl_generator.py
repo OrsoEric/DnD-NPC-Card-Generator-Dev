@@ -95,6 +95,10 @@ class Cl_npc_character_sheet_generator:
             i_dot_per_inch = self.g_n_dots_per_inch
         )
 
+        self.s_font_bold_path = convert_to_path(["font","CormorantGaramond-Bold.ttf"])
+
+        self.g_t_stroke = (200,200,250)
+
         return
 
     def load_layout_from_json(
@@ -171,7 +175,7 @@ class Cl_npc_character_sheet_generator:
                     i_h_margin = h_cursor,
                     i_w_border = w_text_box_px,
                     i_h_border = 0,
-                    i_s_font_name = "arial.ttf",
+                    i_s_font_name = self.s_font_bold_path,
                     i_n_font_size = h_font_px,
                     i_tn_color = (0, 0, 0),
                     i_n_padding = 5,
@@ -180,7 +184,6 @@ class Cl_npc_character_sheet_generator:
                 )
 
                 h_cursor = h_cursor + h_rendered
-
 
             #height is given
             else:
@@ -193,7 +196,7 @@ class Cl_npc_character_sheet_generator:
                     i_h_margin = h_top_left_px,
                     i_w_border = w_text_box_px,
                     i_h_border = h_text_box_px,
-                    i_s_font_name = "arial.ttf",
+                    i_s_font_name = self.s_font_bold_path,
                     i_n_font_size = h_font_px,
                     i_tn_color = (0, 0, 0),
                     i_n_padding = 5,
@@ -204,12 +207,7 @@ class Cl_npc_character_sheet_generator:
                 #move the cursor
                 h_cursor = h_top_left_px + h_text_box_px
 
-
-
-
         return False #SUCCESS
-
-
 
     def draw_layout_back_to_image(
         self,
@@ -288,7 +286,7 @@ class Cl_npc_character_sheet_generator:
             # Load a truetype font if possible, otherwise fall back to the default
             try:
                 cl_item_font = font.truetype(
-                    "verdana.ttf",
+                    self.s_font_bold_path,
                     int(h_font_px),
                 )
             except OSError:
@@ -303,12 +301,16 @@ class Cl_npc_character_sheet_generator:
                 h_cursor += h_pos_px
 
             # Add the header for the attribute or ability 
-            cl_draw.text((w_cursor, h_cursor), s_text, fill=(0, 0, 0), font=cl_item_font)
+            cl_draw.text((w_cursor+2, h_cursor), s_text, fill=(0, 0, 0), font=cl_item_font, stroke_width=1,
+                stroke_fill=self.g_t_stroke)
             # Fetch the numerical value of attribute or ability
             if (n_value>=0):
-                cl_draw.text((w_cursor, h_cursor), f"+{n_value}", fill=(0, 0, 0), font=cl_item_font, anchor="ra")
+                cl_draw.text((w_cursor, h_cursor), f"+{n_value}", fill=(0, 0, 0), font=cl_item_font, anchor="ra",stroke_width=1,
+                stroke_fill=self.g_t_stroke)
             else: 
-                cl_draw.text((w_cursor, h_cursor), f"{n_value}", fill=(0, 0, 0), font=cl_item_font, anchor="ra")
+                cl_draw.text((w_cursor, h_cursor), f"{n_value}", fill=(0, 0, 0), font=cl_item_font, anchor="ra",stroke_width=1,
+                stroke_fill=self.g_t_stroke)
+
 
         #cursor
         w_cursor = 0
@@ -344,12 +346,14 @@ class Cl_npc_character_sheet_generator:
                     i_h_margin = h_cursor,
                     i_w_border = w_text_box_px,
                     i_h_border = 0,
-                    i_s_font_name = "arial.ttf",
+                    i_s_font_name = self.s_font_bold_path,
                     i_n_font_size = h_font_px,
                     i_tn_color = (0, 0, 0),
                     i_n_padding = 5,
                     i_x_draw_border = False,
-                    i_tn_border_color = (255,0,0)
+                    i_tn_border_color = (255,0,0),
+                    i_n_stroke = 1,
+                    i_tn_stroke_color = self.g_t_stroke
                 )
 
                 h_cursor = h_cursor + h_rendered
@@ -366,21 +370,20 @@ class Cl_npc_character_sheet_generator:
                     i_h_margin = h_top_left_px,
                     i_w_border = w_text_box_px,
                     i_h_border = h_text_box_px,
-                    i_s_font_name = "arial.ttf",
+                    i_s_font_name = self.s_font_bold_path,
                     i_n_font_size = h_font_px,
                     i_tn_color = (0, 0, 0),
                     i_n_padding = 5,
                     i_x_draw_border = False,
-                    i_tn_border_color = (255,0,0)
+                    i_tn_border_color = (255,0,0),
+                    i_n_stroke = 1,
+                    i_tn_stroke_color = self.g_t_stroke
                 )
 
                 #move the cursor
                 h_cursor = h_top_left_px + h_text_box_px
 
             #render the text box
-
-
-
 
         return False #OK
     
@@ -489,6 +492,7 @@ class Cl_npc_character_sheet_generator:
             d_header_box["s_name"] = f"ACTION{0}"
             d_header_box["s_text"] = d_action_npc.get("s_name", "ERR:Failed to load")
             d_header_box["h_font_ppt"] = h_font_title_ppt
+            d_header_box["t_color"] = (255,0,0)
 
             ld_text_boxes.append(d_header_box)
             logging.debug(f"Added header text box: {d_header_box}")
