@@ -306,7 +306,8 @@ class St_image:
 
     def save_image(
         self,
-        i_ls_path: list[str]
+        i_ls_path: list[str],
+        i_s_format = "PNG"
     ) -> bool:
         """
         Persist the current image to disk as a PNG file.
@@ -334,7 +335,11 @@ class St_image:
 
         logging.debug(f"input: {i_ls_path} path: {s_image_path}")
 
-        self.g_cl_image.save(str(s_image_path), format="PNG")
+        self.g_cl_image.save(
+            str(s_image_path),
+            format=i_s_format,
+            dpi=(self.g_n_dot_per_inch, self.g_n_dot_per_inch)
+        )
 
         return False #OK
 

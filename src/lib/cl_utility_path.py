@@ -139,7 +139,7 @@ def build_path_output_jpg(output_folder: str, image_path: Path) -> Path:
         -> output/image_001.jpg
     """
     cl_output = Path(output_folder).resolve()
-    return cl_output / f"{image_path.stem}.jpg"
+    return cl_output / f"{image_path.stem} sheet.jpg"
 
 
 # Example usage for testing purposes

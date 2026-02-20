@@ -48,7 +48,8 @@ class Cl_npc_character_sheet_generator:
         i_h_card_height_mm: float,
         i_n_dots_per_inch : int,
         i_background_color: Optional[Tuple[int, int, int]] = None,
-        i_border_color: Optional[Tuple[int, int, int]] = None
+        i_border_color: Optional[Tuple[int, int, int]] = None,
+        i_s_font_path: List[str] = "Arial.ttf"
     ):
         """
         Initialize the character sheet generator with card dimensions and colors.
@@ -95,7 +96,7 @@ class Cl_npc_character_sheet_generator:
             i_dot_per_inch = self.g_n_dots_per_inch
         )
 
-        self.s_font_bold_path = convert_to_path(["font","CormorantGaramond-BoldItalic.ttf"])
+        self.s_font_bold_path = convert_to_path(i_s_font_path)
 
         self.g_t_stroke = (200,200,250)
 
@@ -683,7 +684,7 @@ class Cl_npc_character_sheet_generator:
         )
 
         # Save the image
-        self.g_cl_image_card.save_image(i_ls_output_file_path)
+        self.g_cl_image_card.save_image(i_ls_output_file_path, i_s_format="JPEG")
         logging.info(f"savec output at {i_ls_output_file_path}")
         
         return False #OK
@@ -723,7 +724,8 @@ class Cl_npc_character_sheet_generator:
                 i_h_card_height_mm=88.9,
                 i_n_dots_per_inch = 300,
                 i_background_color=(255, 255, 255),
-                i_border_color=(0, 0, 0)
+                i_border_color=(0, 0, 0),
+                i_s_font_path= ["font","CormorantGaramond-BoldItalic.ttf"]
             )
             logging.info("Constructed NPC generator class...")
 
