@@ -82,84 +82,84 @@
         },
         {
             "s_name": "STRENGTH",
-            "s_text": "ALFREDO",   
+            "s_text": "FORZA",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 45,
             "h_font_ppt": 23
         },
         {
             "s_name": "STR SAVE",
-            "s_text": "STR SAVE",   
+            "s_text": "SALVEZZA",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 24,
             "h_font_ppt": 18
         },
         {
             "s_name": "ATHLETICS",
-            "s_text": "ATHLETICS",   
+            "s_text": "ATLETICA",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 22,
             "h_font_ppt": 18
         },
         {
             "s_name": "DEXTERITY",
-            "s_text": "DEXTERITY",   
+            "s_text": "DESTREZZA",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 38,
             "h_font_ppt": 23
         },
         {
             "s_name": "DEX SAVE",
-            "s_text": "DEX SAVE",   
+            "s_text": "SALVEZZA",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 24,
             "h_font_ppt": 18
         },
         {
             "s_name": "ACROBATICS",
-            "s_text": "ACROBATICS",   
+            "s_text": "ACROBATICA",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 22,
             "h_font_ppt": 18
         },
         {
             "s_name": "SLEIGHT OF HAND",
-            "s_text": "SLEIGHT OF HAND",   
+            "s_text": "TOCCO LEGGERO",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 22,
             "h_font_ppt": 18
         },
         {
             "s_name": "STEALTH",
-            "s_text": "STEALTH",   
+            "s_text": "FURTIVITA",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 22,
             "h_font_ppt": 18
         },
         {
             "s_name": "CONSTITUTION",
-            "s_text": "CONSTITUTION",   
+            "s_text": "CONSTITUZIONE",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 38,
             "h_font_ppt": 23
         },
         {
             "s_name": "CON SAVE",
-            "s_text": "CON SAVE",   
+            "s_text": "SALVEZZA",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 22,
             "h_font_ppt": 18
         },
         {
             "s_name": "INTELLIGENCE",
-            "s_text": "INTELLIGENCE",   
+            "s_text": "INTELLIGENZA",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 36,
             "h_font_ppt": 23
         },
         {
             "s_name": "INT SAVE",
-            "s_text": "INT SAVE",   
+            "s_text": "SALVEZZA",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 24,
             "h_font_ppt": 18
@@ -173,35 +173,35 @@
         },
         {
             "s_name": "INVESTIGATION",
-            "s_text": "INVESTIGATION",   
+            "s_text": "INVESTIGAZIONE",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 22,
             "h_font_ppt": 18
         },
         {
             "s_name": "HISTORY",
-            "s_text": "HISTORY",   
+            "s_text": "STORIA",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 22,
             "h_font_ppt": 18
         },
         {
             "s_name": "NATURE",
-            "s_text": "NATURE",   
+            "s_text": "NATURA",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 22,
             "h_font_ppt": 18
         },
         {
             "s_name": "RELIGION",
-            "s_text": "RELIGION",   
+            "s_text": "RELIGIONE",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 22,
             "h_font_ppt": 18
         },
         {
             "s_name": "WISDOM",
-            "s_text": "WISDOM",   
+            "s_text": "SAGGIEZZA",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 35,
             "h_font_ppt": 23
