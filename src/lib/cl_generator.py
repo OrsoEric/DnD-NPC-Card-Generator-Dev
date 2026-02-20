@@ -101,27 +101,48 @@ class Cl_npc_character_sheet_generator:
         self.g_t_stroke = (200,200,250)
 
         return
-
+    
     def load_layout_from_json(
         self,
-        i_s_file_path: str,
-        i_s_localization : str
+        i_s_file_path: Path,
+        i_s_localization: str
     ) -> List[Dict[str, Any]]:
         """
-        Load the card layout specification from a JSON file.
-        
+        Load the card layout specification from a language‑specific JSON file.
+
+        The original ``i_s_file_path`` may contain an arbitrary extension (for
+        example ``npc_layout.json``).  
+        This method removes that extension, appends the requested localization
+        identifier and finally re‑adds the ``.json`` suffix.  It then reads
+        the resulting file and returns its contents as a list of dictionaries.
+
         Parameters
         ----------
-        i_file_path : str
-            Path to the JSON file that contains the layout definition.
+        i_s_file_path : Union[str, pathlib.Path]
+            Path to the base layout definition (may be relative or absolute).
+
+        i_s_localization : str
+            Language code that will appear just before the final ``.json`` suffix
+            (for example ``en`` for English).
 
         Returns
         -------
-        list[dict]
-            A list where each element represents a single layout item.
-            The dictionary keys are the ones used in the JSON
-            (e.g. ``s_name``, ``w_pos`` …).
+        List[Dict[str, Any]]
+            The JSON payload parsed into a list of dictionaries.
         """
+
+        try:
+            logging.debug(f"Default {i_s_file_path} | Localization {i_s_localization}")
+            s_layout_localization_path = i_s_file_path.parent / f"{i_s_file_path.stem}_{i_s_localization}.json"
+
+
+            logging.info(f"loading layout from: {s_layout_localization_path}")
+            
+        except Exception as cl_e:
+            logging.error(f"Failed to compute and process language.. {cl_e}")
+            return list()
+
+
         with open(i_s_file_path, "r", encoding="utf-8") as cl_file:
             ln_layout_data = json.load(cl_file)
 
@@ -583,17 +604,11 @@ class Cl_npc_character_sheet_generator:
             logging.error(f"NPC doesn't have language field.. {cl_e}")
             return True
         
-        try:
-            s_temp = convert_to_path(i_ls_layout_file_path).resolve()
-            logging.debug(f"{s_temp}")
-            s_layout_localization_path = f"{s_temp.stem}_{s_language}.json"
-            logging.info(f"loading layout from: {s_layout_localization_path}")
 
-            # Load the layout from JSON
-            st_layout = self.load_layout_from_json(convert_to_path(s_layout_localization_path))
-        except Exception as cl_e:
-            logging.error(f"Failed to compute and process language.. {cl_e}")
-            return True
+        s_base_layout_path = convert_to_path(i_ls_layout_file_path)
+
+        # Load the layout from JSON
+        st_layout = self.load_layout_from_json(s_base_layout_path, s_language)
 
         #----------------------------------------------------------------------
         #   DRAW: FRONT ILLUSTRATION
