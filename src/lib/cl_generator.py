@@ -135,7 +135,6 @@ class Cl_npc_character_sheet_generator:
             logging.debug(f"Default {i_s_file_path} | Localization {i_s_localization}")
             s_layout_localization_path = i_s_file_path.parent / f"{i_s_file_path.stem}_{i_s_localization}.json"
 
-
             logging.info(f"loading layout from: {s_layout_localization_path}")
             
         except Exception as cl_e:
@@ -143,8 +142,10 @@ class Cl_npc_character_sheet_generator:
             return list()
 
 
-        with open(i_s_file_path, "r", encoding="utf-8") as cl_file:
+        with open(s_layout_localization_path, "r", encoding="utf-8") as cl_file:
             ln_layout_data = json.load(cl_file)
+
+        logging.info(f"loaded layout: {ln_layout_data}")
 
         return ln_layout_data
 
@@ -296,7 +297,7 @@ class Cl_npc_character_sheet_generator:
 
             # PPT part per thousand of the whole image
             # This way it's scale independent
-            s_text: str = st_item.get("s_name", "")
+            s_text: str = st_item.get("s_text", "")
             w_pos_ppt: int = st_item.get("w_pos_ppt", 0)
             h_pos_ppt: int = st_item.get("h_pos_ppt", 0)
             h_font_ppt: int = st_item.get("h_font_ppt", 0)
@@ -461,11 +462,12 @@ class Cl_npc_character_sheet_generator:
         for d_attribute in ld_attributes_and_abilities:
             #fetch the name of the attribute
             s_attribute = d_attribute["s_name"] 
+            s_text = d_attribute["s_text"] 
             #check that the name of the attribute is amongst the NPC stats
             if s_attribute in ls_npc_key:
                 #then copy over the value
                 d_attribute["n_value"] = i_d_npc[s_attribute]
-                logging.debug(f"NPC value {s_attribute} assigned to layout value {d_attribute}")
+                logging.debug(f"NPC value {s_attribute} assigned to layout value {d_attribute} | Localization text: {s_text}")
             else:
                 logging.error(f"ERR: unable to find attributr {s_attribute} in layout keys {ls_npc_key}")
                 return True #FAIL
