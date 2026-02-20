@@ -1,36 +1,36 @@
-[2026-02-20 07:27:36,534] INFO test_s_localization:58 > BEGIN 
-[2026-02-20 07:27:36,534] DEBUG cl_utility_path:100 > Inspecting input\dice_golem.jpg (extension: .jpg) 
-[2026-02-20 07:27:36,534] DEBUG cl_utility_path:100 > Inspecting input\dice_golem.json (extension: .json) 
-[2026-02-20 07:27:36,535] DEBUG cl_utility_path:100 > Inspecting input\NPC - Dog Lucy.jpg (extension: .jpg) 
-[2026-02-20 07:27:36,535] DEBUG cl_utility_path:100 > Inspecting input\NPC - Dog Lucy.json (extension: .json) 
-[2026-02-20 07:27:36,535] DEBUG cl_utility_path:122 > Found entry 'dice_golem': {'jpg': WindowsPath('D:/Data/Project/Project Programming/Project Python/Character Sheet Generator Dev/input/dice_golem.jpg'), 'png': None, 'json': WindowsPath('D:/Data/Project/Project Programming/Project Python/Character Sheet Generator Dev/input/dice_golem.json')} 
-[2026-02-20 07:27:36,535] DEBUG cl_utility_path:122 > Found entry 'NPC - Dog Lucy': {'jpg': WindowsPath('D:/Data/Project/Project Programming/Project Python/Character Sheet Generator Dev/input/NPC - Dog Lucy.jpg'), 'png': None, 'json': WindowsPath('D:/Data/Project/Project Programming/Project Python/Character Sheet Generator Dev/input/NPC - Dog Lucy.json')} 
-[2026-02-20 07:27:36,535] INFO cl_generator:741 > Processing NPC files D:\Data\Project\Project Programming\Project Python\Character Sheet Generator Dev\input\dice_golem.jpg D:\Data\Project\Project Programming\Project Python\Character Sheet Generator Dev\input\dice_golem.json  
-[2026-02-20 07:27:36,536] INFO cl_generator:745 > Output image path D:\Data\Project\Project Programming\Project Python\Character Sheet Generator Dev\output\dice_golem sheet.jpg 
-[2026-02-20 07:27:36,536] DEBUG st_image:79 > W mm: 127.0 | H mm 88.9 
-[2026-02-20 07:27:36,536] DEBUG st_image:88 > W px: 1500 | H px 1050 
-[2026-02-20 07:27:36,538] DEBUG st_image:79 > W mm: 63.5 | H mm 88.9 
-[2026-02-20 07:27:36,538] DEBUG st_image:88 > W px: 750 | H px 1050 
-[2026-02-20 07:27:36,539] DEBUG st_image:79 > W mm: 63.5 | H mm 88.9 
-[2026-02-20 07:27:36,539] DEBUG st_image:88 > W px: 750 | H px 1050 
-[2026-02-20 07:27:36,541] INFO cl_generator:755 > Constructed NPC generator class... 
-[2026-02-20 07:27:36,541] INFO cl_npc:40 > Json Path D:\Data\Project\Project Programming\Project Python\Character Sheet Generator Dev\input\dice_golem.json 
-[2026-02-20 07:27:36,541] DEBUG cl_generator:570 > Loading NPC from file: dict_keys(['language', 'system', 'actor', 'NAME', 'RACE', 'CR', 'HP', 'AC', 'SPEED', 'DESCRIPTION', 'RESOURCES', 'IMMUNITY', 'RESISTENCE', 'WEAKNESS', 'SPELLCASTING', 'PROFICIENCY', 'INITIATIVE', 'STRENGTH', 'STR SAVE', 'ATHLETICS', 'DEXTERITY', 'DEX SAVE', 'ACROBATICS', 'SLEIGHT OF HAND', 'STEALTH', 'CONSTITUTION', 'CON SAVE', 'INTELLIGENCE', 'INT SAVE', 'ARCANA', 'INVESTIGATION', 'HISTORY', 'NATURE', 'RELIGION', 'WISDOM', 'WIS SAVE', 'ANIMAL HANDLING', 'INSIGHT', 'PERCEPTION', 'MEDICINE', 'SURVIVAL', 'CHARISMA', 'CHA SAVE', 'DECEPTION', 'INTIMIDATION', 'PERFORMANCE', 'PERSUASION', 'ACTIONS']) 
-[2026-02-20 07:27:36,541] DEBUG cl_generator:588 > D:\Data\Project\Project Programming\Project Python\Character Sheet Generator Dev\src\json\npc_layout.json 
-[2026-02-20 07:27:36,541] INFO cl_generator:590 > loading layout from: D:\Data\Project\Project Programming\Project Python\Character Sheet Generator Dev\src\json\npc_layout.json_en.json 
-[2026-02-20 07:27:36,541] ERROR cl_generator:595 > Failed to compute and process language.. Cl_npc_character_sheet_generator.load_layout_from_json() missing 1 required positional argument: 'i_s_localization' 
-[2026-02-20 07:27:36,541] INFO cl_generator:741 > Processing NPC files D:\Data\Project\Project Programming\Project Python\Character Sheet Generator Dev\input\NPC - Dog Lucy.jpg D:\Data\Project\Project Programming\Project Python\Character Sheet Generator Dev\input\NPC - Dog Lucy.json  
-[2026-02-20 07:27:36,542] INFO cl_generator:745 > Output image path D:\Data\Project\Project Programming\Project Python\Character Sheet Generator Dev\output\NPC - Dog Lucy sheet.jpg 
-[2026-02-20 07:27:36,542] DEBUG st_image:79 > W mm: 127.0 | H mm 88.9 
-[2026-02-20 07:27:36,542] DEBUG st_image:88 > W px: 1500 | H px 1050 
-[2026-02-20 07:27:36,544] DEBUG st_image:79 > W mm: 63.5 | H mm 88.9 
-[2026-02-20 07:27:36,544] DEBUG st_image:88 > W px: 750 | H px 1050 
-[2026-02-20 07:27:36,545] DEBUG st_image:79 > W mm: 63.5 | H mm 88.9 
-[2026-02-20 07:27:36,545] DEBUG st_image:88 > W px: 750 | H px 1050 
-[2026-02-20 07:27:36,547] INFO cl_generator:755 > Constructed NPC generator class... 
-[2026-02-20 07:27:36,547] INFO cl_npc:40 > Json Path D:\Data\Project\Project Programming\Project Python\Character Sheet Generator Dev\input\NPC - Dog Lucy.json 
-[2026-02-20 07:27:36,548] DEBUG cl_generator:570 > Loading NPC from file: dict_keys(['language', 'system', 'actor', 'NAME', 'RACE', 'CR', 'HP', 'AC', 'SPEED', 'DESCRIPTION', 'RESOURCES', 'IMMUNITY', 'RESISTENCE', 'WEAKNESS', 'SPELLCASTING', 'PROFICIENCY', 'INITIATIVE', 'STRENGTH', 'STR SAVE', 'ATHLETICS', 'DEXTERITY', 'DEX SAVE', 'ACROBATICS', 'SLEIGHT OF HAND', 'STEALTH', 'CONSTITUTION', 'CON SAVE', 'INTELLIGENCE', 'INT SAVE', 'ARCANA', 'INVESTIGATION', 'HISTORY', 'NATURE', 'RELIGION', 'WISDOM', 'WIS SAVE', 'ANIMAL HANDLING', 'INSIGHT', 'PERCEPTION', 'MEDICINE', 'SURVIVAL', 'CHARISMA', 'CHA SAVE', 'DECEPTION', 'INTIMIDATION', 'PERFORMANCE', 'PERSUASION', 'ACTIONS', 'catch_stray_coma']) 
-[2026-02-20 07:27:36,548] DEBUG cl_generator:588 > D:\Data\Project\Project Programming\Project Python\Character Sheet Generator Dev\src\json\npc_layout.json 
-[2026-02-20 07:27:36,548] INFO cl_generator:590 > loading layout from: D:\Data\Project\Project Programming\Project Python\Character Sheet Generator Dev\src\json\npc_layout.json_en.json 
-[2026-02-20 07:27:36,548] ERROR cl_generator:595 > Failed to compute and process language.. Cl_npc_character_sheet_generator.load_layout_from_json() missing 1 required positional argument: 'i_s_localization' 
-[2026-02-20 07:27:36,549] INFO test_s_localization:62 > END 
+[2026-02-20 17:30:32,004] INFO test_s_localization:58 > BEGIN 
+[2026-02-20 17:30:32,004] DEBUG cl_utility_path:100 > Inspecting input\dice_golem.jpg (extension: .jpg) 
+[2026-02-20 17:30:32,005] DEBUG cl_utility_path:100 > Inspecting input\dice_golem.json (extension: .json) 
+[2026-02-20 17:30:32,005] DEBUG cl_utility_path:100 > Inspecting input\NPC - Dog Lucy.jpg (extension: .jpg) 
+[2026-02-20 17:30:32,005] DEBUG cl_utility_path:100 > Inspecting input\NPC - Dog Lucy.json (extension: .json) 
+[2026-02-20 17:30:32,006] DEBUG cl_utility_path:122 > Found entry 'dice_golem': {'jpg': WindowsPath('D:/Data/Project/Project Programming/Project Python/Character Sheet Generator Dev/input/dice_golem.jpg'), 'png': None, 'json': WindowsPath('D:/Data/Project/Project Programming/Project Python/Character Sheet Generator Dev/input/dice_golem.json')} 
+[2026-02-20 17:30:32,006] DEBUG cl_utility_path:122 > Found entry 'NPC - Dog Lucy': {'jpg': WindowsPath('D:/Data/Project/Project Programming/Project Python/Character Sheet Generator Dev/input/NPC - Dog Lucy.jpg'), 'png': None, 'json': WindowsPath('D:/Data/Project/Project Programming/Project Python/Character Sheet Generator Dev/input/NPC - Dog Lucy.json')} 
+[2026-02-20 17:30:32,006] INFO cl_generator:741 > Processing NPC files D:\Data\Project\Project Programming\Project Python\Character Sheet Generator Dev\input\dice_golem.jpg D:\Data\Project\Project Programming\Project Python\Character Sheet Generator Dev\input\dice_golem.json  
+[2026-02-20 17:30:32,006] INFO cl_generator:745 > Output image path D:\Data\Project\Project Programming\Project Python\Character Sheet Generator Dev\output\dice_golem sheet.jpg 
+[2026-02-20 17:30:32,006] DEBUG st_image:79 > W mm: 127.0 | H mm 88.9 
+[2026-02-20 17:30:32,006] DEBUG st_image:88 > W px: 1500 | H px 1050 
+[2026-02-20 17:30:32,009] DEBUG st_image:79 > W mm: 63.5 | H mm 88.9 
+[2026-02-20 17:30:32,009] DEBUG st_image:88 > W px: 750 | H px 1050 
+[2026-02-20 17:30:32,011] DEBUG st_image:79 > W mm: 63.5 | H mm 88.9 
+[2026-02-20 17:30:32,011] DEBUG st_image:88 > W px: 750 | H px 1050 
+[2026-02-20 17:30:32,013] INFO cl_generator:755 > Constructed NPC generator class... 
+[2026-02-20 17:30:32,013] INFO cl_npc:40 > Json Path D:\Data\Project\Project Programming\Project Python\Character Sheet Generator Dev\input\dice_golem.json 
+[2026-02-20 17:30:32,013] DEBUG cl_generator:570 > Loading NPC from file: dict_keys(['language', 'system', 'actor', 'NAME', 'RACE', 'CR', 'HP', 'AC', 'SPEED', 'DESCRIPTION', 'RESOURCES', 'IMMUNITY', 'RESISTENCE', 'WEAKNESS', 'SPELLCASTING', 'PROFICIENCY', 'INITIATIVE', 'STRENGTH', 'STR SAVE', 'ATHLETICS', 'DEXTERITY', 'DEX SAVE', 'ACROBATICS', 'SLEIGHT OF HAND', 'STEALTH', 'CONSTITUTION', 'CON SAVE', 'INTELLIGENCE', 'INT SAVE', 'ARCANA', 'INVESTIGATION', 'HISTORY', 'NATURE', 'RELIGION', 'WISDOM', 'WIS SAVE', 'ANIMAL HANDLING', 'INSIGHT', 'PERCEPTION', 'MEDICINE', 'SURVIVAL', 'CHARISMA', 'CHA SAVE', 'DECEPTION', 'INTIMIDATION', 'PERFORMANCE', 'PERSUASION', 'ACTIONS']) 
+[2026-02-20 17:30:32,014] DEBUG cl_generator:588 > D:\Data\Project\Project Programming\Project Python\Character Sheet Generator Dev\src\json\npc_layout.json 
+[2026-02-20 17:30:32,014] INFO cl_generator:590 > loading layout from: npc_layout_en.json 
+[2026-02-20 17:30:32,014] ERROR cl_generator:595 > Failed to compute and process language.. Cl_npc_character_sheet_generator.load_layout_from_json() missing 1 required positional argument: 'i_s_localization' 
+[2026-02-20 17:30:32,014] INFO cl_generator:741 > Processing NPC files D:\Data\Project\Project Programming\Project Python\Character Sheet Generator Dev\input\NPC - Dog Lucy.jpg D:\Data\Project\Project Programming\Project Python\Character Sheet Generator Dev\input\NPC - Dog Lucy.json  
+[2026-02-20 17:30:32,015] INFO cl_generator:745 > Output image path D:\Data\Project\Project Programming\Project Python\Character Sheet Generator Dev\output\NPC - Dog Lucy sheet.jpg 
+[2026-02-20 17:30:32,015] DEBUG st_image:79 > W mm: 127.0 | H mm 88.9 
+[2026-02-20 17:30:32,015] DEBUG st_image:88 > W px: 1500 | H px 1050 
+[2026-02-20 17:30:32,019] DEBUG st_image:79 > W mm: 63.5 | H mm 88.9 
+[2026-02-20 17:30:32,019] DEBUG st_image:88 > W px: 750 | H px 1050 
+[2026-02-20 17:30:32,021] DEBUG st_image:79 > W mm: 63.5 | H mm 88.9 
+[2026-02-20 17:30:32,021] DEBUG st_image:88 > W px: 750 | H px 1050 
+[2026-02-20 17:30:32,023] INFO cl_generator:755 > Constructed NPC generator class... 
+[2026-02-20 17:30:32,023] INFO cl_npc:40 > Json Path D:\Data\Project\Project Programming\Project Python\Character Sheet Generator Dev\input\NPC - Dog Lucy.json 
+[2026-02-20 17:30:32,024] DEBUG cl_generator:570 > Loading NPC from file: dict_keys(['language', 'system', 'actor', 'NAME', 'RACE', 'CR', 'HP', 'AC', 'SPEED', 'DESCRIPTION', 'RESOURCES', 'IMMUNITY', 'RESISTENCE', 'WEAKNESS', 'SPELLCASTING', 'PROFICIENCY', 'INITIATIVE', 'STRENGTH', 'STR SAVE', 'ATHLETICS', 'DEXTERITY', 'DEX SAVE', 'ACROBATICS', 'SLEIGHT OF HAND', 'STEALTH', 'CONSTITUTION', 'CON SAVE', 'INTELLIGENCE', 'INT SAVE', 'ARCANA', 'INVESTIGATION', 'HISTORY', 'NATURE', 'RELIGION', 'WISDOM', 'WIS SAVE', 'ANIMAL HANDLING', 'INSIGHT', 'PERCEPTION', 'MEDICINE', 'SURVIVAL', 'CHARISMA', 'CHA SAVE', 'DECEPTION', 'INTIMIDATION', 'PERFORMANCE', 'PERSUASION', 'ACTIONS', 'catch_stray_coma']) 
+[2026-02-20 17:30:32,024] DEBUG cl_generator:588 > D:\Data\Project\Project Programming\Project Python\Character Sheet Generator Dev\src\json\npc_layout.json 
+[2026-02-20 17:30:32,024] INFO cl_generator:590 > loading layout from: npc_layout_en.json 
+[2026-02-20 17:30:32,024] ERROR cl_generator:595 > Failed to compute and process language.. Cl_npc_character_sheet_generator.load_layout_from_json() missing 1 required positional argument: 'i_s_localization' 
+[2026-02-20 17:30:32,025] INFO test_s_localization:62 > END 

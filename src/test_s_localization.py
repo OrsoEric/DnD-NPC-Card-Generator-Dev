@@ -1,5 +1,5 @@
 #   call .venv\Scripts\activate.bat
-#   python src\test_r_release.py
+#   python src\test_s_localization.py
 
 
 """

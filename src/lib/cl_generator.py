@@ -586,7 +586,7 @@ class Cl_npc_character_sheet_generator:
         try:
             s_temp = convert_to_path(i_ls_layout_file_path).resolve()
             logging.debug(f"{s_temp}")
-            s_layout_localization_path = f"{s_temp}_{s_language}.json"
+            s_layout_localization_path = f"{s_temp.stem}_{s_language}.json"
             logging.info(f"loading layout from: {s_layout_localization_path}")
 
             # Load the layout from JSON
