@@ -1,0 +1,75 @@
+{
+    "language": "it",
+    
+    "system": "DnD5E",
+    "actor": "NPC",
+    "NAME": "Dice Golem",
+    "RACE": "Construct",
+
+    "CR": "3",
+    "HP": "75",
+    "AC": "15",
+    "SPEED": "Walk: 30ft | Climb: 10ft",
+
+    "DESCRIPTION": "A hulking construct forged from interlocking dice of every size and face count. Its body shimmers with a dull metallic sheen, and each segment hums softly as numbers inside shift. When struck, the golem rattles like an overflowing bag of coins, sometimes ejecting a die that rolls harmlessly to the ground.",
+
+    "RESOURCES": "Actions: 1\nBonus Actions: 0\nReactions: 0",
+
+    "IMMUNITY" : "IMMUNITY: Poison, Psychic",
+    "RESISTENCE" : "RESISTENCE: Bludgeoning, Piercing, Slashing (nonmagical)",
+    "WEAKNESS" : "WEAKNESS: Fire",
+
+    "SPELLCASTING": "No spellcasting abilities.",
+    "PROFICIENCY": 2,
+
+    "INITIATIVE": -1,
+
+    "STRENGTH": 3,
+    "STR SAVE": 0,
+    "ATHLETICS": 5,
+
+    "DEXTERITY": 0,
+    "DEX SAVE": 0,
+    "ACROBATICS": 0,
+    "SLEIGHT OF HAND": 1,
+    "STEALTH": 0,
+
+    "CONSTITUTION": 2,
+    "CON SAVE": 0,
+
+    "INTELLIGENCE": -1,
+    "INT SAVE": -1,
+    "ARCANA": 0,
+    "INVESTIGATION": 0,
+    "HISTORY": 0,
+    "NATURE": 0,
+    "RELIGION": 0,
+
+    "WISDOM": 0,
+    "WIS SAVE": 0,
+    "ANIMAL HANDLING": 0,
+    "INSIGHT": 0,
+    "PERCEPTION": 2,
+    "MEDICINE": 0,
+    "SURVIVAL": 0,
+
+    "CHARISMA": 0,
+    "CHA SAVE": 0,
+    "DECEPTION": 0,
+    "INTIMIDATION": 0,
+    "PERFORMANCE": 0,
+    "PERSUASION": 0,
+
+    "ACTIONS": [
+        {
+            "s_name": "Dice Roll",
+            "s_text": "(1 action) Melee Weapon Attack: +5 to hit, reach 10ft, one target. Hit: 2d8+3 bludgeoning damage. The Dice Golem rolls a die from its body; if damaged beyond 50% HP it loses a die, reducing size by one cube.",
+            "s_flavor": "The golem's shifting form echoes the clatter of dice as they tumble within its metallic frame."
+        },
+        {
+            "s_name": "Crushing Grip",
+            "s_text": "(1 action) Grapple (Melee Weapon Attack): +5 to hit, reach 5ft. If successful, the target is restrained until the end of the golem's next turn or until it takes damage.",
+            "s_flavor": "Its dice limbs clamp around foes, squeezing tighter as the numbers inside flash like a shaken deck."
+        }
+    ]
+}

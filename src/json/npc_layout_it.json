@@ -89,7 +89,7 @@
         },
         {
             "s_name": "STR SAVE",
-            "s_text": "SALVEZZA",   
+            "s_text": "TIRO DI SALVEZZA",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 24,
             "h_font_ppt": 18
@@ -110,7 +110,7 @@
         },
         {
             "s_name": "DEX SAVE",
-            "s_text": "SALVEZZA",   
+            "s_text": "TIRO DI SALVEZZA",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 24,
             "h_font_ppt": 18
@@ -124,7 +124,7 @@
         },
         {
             "s_name": "SLEIGHT OF HAND",
-            "s_text": "TOCCO LEGGERO",   
+            "s_text": "SCIPPARE",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 22,
             "h_font_ppt": 18
@@ -138,14 +138,14 @@
         },
         {
             "s_name": "CONSTITUTION",
-            "s_text": "CONSTITUZIONE",   
+            "s_text": "COSTITUZIONE",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 38,
             "h_font_ppt": 23
         },
         {
             "s_name": "CON SAVE",
-            "s_text": "SALVEZZA",   
+            "s_text": "TIRO DI SALVEZZA",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 22,
             "h_font_ppt": 18
@@ -159,21 +159,21 @@
         },
         {
             "s_name": "INT SAVE",
-            "s_text": "SALVEZZA",   
+            "s_text": "TIRO DI SALVEZZA",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 24,
             "h_font_ppt": 18
         },
         {
             "s_name": "ARCANA",
-            "s_text": "ARCANA",   
+            "s_text": "ARCANO",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 22,
             "h_font_ppt": 18
         },
         {
             "s_name": "INVESTIGATION",
-            "s_text": "INVESTIGAZIONE",   
+            "s_text": "INVESTIGARE",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 22,
             "h_font_ppt": 18
@@ -201,91 +201,91 @@
         },
         {
             "s_name": "WISDOM",
-            "s_text": "SAGGIEZZA",   
+            "s_text": "SAGGEZZA",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 35,
             "h_font_ppt": 23
         },
         {
             "s_name": "WIS SAVE",
-            "s_text": "WIS SAVE",   
+            "s_text": "TIRO DI SALVEZZA",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 24,
             "h_font_ppt": 18
         },
         {
             "s_name": "ANIMAL HANDLING",
-            "s_text": "ANIMAL HANDLING",   
+            "s_text": "AMMAESTRARE",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 22,
             "h_font_ppt": 18
         },
         {
             "s_name": "INSIGHT",
-            "s_text": "INSIGHT",   
+            "s_text": "INTUIZIONE",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 22,
             "h_font_ppt": 18
         },
         {
             "s_name": "PERCEPTION",
-            "s_text": "PERCEPTION",   
+            "s_text": "PERCEZIONE",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 22,
             "h_font_ppt": 18
         },
         {
             "s_name": "MEDICINE",
-            "s_text": "MEDICINE",   
+            "s_text": "MEDICINA",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 22,
             "h_font_ppt": 18
         },
         {
             "s_name": "SURVIVAL",
-            "s_text": "SURVIVAL",   
+            "s_text": "SOPRAVVIVENZA",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 22,
             "h_font_ppt": 18
         },
         {
             "s_name": "CHARISMA",
-            "s_text": "CHARISMA",   
+            "s_text": "CARISMA",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 38,
             "h_font_ppt": 23
         },
         {
             "s_name": "CHA SAVE",
-            "s_text": "CHA SAVE",   
+            "s_text": "TIRO DI SALVEZZA",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 24,
             "h_font_ppt": 18
         },
         {
             "s_name": "DECEPTION",
-            "s_text": "DECEPTION",   
+            "s_text": "INGANNARE",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 22,
             "h_font_ppt": 18
         },
         {
             "s_name": "INTIMIDATION",
-            "s_text": "INTIMIDATION",   
+            "s_text": "MINACCIARE",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 22,
             "h_font_ppt": 18
         },
         {
             "s_name": "PERFORMANCE",
-            "s_text": "PERFORMANCE",   
+            "s_text": "RECITARE",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 22,
             "h_font_ppt": 18
         },
         {
             "s_name": "PERSUASION",
-            "s_text": "PERSUASION",   
+            "s_text": "PERSUADERE",   
             "w_pos_ppt": 0,
             "h_pos_ppt": 22,
             "h_font_ppt": 18
