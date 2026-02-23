@@ -56,7 +56,10 @@ class St_image:
         self.g_w_card_px: int = int(0)
         self.g_h_card_px: int = int(0)
 
-        self.compute_px()
+        x_fail = self.compute_px()
+        if x_fail == True:
+            logging.error("ERR: invalid image size")
+            return
 
         self.create_image( self.g_w_card_px, self.g_h_card_px )
 
@@ -86,6 +89,10 @@ class St_image:
         )
 
         logging.debug(f"W px: {self.g_w_card_px} | H px {self.g_h_card_px}")
+
+        if self.g_w_card_px <= 0 or self.g_h_card_px <= 0:
+            logging.error("ERR: invalid image size")
+            return True #FAIL
 
         return False #OK
 

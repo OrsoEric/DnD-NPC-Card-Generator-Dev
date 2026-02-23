@@ -44,9 +44,6 @@ class Cl_npc_character_sheet_generator:
 
     def __init__(
         self,
-        i_w_card_width_mm: float,
-        i_h_card_height_mm: float,
-        i_n_dots_per_inch : int,
         i_background_color: Optional[Tuple[int, int, int]] = None,
         i_border_color: Optional[Tuple[int, int, int]] = None,
         i_s_font_path: List[str] = "Arial.ttf"
@@ -66,9 +63,11 @@ class Cl_npc_character_sheet_generator:
             RGB border colour.  If ``None`` a default black is used.
         """
 
-        self.g_w_card_width_mm: float = i_w_card_width_mm
-        self.g_h_card_height_mm: float = i_h_card_height_mm
-        self.g_n_dots_per_inch: int = i_n_dots_per_inch
+        self.g_w_card_mm: float = 1.0
+        self.g_h_card_mm: float = 1.0
+        self.g_n_dots_per_inch: int = 50
+
+        self.g_t_size_px = [0,0]
 
         self.g_tn_background_color: Tuple[int, int, int] = (
             i_background_color or self.CN_DEFAULT_BACKGROUND_COLOR
@@ -78,33 +77,39 @@ class Cl_npc_character_sheet_generator:
             i_border_color or self.CN_DEFAULT_BORDER_COLOR
         )
 
-        self.g_cl_image_card : St_image = St_image(
-            i_w_card_mm = self.g_w_card_width_mm *2,
-            i_h_card_mm = self.g_h_card_height_mm,
-            i_dot_per_inch = self.g_n_dots_per_inch
-        )
-
-        self.g_cl_image_card_front : St_image = St_image(
-            i_w_card_mm = self.g_w_card_width_mm,
-            i_h_card_mm = self.g_h_card_height_mm,
-            i_dot_per_inch = self.g_n_dots_per_inch
-        )
-
-        self.g_cl_image_card_back : St_image = St_image(
-            i_w_card_mm = self.g_w_card_width_mm,
-            i_h_card_mm = self.g_h_card_height_mm,
-            i_dot_per_inch = self.g_n_dots_per_inch
-        )
-
         self.s_font_bold_path = convert_to_path(i_s_font_path)
 
         self.g_t_stroke = (200,200,250)
 
         return
     
+    def create_canavas(self) -> bool:
+        logging.info(f"Creating canavas | W mm: {self.g_w_card_mm} | H mm: {self.g_h_card_mm} | DPI: {self.g_n_dots_per_inch} ")
+
+        self.g_cl_image_card : St_image = St_image(
+            i_w_card_mm = self.g_w_card_mm *2,
+            i_h_card_mm = self.g_h_card_mm,
+            i_dot_per_inch = self.g_n_dots_per_inch
+        )
+
+        self.g_cl_image_card_front : St_image = St_image(
+            i_w_card_mm = self.g_w_card_mm,
+            i_h_card_mm = self.g_h_card_mm,
+            i_dot_per_inch = self.g_n_dots_per_inch
+        )
+
+        self.g_cl_image_card_back : St_image = St_image(
+            i_w_card_mm = self.g_w_card_mm,
+            i_h_card_mm = self.g_h_card_mm,
+            i_dot_per_inch = self.g_n_dots_per_inch
+        )
+
+        return False #OK
+
+
     def load_layout_from_json(
         self,
-        i_s_file_path: Path
+        i_ls_file_path: Path | List[str]
     ) -> List[Dict[str, Any]]:
         """
         Load the card layout specification from a language‑specific JSON file.
@@ -130,7 +135,9 @@ class Cl_npc_character_sheet_generator:
             The JSON payload parsed into a list of dictionaries.
         """
 
-        with open(i_s_file_path, "r", encoding="utf-8") as cl_file:
+        s_base_layout_path = convert_to_path(i_ls_file_path)
+
+        with open(s_base_layout_path, "r", encoding="utf-8") as cl_file:
             ln_layout_data = json.load(cl_file)
 
         logging.info(f"loaded layout: {ln_layout_data}")
@@ -544,6 +551,8 @@ class Cl_npc_character_sheet_generator:
 
         return False  # SUCCESS
 
+
+
     def generate_card(
         self,
         i_ls_layout_file_path: List[str],
@@ -575,9 +584,6 @@ class Cl_npc_character_sheet_generator:
             The generated image object.
         """
         
-        #SIZE of the image
-        t_size_front = self.g_cl_image_card_back.get_size()
-
         #----------------------------------------------------------------------
         #   LOAD NPC
         #----------------------------------------------------------------------
@@ -595,10 +601,26 @@ class Cl_npc_character_sheet_generator:
         # open it
         # this is how localization is handled
 
-        s_base_layout_path = convert_to_path(i_ls_layout_file_path)
-
         # Load the layout from JSON
-        st_layout = self.load_layout_from_json(s_base_layout_path)
+        st_layout = self.load_layout_from_json(i_ls_layout_file_path)
+
+        #----------------------------------------------------------------------
+        #   IMAGE SIZE AND ALLOCATE CANAVAS
+        #----------------------------------------------------------------------
+
+        dn_dimensions = st_layout["dimensions"]
+
+        self.g_w_card_mm = dn_dimensions["w_card_mm"]
+        self.g_h_card_mm = dn_dimensions["h_card_mm"]
+        self.g_n_dots_per_inch = dn_dimensions["n_dots_per_inch"]
+        #self.g_t_size_px = [self.g_w_card_width_mm/25.4*self.g_n_dots_per_inch, self.g_h_card_width_mm/25.4*self.g_n_dots_per_inch]
+
+        logging.info(f"Image size mm: W: {self.g_w_card_mm} | H: {self.g_h_card_mm}") 
+
+        x_fail = self.create_canavas()
+        if x_fail == True:
+            logging.error("ERR: failed to create canavas")
+            return True
 
         #----------------------------------------------------------------------
         #   DRAW: FRONT ILLUSTRATION
@@ -606,16 +628,17 @@ class Cl_npc_character_sheet_generator:
 
         #create an image for the NPC ilustration
         cl_npc_illustration : St_image = St_image(
-            i_w_card_mm = self.g_w_card_width_mm,
-            i_h_card_mm = self.g_h_card_height_mm,
+            i_w_card_mm = self.g_w_card_mm,
+            i_h_card_mm = self.g_h_card_mm,
             i_dot_per_inch = self.g_n_dots_per_inch
         )
 
         #load the NPC illustration and resize it
         cl_npc_illustration.load_image( i_ls_npc_illustration_path )
 
+        t_size_px = self.g_cl_image_card_front.get_size()
         #draw NPC illustration on the front
-        self.g_cl_image_card_front.draw_image( cl_npc_illustration, (0,0), t_size_front )
+        self.g_cl_image_card_front.draw_image( cl_npc_illustration, (0,0), t_size_px )
 
         #----------------------------------------------------------------------
         #   DRAW: FRONT MASK
@@ -623,8 +646,8 @@ class Cl_npc_character_sheet_generator:
 
         #create an image for the NPC ilustration
         cl_front_mask : St_image = St_image(
-            i_w_card_mm = self.g_w_card_width_mm,
-            i_h_card_mm = self.g_h_card_height_mm,
+            i_w_card_mm = self.g_w_card_mm,
+            i_h_card_mm = self.g_h_card_mm,
             i_dot_per_inch = self.g_n_dots_per_inch
         )
 
@@ -644,8 +667,8 @@ class Cl_npc_character_sheet_generator:
 
         #create an image for the NPC ilustration
         cl_back_mask : St_image = St_image(
-            i_w_card_mm = self.g_w_card_width_mm,
-            i_h_card_mm = self.g_h_card_height_mm,
+            i_w_card_mm = self.g_w_card_mm,
+            i_h_card_mm = self.g_h_card_mm,
             i_dot_per_inch = self.g_n_dots_per_inch
         )
 
@@ -698,7 +721,7 @@ class Cl_npc_character_sheet_generator:
 
         #i_ls_mask_front_path
 
-        self.g_cl_image_card.draw_image( self.g_cl_image_card_front, (0,0), t_size_front )
+        self.g_cl_image_card.draw_image( self.g_cl_image_card_front, (0,0), self.g_cl_image_card_front.get_size() )
 
         #draw the back on the main image with offset
         t_size_back = self.g_cl_image_card_back.get_size()
@@ -750,9 +773,6 @@ class Cl_npc_character_sheet_generator:
             logging.info(f"Output image path {s_output_image_path}")
 
             cl_generator = Cl_npc_character_sheet_generator(
-                i_w_card_width_mm=63.5,
-                i_h_card_height_mm=88.9,
-                i_n_dots_per_inch = 300,
                 i_background_color=(255, 255, 255),
                 i_border_color=(0, 0, 0),
                 i_s_font_path= ["font","CormorantGaramond-BoldItalic.ttf"]

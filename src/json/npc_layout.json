@@ -1,5 +1,13 @@
 {
-    "text_boxes": [
+    "dimensions":
+    {
+        "w_card_mm" : 63.5,
+        "h_card_mm" : 88.9,
+        "n_dots_per_inch" : 300
+    },
+
+    "text_boxes":
+    [
         {
             "s_name": "DESCRIPTION",
             "s_text": "this is a long multiline description of the actor that can cover many topics like flavour, physical description, behaviour, habitat, history and myths.",
