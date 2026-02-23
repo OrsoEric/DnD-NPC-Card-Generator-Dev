@@ -289,7 +289,7 @@ class Cl_npc_character_sheet_generator:
             w_pos_ppt: int = st_item.get("w_pos_ppt", 0)
             h_pos_ppt: int = st_item.get("h_pos_ppt", 0)
             h_font_ppt: int = st_item.get("h_font_ppt", 0)
-            n_value : int = st_item.get("n_value",-99)
+            tss_value : Tuple[str,str] = st_item.get("n_value",["","-99"])
             
             # Convert PPT values to pixels
             w_pos_px = w_size_px * w_pos_ppt / 1000
@@ -313,17 +313,24 @@ class Cl_npc_character_sheet_generator:
                 w_cursor += w_pos_px
                 h_cursor += h_pos_px
 
-            # Add the header for the attribute or ability 
-            cl_draw.text((w_cursor+2, h_cursor), s_text, fill=(0, 0, 0), font=cl_item_font, stroke_width=1,
-                stroke_fill=self.g_t_stroke)
-            # Fetch the numerical value of attribute or ability
-            if (n_value>=0):
-                cl_draw.text((w_cursor, h_cursor), f"+{n_value}", fill=(0, 0, 0), font=cl_item_font, anchor="ra",stroke_width=1,
-                stroke_fill=self.g_t_stroke)
-            else: 
-                cl_draw.text((w_cursor, h_cursor), f"{n_value}", fill=(0, 0, 0), font=cl_item_font, anchor="ra",stroke_width=1,
-                stroke_fill=self.g_t_stroke)
+            #unpack the NPC, this has the localization
+            logging.debug(f"attribute and ability field{tss_value}")
+            s_attribute_text = tss_value[0]
+            s_attribute_value = tss_value[1]
 
+            # Add the header for the attribute or ability 
+            cl_draw.text(
+                (w_cursor+2, h_cursor),
+                s_attribute_text,
+                fill=(0, 0, 0),
+                font=cl_item_font,
+                stroke_width=1,
+                stroke_fill=self.g_t_stroke
+            )
+            
+            # Fetch the numerical value of attribute or ability
+            cl_draw.text((w_cursor, h_cursor), f"{s_attribute_value}", fill=(0, 0, 0), font=cl_item_font, anchor="ra",stroke_width=1,
+            stroke_fill=self.g_t_stroke)
 
         #cursor
         w_cursor = 0
