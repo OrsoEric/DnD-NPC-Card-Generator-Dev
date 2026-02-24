@@ -81,8 +81,42 @@ class Cl_npc_character_sheet_generator:
 
         self.g_t_stroke = (200,200,250)
 
+        #load the layout and masks from config file
+        x_fail = self.load_config("config.json")
+
         return
     
+    def load_config(self, i_file_path: str) -> bool:
+        """
+        Load configuration from a JSON file and assign each value to class attributes.
+
+        Parameters:
+            i_file_path (str): Full path to the config.json file.
+
+        Returns:
+            None
+        """
+        try:
+            with open(i_file_path, 'r', encoding='utf-8') as json_file:
+                config_data: Dict[str, Any] = json.load(json_file)
+
+            # Assign each value from config to class attributes
+
+            self.g_s_layout_json = config_data.get("s_layout_json", [])
+            self.g_s_mask_front_path = config_data.get("s_mask_front_path", [])
+            self.g_s_mask_back_path = config_data.get("s_mask_back_path", [])
+            self.g_s_input_folder = config_data.get("s_input_folder", "")
+            self.g_s_output_folder = config_data.get("s_output_folder", "")
+            #self.g_x_generate_front_back = config_data.get("x_generate_front_back", False)
+
+        except FileNotFoundError:
+            raise FileNotFoundError(f"The configuration file at '{i_file_path}' was not found.")
+        except json.JSONDecodeError:
+            raise ValueError(f"File at '{i_file_path}' is not a valid JSON file.")
+        
+        return False #OK
+
+
     def create_canavas(self) -> bool:
         logging.info(f"Creating canavas | W mm: {self.g_w_card_mm} | H mm: {self.g_h_card_mm} | DPI: {self.g_n_dots_per_inch} ")
 
@@ -555,9 +589,6 @@ class Cl_npc_character_sheet_generator:
 
     def generate_card(
         self,
-        i_ls_layout_file_path: List[str],
-        i_ls_mask_front_path : List[str],
-        i_ls_mask_back_path : List[str],
         i_ls_npc_illustration_path : List[str] | Path,
         i_ls_npc_json_path: List[str] | Path,
         i_ls_output_file_path: List[str] | Path,
@@ -602,7 +633,7 @@ class Cl_npc_character_sheet_generator:
         # this is how localization is handled
 
         # Load the layout from JSON
-        st_layout = self.load_layout_from_json(i_ls_layout_file_path)
+        st_layout = self.load_layout_from_json( self.g_s_layout_json )
 
         #----------------------------------------------------------------------
         #   IMAGE SIZE AND ALLOCATE CANAVAS
@@ -652,7 +683,7 @@ class Cl_npc_character_sheet_generator:
         )
 
         #load the NPC illustration and resize it
-        cl_front_mask.load_image( i_ls_mask_front_path )
+        cl_front_mask.load_image( self.g_s_mask_front_path )
 
         self.g_cl_image_card_front.compose_image( cl_front_mask, 0.6 )
 
@@ -673,7 +704,7 @@ class Cl_npc_character_sheet_generator:
         )
 
         #load the NPC illustration and resize it
-        cl_back_mask.load_image( i_ls_mask_back_path )
+        cl_back_mask.load_image( self.g_s_mask_back_path )
 
         self.g_cl_image_card_back.compose_image( cl_back_mask, 1.0 )
 
@@ -742,6 +773,8 @@ class Cl_npc_character_sheet_generator:
         
         return False #OK
     
+    
+
     @staticmethod
     def find_and_generate_cards(
         #card layout descriptor
@@ -781,9 +814,6 @@ class Cl_npc_character_sheet_generator:
 
             # Generate the card back
             cl_generated_image = cl_generator.generate_card(
-                i_ls_layout_file_path=i_ls_layout_file_path,
-                i_ls_mask_front_path=i_ls_mask_front_path,
-                i_ls_mask_back_path=i_ls_mask_back_path,
                 i_ls_npc_illustration_path= s_input_npc_image_path,
                 i_ls_npc_json_path = s_input_npc_json_path,
                 i_ls_output_file_path=s_output_image_path

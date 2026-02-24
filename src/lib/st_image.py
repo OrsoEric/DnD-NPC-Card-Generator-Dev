@@ -310,7 +310,6 @@ class St_image:
 
         return False  # OK
 
-
     def save_image(
         self,
         i_ls_path: list[str],

@@ -1,0 +1,14 @@
+{
+    "s_layout_json" : ["src", "json", "npc_layout_a6.json"],
+
+    "s_mask_front_path" : ["mask", "front_mask.png"],
+    "s_mask_back_path" : ["mask", "back_mask.png"] ,
+
+    "s_input_folder" : "input",
+    "s_output_folder" :"output",
+
+    "x_generate_front_back" : true,
+
+
+    "catch stray coma" : false
+}

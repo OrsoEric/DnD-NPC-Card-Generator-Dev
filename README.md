@@ -201,6 +201,17 @@ I made NPCs for a test campaign, including italian localization.
 
 - I lack the roleplay information on the card
 
+# A6 CARD
+
+There are A6 sleeves. 4X A6 fits an A4.
+
+I can do a sheet with four fronts and four rears and do a front rear print.
+
+Using a printing service
+
+I use another python application to make the composition, pick the front and back and compose them into pdf?
+
+
 ### TODO
 
 - I need to vastly increase the card size.
@@ -210,3 +221,4 @@ I made NPCs for a test campaign, including italian localization.
 - I need a json preprocessor. The source json should list the proficiencies, expertise and compute the stat itself, and have a nudge to adjust the final value, it makes easier to estimate.
 
 - I need a difficulty estimation so that I can estimate CR.
+
