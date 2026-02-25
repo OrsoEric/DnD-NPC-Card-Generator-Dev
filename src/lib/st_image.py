@@ -1,26 +1,18 @@
-"""
-st_image.py
-
-This module defines a structure that keeps an image together with its dimensional
-information expressed in millimetres (mm), pixels (px) and dots per inch (dpi).
-All configuration values are stored as **private instance attributes** – the
-public API only exposes behaviour, not internal data.
-"""
-
-# --------------------------------------------------------------------------- #
-# IMPORTS
-# --------------------------------------------------------------------------- #
+# ────────────────────────────────────────────────────────────────────────────── #
+#   File:  st_image.py                                                      #
+#   Purpose: Image container + helper methods for manipulation and saving.    #
+#            Adds `save_pdf` – creates one PDF from many A4 images.          
+#   Author: Orso Eric
+# ────────────────────────────────────────────────────────────────────────────── 
 
 import logging
-
-from lib.cl_utility_path import convert_to_path
-import PIL.Image
-
 from pathlib import Path
 
-# --------------------------------------------------------------------------- #
-# CLASS DEFINITION
-# --------------------------------------------------------------------------- #
+#import PIL.Image
+
+from PIL import Image
+
+from lib.cl_utility_path import convert_to_path
 
 
 class St_image:
@@ -38,9 +30,9 @@ class St_image:
 
     def __init__(
         self,
-        i_w_card_mm : float,
-        i_h_card_mm : float,
-        i_dot_per_inch : int
+        i_w_card_mm: float,
+        i_h_card_mm: float,
+        i_dot_per_inch: int,
     ) -> None:
         """
         Initialise the structure and set all configuration values.
@@ -50,28 +42,28 @@ class St_image:
         """
         self.g_w_card_mm: float = i_w_card_mm          #: Width of a standard card in millimetres.
         self.g_h_card_mm: float = i_h_card_mm          #: Height of a standard card in millimetres.
-        self.g_n_dot_per_inch: int = i_dot_per_inch          #: DPI – dots (pixels) per inch.
-        self.g_n_mm_per_inch: float = 25.4        #: Millimetres per inch.
+        self.g_n_dot_per_inch: int = i_dot_per_inch    #: DPI – dots (pixels) per inch.
+        self.g_n_mm_per_inch: float = 25.4            #: Millimetres per inch.
 
+        # Image size in pixels will be calculated next
         self.g_w_card_px: int = int(0)
         self.g_h_card_px: int = int(0)
 
+        self.g_cl_image : Image.Image = None
+
+
         x_fail = self.compute_px()
-        if x_fail == True:
+        if x_fail:
             logging.error("ERR: invalid image size")
             return
 
-        self.create_image( self.g_w_card_px, self.g_h_card_px )
-
-        return
+        self.create_image(self.g_w_card_px, self.g_h_card_px)
 
     # ----------------------------------------------------------------------- #
     # PUBLIC API
     # ----------------------------------------------------------------------- #
 
-    def compute_px(
-        self
-    ) -> bool:
+    def compute_px(self) -> bool:
         """
         Compute the pixel width and height that correspond to the physical
         card dimensions at the configured DPI.
@@ -81,10 +73,10 @@ class St_image:
         """
         logging.debug(f"W mm: {self.g_w_card_mm} | H mm {self.g_h_card_mm}")
 
-        self.g_w_card_px: int = int(
+        self.g_w_card_px = int(
             self.g_w_card_mm / self.g_n_mm_per_inch * self.g_n_dot_per_inch
         )
-        self.g_h_card_px: int = int(
+        self.g_h_card_px = int(
             self.g_h_card_mm / self.g_n_mm_per_inch * self.g_n_dot_per_inch
         )
 
@@ -92,114 +84,82 @@ class St_image:
 
         if self.g_w_card_px <= 0 or self.g_h_card_px <= 0:
             logging.error("ERR: invalid image size")
-            return True #FAIL
+            return True
 
-        return False #OK
+        return False
 
-    def get_size( self ):
-        
+    def get_size(self) -> tuple[int, int]:
+        """
+        Return the image dimensions in pixels.
+        """
         return (self.g_w_card_px, self.g_h_card_px)
 
     # ----------------------------------------------------------------------- #
-    # 
+    # Drawing / Compositing
     # ----------------------------------------------------------------------- #
 
     def draw_image(
         self,
         i_source_st_image: "St_image",
         i_offset_px: tuple[int, int],
-        i_size_px: tuple[int, int]
+        i_size_px: tuple[int, int],
     ) -> bool:
         """
         Draw a portion of *i_source_st_image* onto the current image.
-
-        Parameters
-        ----------
-        i_source_st_image : St_image
-            The source image from which data will be extracted.  Its internal
-            Pillow image must already exist.
-        i_offset_px : tuple[int, int]
-            The (x, y) pixel coordinates inside *self.g_cl_image* where the
-            top‑left corner of the drawn region will be placed.
-        i_size_px : tuple[int, int]
-            Desired width and height in pixels for the region to be copied.
-            If this size differs from the source image's native dimensions,
-            the source is resized accordingly before pasting.
-
-        Returns
-        -------
-        bool
-            ``False`` indicates a successful operation; ``True`` would signal an
-            error (this mirrors the style of the other methods in this class).
         """
-        if self.g_cl_image is None:
+        if getattr(self, "g_cl_image", None) is None:
             logging.error("No destination image available for drawing.")
-            return True  # ERROR
+            return True
 
-        if i_source_st_image.g_cl_image is None:
+        if getattr(i_source_st_image, "g_cl_image", None) is None:
             logging.error("Source St_image has no image to draw.")
-            return True  # ERROR
+            return True
 
-        lcl_source_img: PIL.Image.Image = i_source_st_image.g_cl_image
+        lcl_source_img: Image.Image = i_source_st_image.g_cl_image
 
-        # If the requested size differs from the source's actual size, resize it.
+        # Resize source if requested size differs from its native resolution
         if (i_size_px[0] != lcl_source_img.width or
                 i_size_px[1] != lcl_source_img.height):
             lcl_source_img = lcl_source_img.resize(
                 (i_size_px[0], i_size_px[1]),
-                resample=PIL.Image.Resampling.LANCZOS
+                resample=PIL.Image.Resampling.LANCZOS,
             )
 
         # Paste the processed source image onto the destination at the given offset.
         try:
             self.g_cl_image.paste(lcl_source_img, i_offset_px)
-        except Exception as exc:  # pragma: no cover – unlikely but defensive
+        except Exception as exc:  # pragma: no cover
             logging.exception("Failed to paste image: %s", exc)
-            return True  # ERROR
+            return True
 
         logging.debug(
             "Pasted source image (%sx%s) at offset (%d,%d) onto destination "
             "(%dx%d).",
-            lcl_source_img.width, lcl_source_img.height,
-            i_offset_px[0], i_offset_px[1],
-            self.g_cl_image.width, self.g_cl_image.height
+            lcl_source_img.width,
+            lcl_source_img.height,
+            i_offset_px[0],
+            i_offset_px[1],
+            self.g_cl_image.width,
+            self.g_cl_image.height,
         )
 
-        return False  # OK
-
+        return False
 
     def create_image(
         self,
-        i_w_size_px : int,
-        i_h_size_px : int,
-        i_color: str = "white"
+        i_w_size_px: int,
+        i_h_size_px: int,
+        i_color: str = "white",
     ) -> bool:
         """
         Create a new RGB image that matches the physical dimensions of the card.
-
-        The created image is stored in :attr:`_image`.  If an image already
-        exists it will be replaced.
-
-        Parameters:
-            i_color (str): The background colour of the blank image.
-                Any colour recognised by Pillow can be used, e.g. "white",
-                "#FF00FF" or a tuple ``(R, G, B)``.
         """
-        self.g_cl_image: PIL.Image.Image = PIL.Image.new(
-            mode="RGB", size=(i_w_size_px, i_h_size_px), color=i_color
-        )
-
-        return False #OK
+        self.g_cl_image = Image.new("RGB", (i_w_size_px, i_h_size_px), color=i_color)
+        return False
 
     def destroy_image(self) -> None:
-        """
-        Destroy the currently stored image.
-
-        The method safely closes the Pillow image (if it implements the
-        ``close`` protocol) and removes the reference so that Python's garbage
-        collector can reclaim the memory.
-        """
-        if self.g_cl_image is not None:
+        """Destroy the currently stored image."""
+        if getattr(self, "g_cl_image", None) is not None:
             try:  # pragma: no cover
                 getattr(self.g_cl_image, "close")()
             finally:
@@ -208,133 +168,80 @@ class St_image:
 
     def apply_global_opacity_to_image(
         self,
-        i_desired_opacity: float
+        i_desired_opacity: float,
     ) -> bool:
         """
         Applies a uniform opacity factor to every pixel of an RGBA image.
-
-        Parameters
-        ----------
-        i_original_image : PIL.Image.Image
-            The source image; it must already be in RGBA mode.
-        i_desired_opacity : float
-            Desired global opacity (0.0 – fully transparent, 1.0 – fully opaque).
-
-        Returns
-        -------
-        PIL.Image.Image
-            A new image with the alpha channel scaled by *i_desired_opacity*.
         """
-        # Retrieve the pixel data as a NumPy array for efficient manipulation
         ln_pixels = self.g_cl_image.load()
-
         n_width, n_height = self.g_cl_image.size
 
-        # Iterate over every pixel to modify its alpha component
         for i_x in range(n_width):
             for j_y in range(n_height):
                 r_value, g_value, b_value, a_value = ln_pixels[i_x, j_y]
-                # Scale the existing alpha by the desired opacity
                 n_new_alpha: int = int(round(a_value * i_desired_opacity))
                 n_new_alpha = max(0, min(255, n_new_alpha))  # clamp to [0,255]
                 ln_pixels[i_x, j_y] = (r_value, g_value, b_value, n_new_alpha)
 
-        return False #OK
+        return False
 
     def compose_image(
-        self, 
-        i_st_mask_with_transparency : "St_image",
-        i_n_opacity : float
+        self,
+        i_st_mask_with_transparency: "St_image",
+        i_n_opacity: float,
     ) -> bool:
-        
-        i_st_mask_with_transparency.apply_global_opacity_to_image( i_n_opacity )
+        """Composite a mask onto the current image."""
+        i_st_mask_with_transparency.apply_global_opacity_to_image(i_n_opacity)
 
-        self.g_cl_image = PIL.Image.alpha_composite(
+        self.g_cl_image = Image.alpha_composite(
             self.g_cl_image.convert("RGBA"),
-            i_st_mask_with_transparency.g_cl_image.convert("RGBA")
+            i_st_mask_with_transparency.g_cl_image.convert("RGBA"),
         )
+        return False
 
-        return False #OK
+    # ----------------------------------------------------------------------- #
+    # File I/O
+    # ----------------------------------------------------------------------- #
 
     def load_image(
         self,
-        i_ls_path : list[str] | Path
+        i_ls_path: list[str] | Path,
     ) -> bool:
         """
         Load an image from the supplied path components and store it in this
         instance.
-
-        The function accepts a list of strings that together form the file
-        system location of an image (e.g. ``["data", "card.png"]``).  It
-        converts those parts to a :class:`pathlib.Path` using
-        :func:`convert_to_path`, opens the file with Pillow, and assigns the
-        resulting :class:`PIL.Image.Image` object to :attr:`g_cl_image`.
-
-        The method follows the error‑handling convention used throughout the
-        class: a return value of ``False`` indicates success while ``True``
-        signals that an exception was raised during loading.
-
-        Parameters:
-            i_path_parts (list): Sequential path components that form the full
-                image location.  Each element should be a string; missing
-                directories will cause Pillow to raise an error and the
-                method will return ``True``.
-
-        Returns:
-            bool: ``False`` on successful load, ``True`` if an exception was
-            caught.
         """
-        # Convert list of path components into a Path object.
-        
-        if type(i_ls_path) is type(list()):
+        if isinstance(i_ls_path, list):
             s_image_path = convert_to_path(i_ls_path)
         else:
             s_image_path = i_ls_path
 
-
         try:
-            cl_image_loaded : PIL.Image.Image = PIL.Image.open(s_image_path)
-            
-        except Exception as exc:  # pragma: no cover – defensive
+            cl_image_loaded: Image.Image = Image.open(s_image_path)
+        except Exception as exc:  # pragma: no cover
             logging.exception("Failed to load image from %s: %s", s_image_path, exc)
-            return True  # ERROR
-        
+            return True
 
-        # and the LANCZOS filter for high‑quality downsampling.
-        cl_image_resized: PIL.Image.Image = cl_image_loaded.resize(
-            (self.g_w_card_px, self.g_h_card_px),
-            resample=PIL.Image.LANCZOS
+        # Resize to the card size using LANCZOS for high quality.
+        cl_image_resized = cl_image_loaded.resize(
+            (self.g_w_card_px, self.g_h_card_px), resample=Image.LANCZOS
         )
 
         self.g_cl_image = cl_image_resized
-
-        return False  # OK
+        return False
 
     def save_image(
         self,
-        i_ls_path: list[str],
-        i_s_format = "PNG"
+        i_ls_path: list[str] | Path,
+        i_s_format="PNG",
     ) -> bool:
         """
-        Persist the current image to disk as a PNG file.
-
-        The list of strings is treated as successive components of a path
-        (e.g. ``["output", "card.png"]``).  Any missing parent directories are
-        created automatically.  If the supplied path does not have an extension,
-        ``.png`` will be appended.
-
-        Parameters:
-            i_path_parts (list[str]): Components that together form the desired
-                file path, e.g. a directory name and a filename without
-                extension.
-
-        Raises:
-            ValueError: If no image has been created or loaded yet.
+        Persist the current image to disk.
         """
-        if self.g_cl_image is None:
-            return True #ERROR
+        if getattr(self, "g_cl_image", None) is None:
+            return True  # error
 
-        if type(i_ls_path) is type(list()):
+        if isinstance(i_ls_path, list):
             s_image_path = convert_to_path(i_ls_path)
         else:
             s_image_path = i_ls_path
@@ -344,10 +251,80 @@ class St_image:
         self.g_cl_image.save(
             str(s_image_path),
             format=i_s_format,
-            dpi=(self.g_n_dot_per_inch, self.g_n_dot_per_inch)
+            dpi=(self.g_n_dot_per_inch, self.g_n_dot_per_inch),
         )
+        return False
 
-        return False #OK
+    # ----------------------------------------------------------------------- #
+    # NEW METHOD – SAVE A LIST OF A4 IMAGES AS ONE PDF
+    # ----------------------------------------------------------------------- #
+
+    @classmethod
+    def save_pdf(
+        cls,
+        i_ls_st_images: list["St_image"],
+        i_ls_path: list[str] | Path,
+    ) -> bool:
+        """
+        Save a sequence of ``St_image`` objects as one multi‑page PDF.
+
+        The method expects all images in *i_ls_st_images* to be A4‑sized
+        (or at least the same size).  It uses Pillow's ``save`` with
+        ``save_all=True`` and passes the remaining images via
+        ``append_images``.  The DPI is taken from the first image, which should
+        match all others.
+
+        Parameters
+        ----------
+        i_ls_st_images : list[St_image]
+            A list of already‑initialised ``St_image`` instances that each hold
+            a Pillow image.
+        i_ls_path : list[str] | Path
+            File system path components (or a single ``Path``) where the PDF
+            should be written.
+
+        Returns
+        -------
+        bool
+            ``False`` if the PDF was created successfully, ``True`` otherwise.
+        """
+        if not i_ls_st_images:
+            logging.error("No images supplied for PDF generation.")
+            return True
+
+        # Build a list of Pillow Image objects, validating that each has data.
+        lcl_pil_imgs: list[Image.Image] = []
+        for idx, st_img in enumerate(i_ls_st_images):
+            if getattr(st_img, "g_cl_image", None) is None:
+                logging.error(
+                    f"Image at index {idx} does not contain image data."
+                )
+                return True
+            lcl_pil_imgs.append(st_img.g_cl_image)
+
+        # Resolve the output path.
+        if isinstance(i_ls_path, list):
+            s_pdf_path: Path = convert_to_path(i_ls_path)
+        else:
+            s_pdf_path = i_ls_path
+
+        try:
+            dpi_tuple = (
+                i_ls_st_images[0].g_n_dot_per_inch,
+                i_ls_st_images[0].g_n_dot_per_inch,
+            )
+            lcl_pil_imgs[0].save(
+                str(s_pdf_path),
+                format="PDF",
+                dpi=dpi_tuple,
+                save_all=True,
+                append_images=lcl_pil_imgs[1:],
+            )
+        except Exception as exc:  # pragma: no cover
+            logging.exception("Failed to write PDF file %s: %s", s_pdf_path, exc)
+            return True
+
+        return False
 
     # ----------------------------------------------------------------------- #
     # REPRESENTATION HELPERS (optional)
@@ -358,25 +335,26 @@ class St_image:
         Return a concise representation that includes the size of the stored
         image if it exists.
         """
-        if self.g_cl_image is not None:
+        if getattr(self, "g_cl_image", None) is not None:
             return (
-                f"{self.__class__.__name__}(image={self.g_cl_image.size[0]}x{self.g_cl_image.size[1]})"
+                f"{self.__class__.__name__}(image="
+                f"{self.g_cl_image.size[0]}x{self.g_cl_image.size[1]})"
             )
         else:
             return f"{self.__class__.__name__}()"
 
 
+# ────────────────────────────────────────────────────────────────────────────── #
+#   TEST BENCH
+# ────────────────────────────────────────────────────────────────────────────── #
 
-# --------------------------------------------------------------------------- #
-# TEST BENCH
-# --------------------------------------------------------------------------- #
-
-#from st_image import St_image
 if __name__ == "__main__":
+    # Create a single instance and save it as PNG.
     st = St_image(
-        i_w_card_mm=63.5,
-        i_h_card_mm = 88.9,
-        i_dot_per_inch = 300
+        i_w_card_mm=210, i_h_card_mm=297, i_dot_per_inch=300
     )
+    st.save_image(["output", "test_bench_st_image"])
 
-    st.save_image(["output", "test_bench_st_image"])   # creates output/card.png
+    # Example of writing two instances into one PDF (uncomment to test):
+    # st2 = St_image(i_w_card_mm=210, i_h_card_mm=297, i_dot_per_inch=300)
+    # St_image.save_pdf([st, st2], ["output", "cards.pdf"])
